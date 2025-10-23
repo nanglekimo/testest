@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王志明 - LinkedIn風格履歷</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', -apple-system, system-ui, sans-serif;
+            background: #f3f2ef;
+        }
+
+        .linkedin-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0dfdc;
+            margin-bottom: 8px;
+        }
+
+        .linkedin-card:hover {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 4px rgba(0, 0, 0, .15);
+        }
+
+        .profile-banner {
+            height: 200px;
+            background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+        }
+
+        .profile-photo {
+            width: 152px;
+            height: 152px;
+            border: 4px solid white;
+            border-radius: 50%;
+            margin-top: -76px;
+        }
+
+        .btn-linkedin {
+            background: #0a66c2;
+            color: white;
+            border-radius: 24px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-linkedin:hover {
+            background: #004182;
+        }
+
+        .btn-outline {
+            border: 1px solid #0a66c2;
+            color: #0a66c2;
+            border-radius: 24px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: #e7f3ff;
+            border-width: 2px;
+        }
+
+        .skill-badge {
+            background: #f3f2ef;
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #262626;
+            display: inline-block;
+            margin: 4px;
+            transition: all 0.2s;
+        }
+
+        .skill-badge:hover {
+            background: #e0dfdc;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            background: #f3f2ef;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #0a66c2;
+        }
+
+        .hexagram-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .hexagram-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .line-symbol {
+            font-size: 1.2em;
+            margin: 3px 0;
+            font-weight: 500;
+        }
+
+        .yang {
+            color: #d35400;
+        }
+
+        .yin {
+            color: #2980b9;
+        }
+
+        .moving {
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between h-14">
+                <div class="flex items-center space-x-6">
+                    <div class="text-2xl font-bold text-blue-700">in</div>
+                    <div class="text-sm text-gray-600">王志明的個人檔案</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="btn-outline text-sm">分享個人檔案</button>
+                    <button onclick="openContact()" class="btn-linkedin text-sm">開放應徵工作</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+                <div class="linkedin-card overflow-hidden">
+                    <div class="profile-banner"></div>
+                    <div class="px-6 pb-6">
+                        <div class="flex justify-between items-start">
+                            <div
+                                class="profile-photo bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-6xl font-bold">
+                                王</div>
+                            <div class="mt-4"><button onclick="openContact()" class="btn-linkedin">聯繫</button></div>
+                        </div>
+                        <div class="mt-4">
+                            <h1 class="text-3xl font-bold text-gray-900">王志明</h1>
+                            <p class="text-xl text-gray-700 mt-1">資料分析師 | PCB產業專家</p>
+                            <p class="text-sm text-gray-500 mt-2">桃園市 · <span
+                                    class="text-blue-600 cursor-pointer hover:underline">聯絡資訊</span></p>
+                            <p class="text-sm text-blue-600 font-semibold mt-2">500+ 位聯絡人</p>
+                            <div class="flex gap-2 mt-4">
+                                <button onclick="openContact()" class="btn-linkedin text-sm">開放應徵工作</button>
+                                <button class="btn-outline text-sm">加到精選</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linkedin-card p-6">
+                    <h2 class="section-title">關於</h2>
+                    <p class="text-sm text-gray-700 leading-relaxed mt-4">
+                        一位擁有超過15年PCB產業實務經驗的資深專業人士，從底層機台操作、製程設計到品保客服，累積了深厚的產業知識與跨部門協調能力。具備哲學系背景所培養的嚴謹邏輯與批判性思考，並透過近年自學Python與Anaconda，致力於將製造業的實務痛點與數據分析技術相結合。
+                    </p>
+                    <p class="text-sm text-gray-700 leading-relaxed mt-3">目前正尋求轉型，期望能運用過去的產業經驗與新習得的數據處理技能，擔任<strong
+                            class="text-gray-900">數據分析師或數據品質工程師</strong>，為企業提供更精準、高效的系統優化方案。</p>
+                </div>
+
+                <div class="linkedin-card p-6">
+                    <h2 class="section-title mb-6">經歷</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-3">
+                            <div class="company-logo flex-shrink-0">健</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900">品保客服工程師</h3>
+                                <p class="text-sm text-gray-700">健鼎科技 · 全職</p>
+                                <p class="text-xs text-gray-500 mt-1">2023年 - 2024年 · 1年</p>
+                                <p class="text-xs text-gray-500">桃園市</p>
+                                <ul class="mt-3 text-sm text-gray-700 space-y-2">
+                                    <li>• 負責PCB產品出貨後的客戶服務，確保產品符合嚴格的產業標準</li>
+                                    <li>• 主導客訴問題的根本原因分析（RCA），與工程部門合作進行製程優化，將客訴率降低15%</li>
+                                    <li>• 透過日常品保數據記錄，發現潛在品質問題趨勢，為製程改善提供決策依據</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-6"></div>
+                        <div class="flex gap-3">
+                            <div class="company-logo flex-shrink-0">耀</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900">品保專員</h3>
+                                <p class="text-sm text-gray-700">耀新電子 · 全職</p>
+                                <p class="text-xs text-gray-500 mt-1">2016年 - 2020年 · 4年</p>
+                                <ul class="mt-3 text-sm text-gray-700 space-y-2">
+                                    <li>• 負責PCB產品出貨前的最終品質檢驗，確保產品符合客戶規格</li>
+                                    <li>• 建立品質數據追蹤系統，提升檢驗效率20%</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-6"></div>
+                        <div class="flex gap-3">
+                            <div class="company-logo flex-shrink-0">定</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900">製前設計工程師</h3>
+                                <p class="text-sm text-gray-700">定穎電子 · 全職</p>
+                                <p class="text-xs text-gray-500 mt-1">2015年 - 2016年 · 1年</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linkedin-card p-6">
+                    <h2 class="section-title mb-6">學歷</h2>
+                    <div class="flex gap-3">
+                        <div class="company-logo flex-shrink-0 text-lg">中</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900">國立中正大學</h3>
+                            <p class="text-sm text-gray-700">哲學系學士</p>
+                            <p class="text-xs text-gray-500 mt-1">1998年 - 2004年</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linkedin-card p-6">
+                    <h2 class="section-title mb-6">專案</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-gray-900">六爻電腦起卦系統</h3>
+                            <p class="text-xs text-gray-500 mt-1">2024年</p>
+                            <p class="text-sm text-gray-700 mt-3 leading-relaxed">
+                                結合傳統易經智慧與現代程式技術，開發互動式起卦工具。完整實現六十四卦系統，包含本卦、變卦判斷及動爻分析，展現邏輯思維與前端開發能力。</p>
+                            <button onclick="openHexagram()"
+                                class="mt-3 text-sm text-blue-600 font-semibold hover:underline">🔮 體驗起卦系統 →</button>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-full">HTML</span>
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-full">易經64卦</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linkedin-card p-6">
+                    <h2 class="section-title mb-4">技能</h2>
+                    <div class="flex flex-wrap">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">數據分析</span>
+                        <span class="skill-badge">PCB製程</span>
+                        <span class="skill-badge">品質管理</span>
+                        <span class="skill-badge">邏輯思維</span>
+                        <span class="skill-badge">Pandas</span>
+                        <span class="skill-badge">系統優化</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="linkedin-card p-4 sticky top-20">
+                    <div class="text-sm">
+                        <div class="mb-3 pb-3 border-b border-gray-200">
+                            <p class="text-xs text-gray-500 mb-1">個人檔案語言</p>
+                            <p class="font-semibold">繁體中文</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-gray-500">電子郵件</p>
+                                <p class="text-sm">chihming.wang@email.com</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">電話</p>
+                                <p class="text-sm">+886 912 345 678</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">地址</p>
+                                <p class="text-sm">桃園市</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hexagramModal" class="hexagram-modal">
+        <div class="bg-white rounded-xl shadow-2xl max-w-5xl w-full mx-4 p-8 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">🔮 六爻電腦起卦系統</h2>
+                <button onclick="closeHexagram()"
+                    class="text-gray-500 hover:text-gray-700 text-3xl font-bold leading-none">×</button>
+            </div>
+            <p class="text-gray-600 mb-4">請輸入您的問題，然後按下「開始起卦」</p>
+            <input id="question" type="text" placeholder="輸入求卦問題，例如：是否應該轉換職業跑道？"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 mb-4">
+            <button onclick="generateHexagram()" class="btn-linkedin w-full py-3 mb-6">開始起卦</button>
+            <div id="questionDisplay" class="text-center font-semibold text-base mb-4 text-blue-600"></div>
+            <div id="guaContainer" class="flex flex-wrap justify-center gap-6 mb-6"></div>
+            <div id="explanation" class="hidden"></div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="hexagram-modal">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full mx-4 p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">💼 聯絡方式</h2>
+                <button onclick="closeContact()"
+                    class="text-gray-500 hover:text-gray-700 text-3xl font-bold leading-none">×</button>
+            </div>
+            <div class="text-center mb-6">
+                <div
+                    class="w-24 h-24 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-4xl font-bold mb-4">
+                    王</div>
+                <h3 class="text-xl font-bold text-gray-900">王志明</h3>
+                <p class="text-gray-600">資料分析師 | PCB產業專家</p>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-6 mb-6 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">📱</span>
+                    <div>
+                        <p class="text-xs text-gray-500">電話</p>
+                        <p class="font-semibold text-gray-900">+886 912 345 678</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">✉️</span>
+                    <div>
+                        <p class="text-xs text-gray-500">電子郵件</p>
+                        <p class="font-semibold text-gray-900">chihming.wang@email.com</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">💼</span>
+                    <div>
+                        <p class="text-xs text-gray-500">LinkedIn</p>
+                        <p class="font-semibold text-blue-600">linkedin.com/in/chihming-wang</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200 text-center mb-6">
+                <p class="text-lg font-semibold text-gray-900 mb-2">感謝您的關注！🙏</p>
+                <p class="text-sm text-gray-700">我期待能與您進一步交流，並探討如何將我的PCB產業經驗與數據分析專長應用於您的團隊。</p>
+            </div>
+            <button onclick="closeContact()" class="btn-linkedin w-full py-3">確定</button>
+        </div>
+    </div>
+
+    <script>
+        function openContact() { document.getElementById('contactModal').classList.add('active'); }
+        function closeContact() { document.getElementById('contactModal').classList.remove('active'); }
+        function openHexagram() { document.getElementById('hexagramModal').classList.add('active'); }
+        function closeHexagram() {
+            document.getElementById('hexagramModal').classList.remove('active');
+            document.getElementById('questionDisplay').innerHTML = '';
+            document.getElementById('guaContainer').innerHTML = '';
+            document.getElementById('explanation').classList.add('hidden');
+            document.getElementById('question').value = '';
+        }
+
+        const lines = ["老陰", "少陰", "少陽", "老陽"];
+        const lineSymbols = { "老陰": "▇　▇", "少陰": "▇　▇", "少陽": "▇▇▇", "老陽": "▇▇▇" };
+
+        const hexagramData = {
+            "111111": [1, "乾為天", "元亨利貞。", "天行健，君子以自強不息。"],
+            "000000": [2, "坤為地", "元亨，利牝馬之貞。", "地勢坤，君子以厚德載物。"],
+            "010001": [3, "水雷屯", "元亨利貞，勿用有攸往，利建侯。", "雲雷屯，君子以經綸。"],
+            "001010": [4, "山水蒙", "亨。匪我求童蒙，童蒙求我。", "山下出泉，蒙。"],
+            "010111": [5, "水天需", "有孚，光亨，貞吉。利涉大川。", "雲上於天，需。"],
+            "111010": [6, "天水訟", "有孚窒惕，中吉，終凶。", "天與水違行，訟。"],
+            "000010": [7, "地水師", "貞丈人吉，無咎。", "地中有水，師。"],
+            "010000": [8, "水地比", "吉。原筮，元永貞，無咎。", "地上有水，比。"],
+            "111011": [9, "風天小畜", "亨。密雲不雨，自我西郊。", "風行天上，小畜。"],
+            "110111": [10, "天澤履", "履虎尾，不咥人，亨。", "上天下澤，履。"],
+            "000111": [11, "地天泰", "小往大來，吉亨。", "天地交，泰。"],
+            "111000": [12, "天地否", "否之匪人，不利君子貞。", "天地不交，否。"],
+            "111101": [13, "天火同人", "同人于野，亨。", "天與火，同人。"],
+            "101111": [14, "火天大有", "元亨。", "火在天上，大有。"],
+            "000001": [15, "地山謙", "亨。君子有終。", "地中有山，謙。"],
+            "100000": [16, "雷地豫", "利建侯行師。", "雷出地奮，豫。"],
+            "110100": [17, "澤雷隨", "元亨利貞，無咎。", "澤中有雷，隨。"],
+            "001011": [18, "山風蠱", "元亨，利涉大川。", "山下有風，蠱。"],
+            "000110": [19, "地澤臨", "元亨利貞，至于八月有凶。", "澤上有地，臨。"],
+            "011000": [20, "風地觀", "盥而不薦，有孚顒若。", "風行地上，觀。"],
+            "101100": [21, "火雷噬嗑", "亨。利用獄。", "雷電，噬嗑。"],
+            "001101": [22, "山火賁", "亨。小利有攸往。", "山下有火，賁。"],
+            "001000": [23, "山地剝", "不利有攸往。", "山附於地，剝。"],
+            "000100": [24, "地雷復", "亨。出入無疾，朋來無咎。", "雷在地中，復。"],
+            "111100": [25, "天雷無妄", "元亨，利貞。", "天下雷行，物與無妄。"],
+            "001111": [26, "山天大畜", "利貞。不家食，吉。", "天在山中，大畜。"],
+            "001100": [27, "山雷頤", "貞吉。觀頤，自求口實。", "山下有雷，頤。"],
+            "011110": [28, "澤風大過", "棟橈，利有攸往，亨。", "澤滅木，大過。"],
+            "010010": [29, "坎為水", "習坎，有孚，維心亨。", "水洊至，習坎。"],
+            "101101": [30, "離為火", "利貞，亨。畜牝牛吉。", "明兩作，離。"],
+            "001110": [31, "澤山咸", "亨，利貞。取女吉。", "山上有澤，咸。"],
+            "100011": [32, "雷風恆", "亨，無咎，利貞。", "雷風，恆。"],
+            "111001": [33, "天山遯", "亨，小利貞。", "天下有山，遯。"],
+            "100111": [34, "雷天大壯", "利貞。", "雷在天上，大壯。"],
+            "101000": [35, "火地晉", "康侯用錫馬蕃庶。", "明出地上，晉。"],
+            "000101": [36, "地火明夷", "利艱貞。", "明入地中，明夷。"],
+            "101011": [37, "風火家人", "利女貞。", "風自火出，家人。"],
+            "110101": [38, "火澤睽", "小事吉。", "上火下澤，睽。"],
+            "001010": [39, "水山蹇", "利西南，不利東北。", "山上有水，蹇。"],
+            "100010": [40, "雷水解", "利西南。", "雷雨作，解。"],
+            "001110": [41, "山澤損", "有孚，元吉，無咎。", "山下有澤，損。"],
+            "011100": [42, "風雷益", "利有攸往，利涉大川。", "風雷，益。"],
+            "110111": [43, "澤天夬", "揚于王庭。", "澤上於天，夬。"],
+            "111011": [44, "天風姤", "女壯，勿用取女。", "天下有風，姤。"],
+            "110000": [45, "澤地萃", "亨。王假有廟。", "澤上於地，萃。"],
+            "000011": [46, "地風升", "元亨，用見大人。", "地中生木，升。"],
+            "110010": [47, "澤水困", "亨，貞，大人吉。", "澤無水，困。"],
+            "010011": [48, "水風井", "改邑不改井。", "木上有水，井。"],
+            "110101": [49, "澤火革", "巳日乃孚，元亨。", "澤中有火，革。"],
+            "101011": [50, "火風鼎", "元吉，亨。", "木上有火，鼎。"],
+            "100100": [51, "震為雷", "亨。震來虩虩。", "洊雷，震。"],
+            "001001": [52, "艮為山", "艮其背，不獲其身。", "兼山，艮。"],
+            "011001": [53, "風山漸", "女歸吉，利貞。", "山上有木，漸。"],
+            "100110": [54, "雷澤歸妹", "征凶，無攸利。", "澤上有雷，歸妹。"],
+            "100101": [55, "雷火豐", "亨，王假之。", "雷電皆至，豐。"],
+            "101001": [56, "火山旅", "小亨，旅貞吉。", "山上有火，旅。"],
+            "011011": [57, "巽為風", "小亨，利有攸往。", "隨風，巽。"],
+            "110110": [58, "兌為澤", "亨，利貞。", "麗澤，兌。"],
+            "011010": [59, "風水渙", "亨。王假有廟。", "風行水上，渙。"],
+            "010110": [60, "水澤節", "亨。苦節，不可貞。", "澤上有水，節。"],
+            "011110": [61, "風澤中孚", "豚魚吉，利涉大川。", "澤上有風，中孚。"],
+            "100001": [62, "雷山小過", "亨，利貞。可小事。", "山上有雷，小過。"],
+            "010101": [63, "水火既濟", "亨小，利貞。", "水在火上，既濟。"],
+            "101010": [64, "火水未濟", "亨。小狐汔濟。", "火在水上，未濟。"]
+        };
+
+        function lineToBinary(lineName) { return lineName.includes("陽") ? "1" : "0"; }
+
+        function getHexagramInfo(sixLines) {
+            const binaryCode = sixLines.map(line => lineToBinary(line)).join("");
+            return hexagramData[binaryCode] || [0, "未知卦", "卦象資料未登錄", "請檢查系統"];
+        }
+
+        function generateHexagram() {
+            const question = document.getElementById("question").value.trim();
+            if (!question) { alert("請先輸入求卦問題！"); return; }
+
+            const guaContainer = document.getElementById("guaContainer");
+            const qDisplay = document.getElementById("questionDisplay");
+            const explanation = document.getElementById("explanation");
+
+            qDisplay.innerHTML = `📝 問題：「${question}」`;
+            guaContainer.innerHTML = "";
+            explanation.classList.remove('hidden');
+
+            let gua = [];
+            for (let i = 0; i < 6; i++) { gua.push(lines[Math.floor(Math.random() * 4)]); }
+
+            let changed = gua.map(name => {
+                if (name === "老陰") return "少陽";
+                if (name === "老陽") return "少陰";
+                return name;
+            });
+
+            const gua1 = document.createElement("div");
+            gua1.className = "bg-white p-6 rounded-lg border-2 border-blue-400 min-w-64";
+            gua1.innerHTML = "<h3 class='font-bold text-lg mb-4 text-center text-blue-600'>本卦（由下往上）</h3>";
+            for (let i = 5; i >= 0; i--) {
+                let name = gua[i];
+                let moving = (name === "老陰" || name === "老陽");
+                gua1.innerHTML += `<div class="line-symbol ${name.includes('陽') ? 'yang' : 'yin'} ${moving ? 'moving' : ''}">${lineSymbols[name]}　${name}${moving ? ' ⚡' : ''}</div>`;
+            }
+
+            const gua2 = document.createElement("div");
+            gua2.className = "bg-white p-6 rounded-lg border-2 border-green-400 min-w-64";
+            gua2.innerHTML = "<h3 class='font-bold text-lg mb-4 text-center text-green-600'>變卦</h3>";
+            for (let i = 5; i >= 0; i--) {
+                gua2.innerHTML += `<div class="line-symbol ${changed[i].includes('陽') ? 'yang' : 'yin'}">${lineSymbols[changed[i]]}　${changed[i]}</div>`;
+            }
+
+            guaContainer.appendChild(gua1);
+            guaContainer.appendChild(gua2);
+
+            const guaInfo1 = getHexagramInfo(gua);
+            const guaInfo2 = getHexagramInfo(changed);
+
+            let movingLines = [];
+            for (let i = 0; i < 6; i++) {
+                if (gua[i] === "老陰" || gua[i] === "老陽") movingLines.push(i + 1);
+            }
+
+            let movingText = movingLines.length > 0
+                ? `<p class="text-sm text-green-700 mt-2 font-semibold">🔄 動爻位置：第 ${movingLines.join('、')} 爻（共${movingLines.length}個動爻）</p>`
+                : `<p class="text-sm text-gray-600 mt-2">✓ 本次無動爻（靜卦）</p>`;
+
+            explanation.innerHTML = `
+                <h4 class="font-bold text-xl mb-4 text-gray-900">📖 卦象解析</h4>
+                <div class="mb-4 p-5 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                    <p class="font-bold text-gray-900 text-lg mb-2">本卦：第 ${guaInfo1[0]} 卦 - ${guaInfo1[1]}</p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed"><span class="font-semibold text-blue-700">卦辭：</span>${guaInfo1[2]}</p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed"><span class="font-semibold text-blue-700">象曰：</span>${guaInfo1[3]}</p>
+                    ${movingText}
+                </div>
+                <div class="p-5 bg-green-50 rounded-lg border-l-4 border-green-500">
+                    <p class="font-bold text-gray-900 text-lg mb-2">變卦：第 ${guaInfo2[0]} 卦 - ${guaInfo2[1]}</p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed"><span class="font-semibold text-green-700">卦辭：</span>${guaInfo2[2]}</p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed"><span class="font-semibold text-green-700">象曰：</span>${guaInfo2[3]}</p>
+                </div>
+                <div class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-300">
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        <strong class="text-yellow-800">💡 解卦提示：</strong>本卦代表當前狀況，變卦顯示未來發展趨勢。動爻表示變化的關鍵點，需特別留意其爻辭含義。
+                    </p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
