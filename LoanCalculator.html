@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>貸款月付金試算器</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: #f6f8fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    .container {
+      max-width: 700px;
+      background: #fff;
+      margin: 60px auto;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #003366;
+      font-weight: 700;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #003366;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      background: #003366;
+      color: #fff;
+      font-size: 18px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #004b99;
+    }
+
+    .result {
+      margin-top: 30px;
+      background: #f2f6fa;
+      border-left: 5px solid #003366;
+      padding: 20px;
+      border-radius: 6px;
+    }
+
+    .result p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    .formula {
+      font-family: monospace;
+      background: #eef3f8;
+      padding: 12px;
+      border-radius: 6px;
+      color: #333;
+      margin-top: 25px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>貸款月付金試算器</h1>
+    <label>貸款金額（元）</label>
+    <input type="number" id="loanAmount" placeholder="例如：1000000" />
+
+    <label>年利率（%）</label>
+    <input type="number" id="annualRate" placeholder="例如：2.5" step="0.01" />
+
+    <label>貸款期數（月數）</label>
+    <input type="number" id="months" placeholder="例如：60" />
+
+    <button onclick="calculate()">開始試算</button>
+
+    <div class="result" id="result" style="display:none;">
+      <p id="monthlyPayment"></p>
+      <p id="totalPayment"></p>
+      <p id="totalInterest"></p>
+    </div>
+
+    <div class="formula">
+      計算公式：<br>
+      月付金 = 本金 × [月利率 × (1 + 月利率)<sup>期數</sup>] ÷ [(1 + 月利率)<sup>期數</sup> − 1]
+    </div>
+
+    <footer>© 2025 貸款試算工具 | 專業金融服務</footer>
+  </div>
+
+  <script>
+    function calculate() {
+      const principal = parseFloat(document.getElementById("loanAmount").value);
+      const annualRate = parseFloat(document.getElementById("annualRate").value);
+      const months = parseInt(document.getElementById("months").value);
+
+      if (!principal || !annualRate || !months || principal <= 0 || annualRate < 0 || months <= 0) {
+        alert("請輸入正確的貸款金額、年利率與期數！");
+        return;
+      }
+
+      const monthlyRate = annualRate / 100 / 12;
+      const payment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+      const totalPayment = payment * months;
+      const totalInterest = totalPayment - principal;
+
+      document.getElementById("monthlyPayment").innerHTML = `每月應付金額（含本息）：<strong>${payment.toFixed(2)} 元</strong>`;
+      document.getElementById("totalPayment").innerHTML = `總還款金額：<strong>${totalPayment.toFixed(2)} 元</strong>`;
+      document.getElementById("totalInterest").innerHTML = `總利息支出：<strong>${totalInterest.toFixed(2)} 元</strong>`;
+
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
