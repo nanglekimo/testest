@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旅宿介紹 | 山嶺之宿</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: #f8f7f4; /* 柔霧白底 */
+      color: #2e2e2e;
+    }
+
+    /* --- Header & Hero --- */
+    header {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 75vh;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .slider img.active {
+      opacity: 1;
+    }
+
+    /* 加入柔霧遮罩 */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.25);
+      z-index: 1;
+    }
+
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #c2a667;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+      z-index: 2;
+    }
+
+    /* --- Content --- */
+    .content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .content h2 {
+      color: #c2a667;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #3a3a3a;
+    }
+
+    .facilities {
+      margin-top: 40px;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .facilities h3 {
+      color: #c2a667;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .facilities ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .facilities li::before {
+      content: "• ";
+      color: #c2a667;
+    }
+
+    /* --- Button --- */
+    .btn {
+      display: inline-block;
+      margin-top: 50px;
+      padding: 12px 30px;
+      background-color: #c2a667;
+      color: #fff;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #a98c4e;
+    }
+
+    /* --- Map Section --- */
+    .map {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .map h3 {
+      color: #c2a667;
+      margin-bottom: 15px;
+    }
+
+    iframe {
+      width: 90%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      filter: grayscale(20%) brightness(95%);
+    }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+      padding: 20px 0;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="slider">
+      <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101f" class="active" alt="旅宿照片1">
+      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="旅宿照片2">
+      <img src="https://images.unsplash.com/photo-1519821172141-b5d8a4d3e70d" alt="旅宿照片3">
+      <div class="overlay"></div>
+    </div>
+    <div class="title">山嶺之宿</div>
+  </header>
+
+  <section class="content">
+    <h2>關於我們</h2>
+    <p>
+      坐落於靜謐山谷間的「山嶺之宿」，以自然光與木質香氣營造放鬆氛圍。
+      我們提供精緻客房、天然溫泉與當地食材烹調的美味餐點，邀您遠離城市喧囂，感受純粹寧靜的片刻。
+    </p>
+
+    <div class="facilities">
+      <h3>設施與服務</h3>
+      <ul>
+        <li>山景溫泉湯屋</li>
+        <li>有機早餐與晚餐</li>
+        <li>免費 Wi-Fi 全館覆蓋</li>
+        <li>接駁服務（需預約）</li>
+        <li>24 小時櫃台服務</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="bookNow()">預約住宿</button>
+
+    <div class="map">
+      <h3>地理位置</h3>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345095787!2d144.95373531531683!3d-37.81627974201517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f1f7b1bb%3A0xf577f9d6e3a0b7cf!2sHotel!5e0!3m2!1szh-TW!2stw!4v1614123456789" 
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 山嶺之宿 | 精緻旅宿體驗
+  </footer>
+
+  <script>
+    // 圖片輪播
+    const slides = document.querySelectorAll(".slider img");
+    let current = 0;
+
+    function showNextSlide() {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }
+
+    setInterval(showNextSlide, 4000);
+
+    // 預約功能
+    function bookNow() {
+      const today = new Date();
+      const formatted = today.toLocaleDateString('zh-Hant', { year: 'numeric', month: 'long', day: 'numeric' });
+      alert(`日期：${formatted}\n我們將盡快與您聯繫！`);
+    }
+  </script>
+
+</body>
+</html>
