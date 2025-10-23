@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>溫暖咖啡 - 手作精品咖啡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+            color: #5c4033;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px rgba(92, 64, 51, 0.1);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6b563d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 10px 30px rgba(139, 111, 71, 0.3);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '☕';
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #6b563d;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #8b6f47;
+            font-style: italic;
+        }
+
+        /* Brand Story Section */
+        .brand-story {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px rgba(92, 64, 51, 0.1);
+            border: 3px solid #e8d5c4;
+        }
+
+        .brand-story h2 {
+            font-size: 2.5em;
+            color: #6b563d;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .brand-story h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8b6f47, transparent);
+        }
+
+        .brand-story p {
+            font-size: 1.2em;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            margin-bottom: 50px;
+        }
+
+        .gallery h2 {
+            font-size: 2.5em;
+            color: #6b563d;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(92, 64, 51, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #e8d5c4;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 36px rgba(92, 64, 51, 0.25);
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #c9a882 0%, #a88f6f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+        }
+
+        .gallery-caption {
+            padding: 25px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #6b563d;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(92, 64, 51, 0.1);
+            border: 3px solid #e8d5c4;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5em;
+            color: #6b563d;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #6b563d;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #e8d5c4;
+            border-radius: 15px;
+            font-size: 1em;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.9);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #8b6f47;
+            box-shadow: 0 0 0 4px rgba(139, 111, 71, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6b563d 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(92, 64, 51, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(92, 64, 51, 0.4);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #d4af76 0%, #c9a882 100%);
+            border-radius: 20px;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .thank-you.show {
+            display: block;
+        }
+
+        .thank-you h3 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .thank-you p {
+            font-size: 1.3em;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 4px solid #8b6f47;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #6b563d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close:hover {
+            background: #8b6f47;
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 4px solid #8b6f47;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-title {
+            font-size: 2.5em;
+            color: #6b563d;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-description {
+            font-size: 1.2em;
+            color: #5c4033;
+            line-height: 2;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b563d;
+            font-size: 1em;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo"></div>
+            <h1>溫暖咖啡</h1>
+            <p class="subtitle">每一杯都是手作的溫度</p>
+        </header>
+
+        <!-- Brand Story -->
+        <section class="brand-story">
+            <h2>品牌理念</h2>
+            <p>
+                我們是新創咖啡品牌，致力於將手作的溫暖融入每一杯咖啡中。
+                從精選咖啡豆到細心沖煮，我們相信咖啡不僅是飲品，更是一種生活態度。
+                在這裡，每一口都承載著我們對品質的堅持與對顧客的熱愛。
+                讓我們一起品味這份來自咖啡的溫暖時光。
+            </p>
+        </section>
+
+        <!-- Gallery -->
+        <section class="gallery">
+            <h2>主打商品</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-product="1">
+                    <div class="gallery-image">🌅</div>
+                    <div class="gallery-caption">晨光手沖咖啡</div>
+                </div>
+                <div class="gallery-item" data-product="2">
+                    <div class="gallery-image">🍫</div>
+                    <div class="gallery-caption">濃郁拿鐵</div>
+                </div>
+                <div class="gallery-item" data-product="3">
+                    <div class="gallery-image">🌿</div>
+                    <div class="gallery-caption">清新美式</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-section">
+            <h2>聯絡表單</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">電子郵件</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">訊息</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">送出</button>
+            </form>
+            <div class="thank-you" id="thankYou">
+                <h3>🎉 謝謝您！</h3>
+                <p>感謝您對咖啡的熱愛！</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2024 溫暖咖啡 | 用心沖煮每一杯</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img class="modal-image" id="modalImage" src="" alt="產品圖片">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        // Product data
+        const products = {
+            1: {
+                title: '晨光手沖咖啡',
+                image: 'img/producttype1.jpg',
+                description: '清晨第一道陽光般的溫暖，精選衣索比亞耶加雪菲咖啡豆，散發著柑橘與花香的優雅氣息。每一滴都經過手工濾煮，呈現最純粹的咖啡風味。適合喜愛清新果酸與花香調性的您，讓每個早晨都充滿活力與希望。'
+            },
+            2: {
+                title: '濃郁拿鐵',
+                image: 'img/producttype2.jpg',
+                description: '絲滑細膩的奶泡與濃縮咖啡完美融合，使用新鮮全脂牛奶，創造出如絲綢般的口感。濃郁的咖啡香氣與牛奶的甜美交織，帶來溫暖舒適的味覺體驗。無論是下午茶時光還是工作間歇，都是您最佳的陪伴。'
+            },
+            3: {
+                title: '清新美式',
+                image: 'img/producttype3.jpg',
+                description: '經典永不退流行，使用巴西與哥倫比亞混合豆製作的雙份濃縮，加入純淨熱水稀釋。保留咖啡的醇厚本質，同時帶來清爽的口感。苦味與甘甜達到完美平衡，是咖啡愛好者的首選，簡單卻不平凡。'
+            }
+        };
+
+        // Add click event to gallery items
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product');
+                    openModal(productId);
+                });
+            });
+
+            // Contact form
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Hide form
+                this.style.display = 'none';
+                
+                // Show thank you message
+                document.getElementById('thankYou').classList.add('show');
+                
+                // Optional: Reset form after 3 seconds and show it again
+                setTimeout(() => {
+                    this.reset();
+                    this.style.display = 'block';
+                    document.getElementById('thankYou').classList.remove('show');
+                }, 5000);
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('productModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Close modal button
+            document.querySelector('.modal-close').addEventListener('click', closeModal);
+        });
+
+        function openModal(productId) {
+            const product = products[productId];
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalTitle').textContent = product.title;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('productModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
