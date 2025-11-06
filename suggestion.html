@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多平台財經媒體自動化系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-white mb-4">
+                🚀 多平台財經媒體自動化系統
+            </h1>
+            <p class="text-xl text-purple-200">
+                從內容生產到變現的完整解決方案
+            </p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-4 mb-8 overflow-x-auto">
+            <button onclick="switchTab('architecture')" class="tab-btn px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap bg-purple-500 text-white shadow-lg scale-105" data-tab="architecture">
+                🏗️ 系統架構
+            </button>
+            <button onclick="switchTab('platforms')" class="tab-btn px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap bg-white/10 text-white hover:bg-white/20" data-tab="platforms">
+                📱 發布平台
+            </button>
+            <button onclick="switchTab('revenue')" class="tab-btn px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap bg-white/10 text-white hover:bg-white/20" data-tab="revenue">
+                💰 收益模式
+            </button>
+            <button onclick="switchTab('schedule')" class="tab-btn px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap bg-white/10 text-white hover:bg-white/20" data-tab="schedule">
+                ⏰ 發布排程
+            </button>
+        </div>
+
+        <!-- Architecture Tab -->
+        <div id="architecture" class="tab-content active space-y-8">
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-6">📊 內容生產流水線</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Stage 1 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-800 border-blue-300 flex items-center justify-center mb-4">
+                            🤖
+                        </div>
+                        <h3 class="font-bold text-lg mb-3 text-slate-800">1. 內容生成</h3>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>AI 新聞分析 (每 6 小時)</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>多格式內容生成</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>SEO 優化</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>關鍵字提取</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Stage 2 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-800 border-purple-300 flex items-center justify-center mb-4">
+                            ⚡
+                        </div>
+                        <h3 class="font-bold text-lg mb-3 text-slate-800">2. 內容轉換</h3>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>長文 → 短影音腳本</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>文字 → 語音 (TTS)</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>自動剪輯影片</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>生成縮圖與封面</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Stage 3 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 rounded-lg bg-green-100 text-green-800 border-green-300 flex items-center justify-center mb-4">
+                            📢
+                        </div>
+                        <h3 class="font-bold text-lg mb-3 text-slate-800">3. 多平台發布</h3>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>排程發布 (各平台最佳時段)</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>格式自動適配</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>A/B Testing 標題</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>追蹤發布狀態</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Stage 4 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 rounded-lg bg-orange-100 text-orange-800 border-orange-300 flex items-center justify-center mb-4">
+                            📈
+                        </div>
+                        <h3 class="font-bold text-lg mb-3 text-slate-800">4. 數據分析</h3>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>流量追蹤</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>互動率分析</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>收入統計</span>
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">▸</span>
+                                <span>內容優化建議</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Automation -->
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-6">🔄 每日自動化流程</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            02:00-05:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">夜間數據收集</h4>
+                            <p class="text-purple-200 text-sm">全球市場新聞抓取、AI 分析、內容生成</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            05:30
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">早盤預覽發布</h4>
+                            <p class="text-purple-200 text-sm">官網文章、Email 推送、RSS 更新</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            06:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">社群媒體發布</h4>
+                            <p class="text-purple-200 text-sm">Twitter Thread、FB 貼文、IG 限動</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            06:30
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">影音內容上架</h4>
+                            <p class="text-purple-200 text-sm">YouTube Shorts、TikTok、Podcast 發布</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            09:00-15:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">盤中監控</h4>
+                            <p class="text-purple-200 text-sm">重大新聞即時推播（僅付費會員）</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            18:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">盤後分析發布</h4>
+                            <p class="text-purple-200 text-sm">完整版報告、Podcast、YouTube</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="bg-purple-500 text-white px-3 py-1 rounded-lg font-mono text-sm whitespace-nowrap">
+                            22:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-semibold mb-1">數據彙整</h4>
+                            <p class="text-purple-200 text-sm">流量分析、互動統計、收益報表</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platforms Tab -->
+        <div id="platforms" class="tab-content">
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-6">📱 10 大發布平台整合</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Platform 1: 官網 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                🌐
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">官網</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-red-100 text-red-700">
+                                    優先級: 核心
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                SEO 優化
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                會員系統
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                付費牆
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                贊助按鈕
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 2: Email -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                📧
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Email</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-red-100 text-red-700">
+                                    優先級: 核心
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                自動寄送
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                分眾推播
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                轉換追蹤
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                A/B Testing
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 3: RSS -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                📡
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">RSS</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-red-100 text-red-700">
+                                    優先級: 核心
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                即時更新
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                全文輸出
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                分類訂閱
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                Podcast Feed
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 4: Podcast -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                🎙️
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Podcast</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-orange-100 text-orange-700">
+                                    優先級: 高
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                TTS 生成
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                多平台分發
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                章節標記
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                自動上架
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 5: YouTube Shorts -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                📹
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">YouTube Shorts</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-orange-100 text-orange-700">
+                                    優先級: 高
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                自動剪輯
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                字幕生成
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                縮圖設計
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                排程發布
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 6: Twitter/X -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                🐦
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Twitter/X</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-orange-100 text-orange-700">
+                                    優先級: 高
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                Thread 生成
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                圖文配對
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                最佳時段
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                Hashtag 優化
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 7: Threads -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                🧵
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Threads</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-green-100 text-green-700">
+                                    優先級: 中
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                同步 Twitter
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                格式轉換
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                互動追蹤
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 8: Facebook -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                📘
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Facebook</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-green-100 text-green-700">
+                                    優先級: 中
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                粉專發布
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                社團分享
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                廣告投放
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                互動監控
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 9: Instagram -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                📷
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">Instagram</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-green-100 text-green-700">
+                                    優先級: 中
+                                </span>
+                            </div>
+                        </div>
+<ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                限時動態
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                貼文設計
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                Reels 發布
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                連結導流
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Platform 10: TikTok -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-2xl">
+                                🎵
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">TikTok</h3>
+                                <span class="text-xs px-2 py-1 rounded bg-green-100 text-green-700">
+                                    優先級: 中
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                短影音剪輯
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                熱門音樂
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                挑戰追蹤
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                                流量分析
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Tab -->
+        <div id="revenue" class="tab-content space-y-6">
+            <!-- Membership Revenue -->
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-white text-2xl">
+                        👥
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">會員訂閱</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Free Tier -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <h3 class="font-bold text-xl text-slate-800 mb-2">免費會員</h3>
+                            <div class="text-3xl font-bold text-purple-600">$0</div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                每日 1 篇完整文章
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                Email 摘要
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                社群平台內容
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Pro Tier -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-purple-500 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-1 rounded-full text-xs font-bold">
+                            最受歡迎
+                        </div>
+                        <div class="text-center mb-4">
+                            <h3 class="font-bold text-xl text-slate-800 mb-2">進階會員</h3>
+                            <div class="text-3xl font-bold text-purple-600">$9.99/月</div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                無限閱讀
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                PDF 下載
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                獨家深度報告
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                無廣告
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- VIP Tier -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <h3 class="font-bold text-xl text-slate-800 mb-2">專業會員</h3>
+                            <div class="text-3xl font-bold text-purple-600">$29.99/月</div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                進階功能+
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                API 存取
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                客製化追蹤
+                            </li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2">
+                                <span class="text-green-500 mt-1">✓</span>
+                                專屬客服
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsorship Revenue -->
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-white text-2xl">
+                        💵
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">贊助系統</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">Buy Me a Coffee 整合</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">Patreon 級別制</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">單次贊助（$5, $10, $50）</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">月訂贊助（顯示贊助者名單）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advertising Revenue -->
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-white text-2xl">
+                        📢
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">廣告收益</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">Google AdSense（官網）</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">YouTube 廣告分潤</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">Podcast 前置廣告</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">Email 贊助商內容</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partnership Revenue -->
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-white text-2xl">
+                        📈
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">業配合作</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">券商開戶推薦（CPA）</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">投資課程聯盟行銷</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">財經軟體評測</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <p class="text-purple-200">企業贊助專題</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-6">⏰ 智能發布排程</h2>
+                <div class="space-y-6">
+                    <!-- 06:00 Schedule -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold text-xl">
+                                06:00
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">早盤前分析</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">官網</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Email</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">RSS</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">所有社群</span>
+                        </div>
+                    </div>
+
+                    <!-- 12:00 Schedule -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold text-xl">
+                                12:00
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">午間快訊</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Twitter</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Threads</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Facebook</span>
+                        </div>
+                    </div>
+
+                    <!-- 18:00 Schedule -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold text-xl">
+                                18:00
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">盤後總結</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">官網</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">YouTube Shorts</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Podcast</span>
+                        </div>
+                    </div>
+
+                    <!-- 22:00 Schedule -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold text-xl">
+                                22:00
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">深度週報</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Email（僅付費會員）</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">官網</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimization Tips -->
+                <div class="mt-8 bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-6">
+                    <h3 class="text-yellow-200 font-bold text-lg mb-2">💡 發布時段優化策略</h3>
+                    <ul class="space-y-2 text-yellow-100">
+                        <li>• Twitter/Threads: 上班通勤時段（07:00-09:00）與午休（12:00）</li>
+                        <li>• Facebook: 晚間休閒時段（19:00-22:00）</li>
+                        <li>• YouTube/Podcast: 通勤與睡前時段（07:00, 22:00）</li>
+                        <li>• Email: 工作日早晨（06:00）與週末下午（14:00）</li>
+                        <li>• Instagram/TikTok: 年輕族群活躍時段（12:00, 21:00）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('bg-purple-500', 'text-white', 'shadow-lg', 'scale-105');
+                btn.classList.add('bg-white/10', 'text-white', 'hover:bg-white/20');
+            });
+
+            // Show selected tab content
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            // Add active class to clicked button
+            const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeButton) {
+                activeButton.classList.remove('bg-white/10', 'hover:bg-white/20');
+                activeButton.classList.add('bg-purple-500', 'text-white', 'shadow-lg', 'scale-105');
+            }
+        }
+    </script>
+</body>
+</html>
