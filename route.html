@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVP 演進路線圖 - 靜態 HTML + JS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 確保 Lucide Icons 能夠正確渲染 */
+        .lucide {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+
+<div id="mvp-roadmap-container" class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-8">
+    </div>
+
+<script>
+    // 原始 React 組件中的資料結構 (Phases)
+    const phases = [
+        {
+            phase: "Phase 0",
+            title: "現況 - 已完成",
+            iconName: "check-circle",
+            color: "green",
+            duration: "已完成",
+            effort: "已投入",
+            tasks: [
+                { done: true, task: "本地執行的新聞抓取系統" },
+                { done: true, task: "AI 分析引擎 (Gemini)" },
+                { done: true, task: "Markdown + HTML 報告生成" },
+                { done: true, task: "加密的 API 金鑰管理" }
+            ],
+            output: "✅ 完整的分析報告（需手動執行）"
+        },
+        {
+            phase: "Phase 1",
+            title: "雲端自動化 - 你現在要做的",
+            iconName: "clock",
+            color: "blue",
+            duration: "1-2 週",
+            effort: "中等",
+            tasks: [
+                { done: false, task: "改寫為 Cloud Run 容器應用" },
+                { done: false, task: "Cloud Scheduler 定時觸發（每天 8:00）" },
+                { done: false, task: "報告存入 Firestore" },
+                { done: false, task: "Firebase Hosting 展示網頁" }
+            ],
+            output: "✅ 自動化每日報告 + 基礎網頁展示",
+            keyBenefit: "🎯 從手動執行 → 全自動運行",
+            cost: "$5-10/月 (Cloud Run + Firebase)"
+        },
+        {
+            phase: "Phase 2",
+            title: "精美網站 + Email 訂閱",
+            iconName: "users",
+            color: "purple",
+            duration: "2-3 週",
+            effort: "中等",
+            tasks: [
+                { done: false, task: "React 前端重構（現代化 UI）" },
+                { done: false, task: "歷史報告列表與搜尋" },
+                { done: false, task: "Email 訂閱系統（Firebase Auth + SendGrid）" },
+                { done: false, task: "每日自動寄送報告給訂閱者" }
+            ],
+            output: "✅ 專業網站 + Email 通知",
+            keyBenefit: "🎯 開始累積使用者",
+            cost: "$15-20/月"
+        },
+        {
+            phase: "Phase 3",
+            title: "付費會員 + 進階功能",
+            iconName: "dollar-sign",
+            color: "green",
+            duration: "2-3 週",
+            effort: "中高",
+            tasks: [
+                { done: false, task: "Stripe 付費系統整合" },
+                { done: false, task: "會員分級（免費/付費）" },
+                { done: false, task: "付費牆（完整報告需登入）" },
+                { done: false, task: "PDF 下載（付費功能）" }
+            ],
+            output: "✅ 開始營收",
+            keyBenefit: "🎯 驗證付費意願",
+            cost: "$20-30/月",
+            revenue: "目標: $100-500/月"
+        },
+        {
+            phase: "Phase 4",
+            title: "多平台自動發布",
+            iconName: "zap",
+            color: "orange",
+            duration: "3-4 週",
+            effort: "高",
+            tasks: [
+                { done: false, task: "社群媒體 API 整合（Twitter, FB）" },
+                { done: false, task: "自動生成社群貼文格式" },
+                { done: false, task: "影音腳本生成（基礎版）" },
+                { done: false, task: "RSS Feed 自動更新" }
+            ],
+            output: "✅ 多渠道流量導入",
+            keyBenefit: "🎯 擴大觸及，增加訂閱",
+            cost: "$30-50/月",
+            revenue: "目標: $500-2000/月"
+        }
+    ];
+
+    // 顏色類別映射
+    const getColorClasses = (color) => {
+        const colors = {
+            green: "bg-green-500",
+            blue: "bg-blue-500",
+            purple: "bg-purple-500",
+            orange: "bg-orange-500"
+        };
+        return colors[color] || colors.blue;
+    };
+
+    // 渲染函數
+    const renderRoadmap = () => {
+        const container = document.getElementById('mvp-roadmap-container');
+        let htmlContent = `
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl font-bold text-white mb-4">
+                        🚀 MVP 演進路線圖
+                    </h1>
+                    <p class="text-xl text-slate-300">
+                        從現有專案出發，逐步實現商業化
+                    </p>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-600"></div>
+
+                    <div class="space-y-12">
+        `;
+
+        phases.forEach((phase, idx) => {
+            const colorClass = getColorClasses(phase.color);
+            const isLast = idx === phases.length - 1;
+
+            htmlContent += `
+                <div class="relative">
+                    <div class="absolute left-8 -translate-x-1/2 w-16 h-16 rounded-full ${colorClass} flex items-center justify-center text-white shadow-lg">
+                        <i data-lucide="${phase.iconName}" class="lucide w-6 h-6"></i>
+                    </div>
+
+                    <div class="ml-24 bg-white rounded-xl shadow-2xl overflow-hidden">
+                        <div class="${colorClass} p-6 text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <h2 class="text-2xl font-bold">${phase.phase}</h2>
+                                <div class="flex items-center gap-4 text-sm">
+                                    <span class="bg-white/20 px-3 py-1 rounded-full">
+                                        ⏱️ ${phase.duration}
+                                    </span>
+                                    <span class="bg-white/20 px-3 py-1 rounded-full">
+                                        💪 ${phase.effort}
+                                    </span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl opacity-90">${phase.title}</h3>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="mb-6">
+                                <h4 class="font-bold text-slate-800 mb-3">📋 任務清單</h4>
+                                <div class="space-y-2">
+                                    ${phase.tasks.map((item, i) => `
+                                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                                            <i data-lucide="${item.done ? 'check-circle' : 'circle'}" class="lucide w-5 h-5 ${item.done ? 'text-green-500' : 'text-slate-300'} flex-shrink-0"></i>
+                                            <span class="${item.done ? 'text-slate-500 line-through' : 'text-slate-700'}">
+                                                ${item.task}
+                                            </span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="mb-4 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+                                <p class="text-green-800 font-semibold">${phase.output}</p>
+                            </div>
+
+                            ${phase.keyBenefit ? `
+                                <div class="mb-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                    <p class="text-blue-800 font-semibold">${phase.keyBenefit}</p>
+                                </div>
+                            ` : ''}
+
+                            <div class="flex gap-4">
+                                <div class="flex-1 p-3 bg-orange-50 rounded-lg">
+                                    <div class="text-sm text-orange-600 font-semibold mb-1">💰 成本</div>
+                                    <div class="text-orange-800">${phase.cost}</div>
+                                </div>
+                                ${phase.revenue ? `
+                                    <div class="flex-1 p-3 bg-green-50 rounded-lg">
+                                        <div class="text-sm text-green-600 font-semibold mb-1">💵 營收</div>
+                                        <div class="text-green-800">${phase.revenue}</div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${!isLast ? `
+                        <div class="ml-24 mt-8 flex items-center justify-center">
+                            <i data-lucide="arrow-down" class="lucide w-8 h-8 text-slate-400"></i>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        });
+
+        htmlContent += `
+                    </div>
+                </div>
+
+                <div class="mt-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">🎯 MVP 核心原則</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white/10 rounded-xl p-4 backdrop-blur">
+                            <div class="text-3xl mb-2">⚡</div>
+                            <h4 class="font-bold mb-2">快速迭代</h4>
+                            <p class="text-sm opacity-90">每個 Phase 獨立可用，快速驗證假設</p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4 backdrop-blur">
+                            <div class="text-3xl mb-2">💰</div>
+                            <h4 class="font-bold mb-2">早期營收</h4>
+                            <p class="text-sm opacity-90">Phase 3 就開始收費，驗證商業模式</p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4 backdrop-blur">
+                            <div class="text-3xl mb-2">📊</div>
+                            <h4 class="font-bold mb-2">數據驅動</h4>
+                            <p class="text-sm opacity-90">根據使用者反饋決定下一步</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = htmlContent;
+
+        // 呼叫 Lucide 函式庫來轉換所有的 <i data-lucide="..."></i> 標籤為 SVG 圖示
+        lucide.createIcons();
+    };
+
+    // 在 DOM 加載完成後執行渲染
+    document.addEventListener('DOMContentLoaded', renderRoadmap);
+</script>
+
+</body>
+</html>
