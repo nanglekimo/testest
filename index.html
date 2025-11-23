@@ -54,6 +54,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
             text-align: center;
             transition: transform 0.3s ease, opacity 0.3s ease;
+            position: relative; /* For the new nav links */
         }
 
         h1 {
@@ -67,6 +68,33 @@
             font-weight: 600;
             font-size: 20px;
             margin-bottom: 24px;
+        }
+        
+        /* 針對政策頁面的 h3 */
+        .policy-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        
+        .policy-content p {
+            text-align: left;
+            margin-bottom: 16px;
+            font-size: 14px; /* 政策頁面文字小一點 */
+            color: var(--text-sub);
+        }
+        .policy-content ul {
+            text-align: left;
+            margin: 0 0 16px 20px;
+            padding: 0;
+            list-style-type: disc;
+            color: var(--text-sub);
+        }
+        .policy-content li {
+            font-size: 14px;
+            margin-bottom: 5px;
         }
 
         p {
@@ -167,7 +195,7 @@
         }
         .highlight { color: var(--accent-blue); font-weight: 600; }
 
-        /* ======== NEW: Collapsible Card & Analysis ======== */
+        /* ======== Collapsible Card & Analysis ======== */
         .collapsible-card {
             background: rgba(44, 44, 46, 0.8); /* iOS System Gray 5 */
             border-radius: 12px;
@@ -243,7 +271,28 @@
             font-weight: 500;
             color: var(--text-main);
         }
-        /* ================================================= */
+        
+        /* ======== NEW: Navigation Links (底部導航) ======== */
+        .nav-links {
+            position: absolute;
+            bottom: -30px; /* 放在卡片下方 */
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-link {
+            color: var(--text-sub);
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: var(--text-main);
+        }
+        
     </style>
 </head>
 <body>
@@ -258,6 +307,11 @@
         <div class="btn-group">
             <button class="btn btn-primary" onclick="handleNewUser()">我是會員</button>
             <button class="btn" onclick="handleVeteranUser()">是，我第一次來</button>
+        </div>
+        
+        <div class="nav-links">
+            <span class="nav-link" onclick="showScreen('privacy-policy-screen')">隱私權政策</span>
+            <span class="nav-link" onclick="showScreen('contact-us-screen')">聯絡我們</span>
         </div>
     </div>
 
@@ -313,7 +367,7 @@
             </div>
         </div>
 
-        <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
             <div class="stat-row">
                 <span>元素 (Element)</span>
                 <span id="stat-element" class="highlight">Fire</span>
@@ -337,6 +391,60 @@
             領取專屬攻略書
         </button>
         <button class="btn" style="margin-top: 10px; background: transparent; color: var(--text-sub);" onclick="location.reload()">重新鑑定</button>
+    </div>
+
+    <div id="privacy-policy-screen" class="glass-card hidden">
+        <h1 style="font-size: 28px;">🛡️ 隱私權政策</h1>
+        <div style="font-size: 12px; color: var(--text-sub); margin-bottom: 30px;">生效日期：2025 年 11 月 23 日</div>
+        
+        <div class="policy-content">
+            <p><strong>[您的網站名稱/公會名稱]</strong> 尊重並承諾保護您的個人隱私。本政策說明了當您使用本鑑定系統時，我們如何收集、使用和保護您的資訊。</p>
+
+            <h3>收集的資訊</h3>
+            <p>在使用本鑑定系統時，我們僅收集以下**非個人身份識別資訊**：</p>
+            <ul>
+                <li><strong>測驗答案：</strong> 您在鑑定問答中的選擇。這些答案被用於即時計算您的職業屬性，並在會話結束後即時清除。</li>
+                <li><strong>設備資訊：</strong> 您的瀏覽器類型、操作系統、訪問時間等標準日誌數據，用於改善系統兼容性。</li>
+            </ul>
+
+            <h3>資訊使用</h3>
+            <p>我們收集的資訊僅用於以下目的：</p>
+            <ul>
+                <li>提供並完善轉職鑑定結果服務。</li>
+                <li>分析用戶行為模式，以優化問答設計和用戶體驗。</li>
+            </ul>
+            <p><strong>本系統不會儲存任何個人身份資訊（如姓名、電子郵件、IP 地址）。</strong> 您的測驗結果為一次性計算，不會被連結到任何個人標識。</p>
+
+            <h3>第三方服務 (AdSense)</h3>
+            <p>本網站可能透過 Google AdSense 服務顯示廣告。Google 可能會使用 Cookie 和 Web Beacon 來收集非個人化資訊，以便向您提供您可能感興趣的廣告。請參閱 Google 的隱私權政策以了解更多資訊。</p>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top: 20px;" onclick="showScreen('gatekeeper-screen')">返回首頁</button>
+    </div>
+
+    <div id="contact-us-screen" class="glass-card hidden">
+        <h1 style="font-size: 28px;">📧 聯絡我們</h1>
+        <div style="font-size: 40px; margin: 20px 0;">📜</div>
+        <p>若您對鑑定系統有任何疑問、合作提案或技術反饋，請透過以下方式與公會管理員聯繫。</p>
+        
+        <div class="analysis-block" style="text-align: left;">
+            <div class="analysis-item">
+                <div class="item-label">公會信箱 (Email)</div>
+                <div class="item-content" style="word-break: break-all;">
+                    <a href="mailto:your.guild.email@example.com" style="color: var(--accent-blue); text-decoration: none;">your.guild.email@example.com</a>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <div class="item-label">公會管理員</div>
+                <div class="item-content">管理員 NangleKimo</div>
+            </div>
+            <div class="analysis-item" style="border-bottom: none; padding-bottom: 0;">
+                <div class="item-label">回覆時效</div>
+                <div class="item-content">約 3-5 個工作日</div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top: 20px;" onclick="showScreen('gatekeeper-screen')">返回首頁</button>
     </div>
 
 </div>
@@ -561,11 +669,18 @@
         renderQuestion();
     }
 
+    // [修改] showScreen 函數，確保每次切換頁面時，舊頁面都被隱藏，新頁面被顯示
     function showScreen(id) {
         document.querySelectorAll('.app-container > div').forEach(div => div.classList.add('hidden'));
         const target = document.getElementById(id);
         target.classList.remove('hidden');
         target.classList.add('fade-in');
+        
+        // 【新增】針對隱私權和聯絡我們頁面，確保其內容位於頂部
+        if (id === 'privacy-policy-screen' || id === 'contact-us-screen') {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
     }
 
     // ================= 2. QUIZ LOGIC =================
