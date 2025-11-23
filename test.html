@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資屬性健檢：你是「忙碌投資人」嗎？</title>
+    <style>
+        :root {
+            --primary-color: #2563eb; /* 專業藍 */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #e2e8f0;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            display: none; /* Initially hidden */
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Typography */
+        h1, h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+
+        .option-btn.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* States */
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Result Styles */
+        .result-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .cta-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .cta-btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    
+    <div id="intro-screen" class="fade-in">
+        <h1>投資風格健檢</h1>
+        <p>你是市場中的「全職獵人」還是「忙碌策略家」？</p>
+        <p>花 30 秒完成檢測，我們將分析你是否適合這套針對「高效率投資人」設計的資訊系統。</p>
+        <button class="cta-btn" onclick="startQuiz()">開始檢測</button>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+        <div class="progress-container" style="display: block;">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        
+        <div id="question-container" class="fade-in">
+            <h2 id="question-text">Question text here</h2>
+            <div class="options-grid" id="options-container">
+                </div>
+        </div>
+    </div>
+
+    <div id="result-screen" class="hidden fade-in">
+        <div class="result-content">
+            <div id="result-badge" class="result-tag">分析完成</div>
+            <h2 id="result-title"></h2>
+            <p id="result-desc"></p>
+            <div id="target-audience-content" class="hidden">
+                <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+                <p style="color: #0f172a; font-weight: 600;">🔥 您的專屬解方：</p>
+                <p>我們為像您這樣的忙碌投資人，每天篩選 <strong>3-5 個關鍵敘事與風險情境</strong>。</p>
+                <ul style="padding-left: 20px; color: var(--text-sub); margin-bottom: 20px;">
+                    <li>❌ 拒絕無效的雜訊轟炸</li>
+                    <li>✅ 3分鐘掌握當日市場情緒</li>
+                    <li>✅ 專注於中長線的風險控管</li>
+                </ul>
+                <button class="cta-btn" onclick="alert('感謝您的興趣！連結至訂閱或註冊頁面')">免費獲取今日關鍵報告</button>
+            </div>
+            <button id="restart-btn" class="option-btn" style="margin-top: 15px; text-align: center;" onclick="location.reload()">重新測驗</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 題庫資料
+    const questions = [
+        {
+            id: 1,
+            text: "關於您的工作與看盤時間，哪項描述最貼切？",
+            options: [
+                { text: "我有全職工作，只能利用午休或通勤時偶爾看一眼。", score: 3 }, // Target
+                { text: "我是全職交易者/自由業者，我可以整天盯盤。", score: 0 },
+                { text: "工作非常忙碌，甚至幾天才看一次盤。", score: 2 } // Target potential
+            ]
+        },
+        {
+            id: 2,
+            text: "面對每日海量的財經新聞與雜訊，您的感受是？",
+            options: [
+                { text: "資訊太多太雜，很難快速判斷哪些才重要。", score: 3 }, // Target Pain Point
+                { text: "我有自己的資訊過濾系統，處理得很好。", score: 1 },
+                { text: "我通常只看標題，不太在意細節。", score: 2 }
+            ]
+        },
+        {
+            id: 3,
+            text: "您的投資風格與持倉習慣傾向於？",
+            options: [
+                { text: "當沖或短線進出，追求即時波動價差。", score: 0 },
+                { text: "波段或長期持有，有穩定配置，但會擔心市場突發風險。", score: 3 }, // Target
+                { text: "定期定額 ETF，幾乎不主動操作。", score: 1 }
+            ]
+        },
+        {
+            id: 4,
+            text: "如果有個工具能在開盤前給您「3 個關鍵市場情緒與風險」摘要，您覺得？",
+            options: [
+                { text: "非常有幫助！我需要這種高效率的重點整理。", score: 3 }, // High Intent
+                { text: "還好，我比較喜歡自己閱讀原始長篇報告。", score: 1 },
+                { text: "不需要，我看技術線圖就夠了。", score: 0 }
+            ]
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let totalScore = 0;
+
+    function startQuiz() {
+        document.getElementById('intro-screen').classList.add('hidden');
+        document.getElementById('quiz-screen').classList.remove('hidden');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const q = questions[currentQuestionIndex];
+        document.getElementById('question-text').innerText = q.text;
+        
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        // Update Progress
+        const progress = ((currentQuestionIndex) / questions.length) * 100;
+        document.getElementById('progress').style.width = `${progress}%`;
+
+        q.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt.text;
+            btn.onclick = () => selectOption(opt.score);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(score) {
+        totalScore += score;
+        
+        // Animation delay for better UX
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(b => b.style.pointerEvents = 'none'); // Prevent double click
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }, 300);
+    }
+
+    function showResult() {
+        document.getElementById('quiz-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        const title = document.getElementById('result-title');
+        const desc = document.getElementById('result-desc');
+        const targetContent = document.getElementById('target-audience-content');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // 滿分為 12 分 (4題 x 3分)
+        // 目標客群分數區間設定：8分以上
+        
+        if (totalScore >= 8) {
+            // Perfect Match
+            title.innerText = "您是典型的「忙碌投資人」";
+            desc.innerText = "您擁有穩定的投資心態與正職工作，但「時間」是您最稀缺的資源。您不需要更多的資訊，您需要的是「更精準的觀點」。";
+            targetContent.classList.remove('hidden');
+            restartBtn.classList.add('hidden'); // Hide restart for target to focus on CTA
+        } else if (totalScore >= 4) {
+            // Potential
+            title.innerText = "您是「穩健型觀察者」";
+            desc.innerText = "您對市場保持關注，但可能尚未感受到強烈的資訊焦慮，或者您的投資頻率較低。我們的服務能協助您在關鍵時刻不漏接重要訊號。";
+            targetContent.classList.remove('hidden'); // Still show offer
+        } else {
+            // Not Target (Day trader or passive)
+            title.innerText = "您的風格較偏向「全職交易」或「佛系投資」";
+            desc.innerText = "您可能有充裕的時間盯盤，或者您選擇不主動管理投資。我們的精簡快訊可能對您的幫助有限，因為您需要的是更即時的報價或完全不看盤的生活。";
+            restartBtn.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
