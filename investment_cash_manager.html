@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>投資現金水位管理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #fafaf8;
+    --surface2: #f4f3ef;
+    --border: #e8e5de;
+    --border-strong: #ccc9bf;
+    --text: #1a1a18;
+    --text-muted: #6b6860;
+    --text-light: #9e9b94;
+    --accent: #2d5a27;
+    --accent-light: #edf3ec;
+    --warn: #8b4513;
+    --warn-light: #fdf4ee;
+    --danger: #7a1f1f;
+    --danger-light: #fdf0f0;
+    --neutral: #3d3d3a;
+    --shadow: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  header {
+    background: var(--bg);
+    border-bottom: 1.5px solid var(--border);
+    padding: 18px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .header-subtitle {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 1px;
+  }
+
+  .save-btn {
+    background: var(--text);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: 'Noto Sans TC', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  .save-btn:active { opacity: 0.75; }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .field-row:last-child { border-bottom: none; }
+
+  .field-label {
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+    font-weight: 500;
+  }
+  .field-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 1px;
+    font-weight: 400;
+  }
+
+  .field-input {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  input[type="number"], select {
+    background: var(--bg);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input[type="number"]:focus, select:focus {
+    border-color: var(--accent);
+  }
+  input[type="number"] {
+    width: 130px;
+    text-align: right;
+  }
+
+  select {
+    width: 130px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236b6860'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+    cursor: pointer;
+  }
+
+  .unit {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* Cycle scoring */
+  .score-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .score-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .score-row:last-child { border-bottom: none; }
+
+  .score-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .score-desc {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  .score-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Noto Serif TC', serif;
+    min-width: 32px;
+    text-align: center;
+  }
+  .score-value.pos { color: var(--accent); }
+  .score-value.neg { color: var(--danger); }
+  .score-value.zero { color: var(--text-muted); }
+
+  select.score-select {
+    width: 110px;
+    font-size: 13px;
+  }
+
+  /* Result panel */
+  .result-panel {
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .result-panel.panic { background: var(--accent-light); border: 2px solid var(--accent); }
+  .result-panel.recovery { background: #f0f5ed; border: 2px solid #5a8a52; }
+  .result-panel.neutral { background: var(--surface2); border: 2px solid var(--border-strong); }
+  .result-panel.hot { background: var(--warn-light); border: 2px solid var(--warn); }
+  .result-panel.danger { background: var(--danger-light); border: 2px solid var(--danger); }
+
+  .result-score-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .result-score-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .result-score-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .result-state {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .result-action {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .result-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .meta-box {
+    background: rgba(255,255,255,0.65);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .meta-box-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+  .meta-box-value {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text);
+  }
+  .meta-box-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Allocation breakdown */
+  .alloc-bar-wrap {
+    margin-top: 16px;
+  }
+  .alloc-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--border);
+    margin-bottom: 10px;
+  }
+  .alloc-seg {
+    transition: width 0.4s ease;
+  }
+  .seg-stock { background: #2d5a27; }
+  .seg-bond { background: #7aaa72; }
+  .seg-cash { background: #b8d4b3; }
+
+  .alloc-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* Amounts table */
+  .amounts-table {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .amounts-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .amounts-row:last-child { border-bottom: none; }
+  .amounts-row.total {
+    font-weight: 700;
+    background: var(--surface2);
+    font-size: 15px;
+  }
+  .amounts-label { color: var(--text-muted); }
+  .amounts-value {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Trigger table */
+  .trigger-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .trigger-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: center;
+  }
+  .trigger-header span:first-child { text-align: left; }
+  .trigger-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: center;
+    text-align: center;
+  }
+  .trigger-row:last-child { border-bottom: none; }
+  .trigger-row span:first-child { text-align: left; font-weight: 500; }
+  .trigger-row.active-row {
+    background: var(--accent-light);
+    font-weight: 600;
+  }
+
+  /* Policy quote */
+  .policy-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--border-strong);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 14px 14px 12px; }
+    .header-title { font-size: 15px; }
+    main { padding: 16px 12px 72px; }
+    input[type="number"] { width: 110px; }
+    select { width: 110px; }
+    .result-score-num { font-size: 34px; }
+    .result-state { font-size: 17px; }
+    .trigger-header, .trigger-row { font-size: 12px; padding: 9px 10px; }
+    .meta-box-value { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">投資現金水位管理</div>
+    <div class="header-subtitle">根據市場週期動態調整</div>
+  </div>
+  <button class="save-btn" onclick="saveData()">💾 儲存</button>
+</header>
+
+<main>
+
+  <!-- 基本財務設定 -->
+  <div class="section">
+    <div class="section-title">基本財務設定</div>
+    <div class="card">
+      <div class="field-row">
+        <div>
+          <div class="field-label">總資產</div>
+          <div class="field-sub">含生活現金</div>
+        </div>
+        <div class="field-input">
+          <input type="number" id="totalAssets" value="3000000" step="100000">
+          <span class="unit">元</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <div class="field-label">每月必要支出</div>
+          <div class="field-sub">固定生活費</div>
+        </div>
+        <div class="field-input">
+          <input type="number" id="monthlyExpense" value="50000" step="5000">
+          <span class="unit">元</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <div class="field-label">生活現金月份數</div>
+          <div class="field-sub">建議 6–12 個月</div>
+        </div>
+        <div class="field-input">
+          <select id="lifeCashMonths">
+            <option value="6">6 個月</option>
+            <option value="9">9 個月</option>
+            <option value="12">12 個月</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <div class="field-label">未來大額支出</div>
+          <div class="field-sub">12 個月內</div>
+        </div>
+        <div class="field-input">
+          <input type="number" id="bigExpense" value="0" step="50000">
+          <span class="unit">元</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <div class="field-label">債券 / 貨幣工具比例</div>
+          <div class="field-sub">投資資產中</div>
+        </div>
+        <div class="field-input">
+          <select id="bondRatio">
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+            <option value="20" selected>20%</option>
+            <option value="25">25%</option>
+            <option value="30">30%</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 市場週期評分 -->
+  <div class="section">
+    <div class="section-title">市場週期評分（各 -2 到 +2 分）</div>
+    <div class="card">
+      <div class="score-grid">
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">趨勢</div>
+            <div class="score-desc">指數 vs 200 日均線、高低點結構</div>
+          </div>
+          <div class="score-value" id="val-trend">0</div>
+          <select class="score-select" id="trend" onchange="updateScore()">
+            <option value="-2">-2 明顯空頭</option>
+            <option value="-1">-1 偏空</option>
+            <option value="0" selected>0 中性</option>
+            <option value="1">+1 偏多</option>
+            <option value="2">+2 明顯多頭</option>
+          </select>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">估值</div>
+            <div class="score-desc">PE / PB / 殖利率 / ERP</div>
+          </div>
+          <div class="score-value" id="val-valuation">0</div>
+          <select class="score-select" id="valuation" onchange="updateScore()">
+            <option value="-2">-2 極貴</option>
+            <option value="-1">-1 偏貴</option>
+            <option value="0" selected>0 合理</option>
+            <option value="1">+1 偏便宜</option>
+            <option value="2">+2 極便宜</option>
+          </select>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">盈餘</div>
+            <div class="score-desc">EPS 修正方向、營收、法說</div>
+          </div>
+          <div class="score-value" id="val-earnings">0</div>
+          <select class="score-select" id="earnings" onchange="updateScore()">
+            <option value="-2">-2 大幅下修</option>
+            <option value="-1">-1 小幅下修</option>
+            <option value="0" selected>0 持平</option>
+            <option value="1">+1 小幅上修</option>
+            <option value="2">+2 大幅上修</option>
+          </select>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">流動性</div>
+            <div class="score-desc">利率政策、美債、美元、M2</div>
+          </div>
+          <div class="score-value" id="val-liquidity">0</div>
+          <select class="score-select" id="liquidity" onchange="updateScore()">
+            <option value="-2">-2 明顯緊縮</option>
+            <option value="-1">-1 偏緊</option>
+            <option value="0" selected>0 中性</option>
+            <option value="1">+1 偏寬鬆</option>
+            <option value="2">+2 明顯寬鬆</option>
+          </select>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">信用風險</div>
+            <div class="score-desc">信用利差、高收益債、銀行股</div>
+          </div>
+          <div class="score-value" id="val-credit">0</div>
+          <select class="score-select" id="credit" onchange="updateScore()">
+            <option value="-2">-2 明顯惡化</option>
+            <option value="-1">-1 偏弱</option>
+            <option value="0" selected>0 中性</option>
+            <option value="1">+1 改善</option>
+            <option value="2">+2 明顯改善</option>
+          </select>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <div class="score-label">情緒</div>
+            <div class="score-desc">VIX、融資、題材集中度</div>
+          </div>
+          <div class="score-value" id="val-sentiment">0</div>
+          <select class="score-select" id="sentiment" onchange="updateScore()">
+            <option value="-2">-2 極度過熱</option>
+            <option value="-1">-1 偏熱</option>
+            <option value="0" selected>0 中性</option>
+            <option value="1">+1 偏恐慌</option>
+            <option value="2">+2 極度恐慌</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 分析結果 -->
+  <div class="section">
+    <div class="section-title">分析結果</div>
+    <div class="result-panel neutral" id="resultPanel">
+      <div class="result-score-line">
+        <div class="result-score-num" id="totalScore">0</div>
+        <div class="result-score-label">/ 12 分</div>
+      </div>
+      <div class="result-state" id="resultState">景氣擴張期（中性）</div>
+      <div class="result-action" id="resultAction">維持標準配置，不額外加碼，不額外減碼。</div>
+
+      <div class="result-meta">
+        <div class="meta-box">
+          <div class="meta-box-label">建議投資現金水位</div>
+          <div class="meta-box-value" id="cashRatio">10%</div>
+          <div class="meta-box-sub">佔投資資產</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-box-label">投資現金金額</div>
+          <div class="meta-box-value" id="cashAmount">—</div>
+          <div class="meta-box-sub" id="cashAmountSub">計算中</div>
+        </div>
+      </div>
+
+      <div class="alloc-bar-wrap">
+        <div class="alloc-bar">
+          <div class="alloc-seg seg-stock" id="barStock" style="width:70%"></div>
+          <div class="alloc-seg seg-bond" id="barBond" style="width:20%"></div>
+          <div class="alloc-seg seg-cash" id="barCash" style="width:10%"></div>
+        </div>
+        <div class="alloc-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#2d5a27"></div>股票 <span id="stockPct">70%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7aaa72"></div>債券 <span id="bondPct">20%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#b8d4b3"></div>現金 <span id="cashPct">10%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 資金配置明細 -->
+    <div class="amounts-table" id="amountsTable"></div>
+  </div>
+
+  <!-- 加碼 Trigger 表 -->
+  <div class="section">
+    <div class="section-title">分批加碼節奏（目前狀態適用）</div>
+    <div class="trigger-card">
+      <div class="trigger-header">
+        <span>跌幅</span>
+        <span>投入比例</span>
+        <span>行動</span>
+      </div>
+      <div id="triggerRows"></div>
+    </div>
+  </div>
+
+  <!-- 投資政策 -->
+  <div class="section">
+    <div class="section-title">投資政策聲明</div>
+    <div class="policy-box">
+      平時投資現金維持 10%。若市場估值偏貴、融資升高、題材集中，現金提高至 20%。若市場跌破長期均線且盈餘下修、信用風險惡化，現金提高至 25%–30%。若市場跌幅超過 25%，估值低於歷史中位數，信用風險停止惡化，政策開始轉向寬鬆，現金降低至 5%–8%，並分 4 批投入。<br><br>
+      生活現金永遠不動，且不得低於 6 個月必要支出。
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast">已儲存到本機</div>
+
+<script>
+const STORAGE_KEY = 'investment_cash_manager_v1';
+
+const cycleData = {
+  panic:    { label: '恐慌底部期', cashMin: 5,  cashMax: 8,  stockMin: 80, stockMax: 90, color: 'panic',   action: '降低現金，分批買入。現在是累積風險資產的時機，用現金換股票。', triggers: [['跌 25%','25% 機會現金','開始布局'],['跌 30%','再 25%','持續加碼'],['VIX 回落＋信用收斂','再 25%','訊號確認'],['站回 200 日均線','剩餘 25%','完成布局']] },
+  recovery: { label: '復甦初期',   cashMin: 8,  cashMax: 10, stockMin: 75, stockMax: 85, color: 'recovery', action: '持續投入，現金偏低。趨勢確立，順勢加碼，不要踏空。', triggers: [['跌 10%','25% 機會現金','回測加碼'],['跌 20%','再 25%','加碼'],['站穩均線','25%','確認'],['其餘','保留','觀察']] },
+  neutral:  { label: '景氣擴張期（中性）', cashMin: 10, cashMax: 10, stockMin: 70, stockMax: 80, color: 'neutral', action: '維持標準配置，不額外加碼，不額外減碼。', triggers: [['跌 10%','25% 機會現金','試水溫'],['跌 20%','再 25%','加碼'],['跌 30%','再 25%','加碼'],['跌 40%','剩餘 25%','滿倉']] },
+  hot:      { label: '過熱末升段',  cashMin: 15, cashMax: 20, stockMin: 55, stockMax: 70, color: 'hot',     action: '提高現金，漲多調節。不追高，單一個股超過 20% 時降至 10–15%。新資金先進短債或定存。', triggers: [['跌 10%','10% 機會現金','小量試探'],['跌 20%','15%','謹慎加碼'],['跌 30%','20%','確認止跌後'],['信用惡化','暫停','等待轉機']] },
+  danger:   { label: '衰退下跌期',  cashMin: 20, cashMax: 30, stockMin: 40, stockMax: 60, color: 'danger',  action: '提高現金，等待分批條件。看到跌不代表馬上買，只能小額測試，不可重倉抄底。', triggers: [['跌 10%','10% 機會現金','小量試探'],['跌 20%','15%','謹慎加碼'],['跌 30% 且 EPS 仍下修','20%，保留現金','耐心等'],['信用利差擴大','暫停加碼','等轉機']] },
+};
+
+function getState(score) {
+  if (score >= 8)  return 'panic';
+  if (score >= 4)  return 'recovery';
+  if (score >= -3) return 'neutral';
+  if (score >= -7) return 'hot';
+  return 'danger';
+}
+
+function fmtMoney(n) {
+  return 'NT$' + Math.round(n).toLocaleString('zh-TW');
+}
+
+function updateScore() {
+  const fields = ['trend','valuation','earnings','liquidity','credit','sentiment'];
+  let total = 0;
+  fields.forEach(f => {
+    const v = parseInt(document.getElementById(f).value);
+    total += v;
+    const el = document.getElementById('val-' + f);
+    el.textContent = v > 0 ? '+' + v : v;
+    el.className = 'score-value ' + (v > 0 ? 'pos' : v < 0 ? 'neg' : 'zero');
+  });
+
+  const state = getState(total);
+  const d = cycleData[state];
+  const bondRatio = parseInt(document.getElementById('bondRatio').value);
+
+  // cash ratio
+  const cashMid = Math.round((d.cashMin + d.cashMax) / 2);
+  const cashR = cashMid;
+  const stockR = 100 - bondRatio - cashR;
+
+  // result panel
+  const panel = document.getElementById('resultPanel');
+  panel.className = 'result-panel ' + d.color;
+  document.getElementById('totalScore').textContent = total > 0 ? '+' + total : total;
+  document.getElementById('resultState').textContent = d.label;
+  document.getElementById('resultAction').textContent = d.action;
+  document.getElementById('cashRatio').textContent = d.cashMin === d.cashMax ? d.cashMin + '%' : d.cashMin + '–' + d.cashMax + '%';
+
+  // bar
+  const sR = Math.max(0, stockR);
+  document.getElementById('barStock').style.width = sR + '%';
+  document.getElementById('barBond').style.width = bondRatio + '%';
+  document.getElementById('barCash').style.width = cashMid + '%';
+  document.getElementById('stockPct').textContent = sR + '%';
+  document.getElementById('bondPct').textContent = bondRatio + '%';
+  document.getElementById('cashPct').textContent = cashMid + '%';
+
+  // amounts
+  const total_assets = parseFloat(document.getElementById('totalAssets').value) || 0;
+  const monthly = parseFloat(document.getElementById('monthlyExpense').value) || 0;
+  const lifeMo = parseInt(document.getElementById('lifeCashMonths').value) || 6;
+  const bigExp = parseFloat(document.getElementById('bigExpense').value) || 0;
+
+  const lifeCash = monthly * lifeMo;
+  const investPool = Math.max(0, total_assets - lifeCash - bigExp);
+  const invCash = investPool * cashMid / 100;
+  const invBond = investPool * bondRatio / 100;
+  const invStock = investPool * sR / 100;
+
+  document.getElementById('cashAmount').textContent = fmtMoney(invCash);
+  document.getElementById('cashAmountSub').textContent = '佔投資資產 ' + cashMid + '%';
+
+  const table = document.getElementById('amountsTable');
+  table.innerHTML = `
+    <div class="amounts-row"><span class="amounts-label">生活現金（${lifeMo} 個月）</span><span class="amounts-value">${fmtMoney(lifeCash)}</span></div>
+    ${bigExp > 0 ? `<div class="amounts-row"><span class="amounts-label">大額支出預留</span><span class="amounts-value">${fmtMoney(bigExp)}</span></div>` : ''}
+    <div class="amounts-row"><span class="amounts-label">投資現金（${cashMid}%）</span><span class="amounts-value">${fmtMoney(invCash)}</span></div>
+    <div class="amounts-row"><span class="amounts-label">債券 / 貨幣工具（${bondRatio}%）</span><span class="amounts-value">${fmtMoney(invBond)}</span></div>
+    <div class="amounts-row"><span class="amounts-label">股票 / ETF（${sR}%）</span><span class="amounts-value">${fmtMoney(invStock)}</span></div>
+    <div class="amounts-row total"><span class="amounts-label">總資產</span><span class="amounts-value">${fmtMoney(total_assets)}</span></div>
+  `;
+
+  // triggers
+  const tbody = document.getElementById('triggerRows');
+  tbody.innerHTML = d.triggers.map(([cond, pct, action]) => `
+    <div class="trigger-row">
+      <span>${cond}</span>
+      <span>${pct}</span>
+      <span>${action}</span>
+    </div>
+  `).join('');
+}
+
+function saveData() {
+  const data = {
+    totalAssets: document.getElementById('totalAssets').value,
+    monthlyExpense: document.getElementById('monthlyExpense').value,
+    lifeCashMonths: document.getElementById('lifeCashMonths').value,
+    bigExpense: document.getElementById('bigExpense').value,
+    bondRatio: document.getElementById('bondRatio').value,
+    trend: document.getElementById('trend').value,
+    valuation: document.getElementById('valuation').value,
+    earnings: document.getElementById('earnings').value,
+    liquidity: document.getElementById('liquidity').value,
+    credit: document.getElementById('credit').value,
+    sentiment: document.getElementById('sentiment').value,
+    savedAt: new Date().toISOString(),
+  };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showToast('✓ 已儲存到本機');
+  } catch(e) {
+    showToast('儲存失敗，請確認瀏覽器設定');
+  }
+}
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    const map = {
+      totalAssets: 'totalAssets', monthlyExpense: 'monthlyExpense',
+      lifeCashMonths: 'lifeCashMonths', bigExpense: 'bigExpense',
+      bondRatio: 'bondRatio', trend: 'trend', valuation: 'valuation',
+      earnings: 'earnings', liquidity: 'liquidity', credit: 'credit', sentiment: 'sentiment',
+    };
+    Object.entries(map).forEach(([k, id]) => {
+      if (data[k] !== undefined) document.getElementById(id).value = data[k];
+    });
+    if (data.savedAt) {
+      const d = new Date(data.savedAt);
+      document.querySelector('.header-subtitle').textContent = `上次儲存：${d.toLocaleDateString('zh-TW')} ${d.toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit'})}`;
+    }
+  } catch(e) {}
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// listen changes on financial fields too
+['totalAssets','monthlyExpense','lifeCashMonths','bigExpense','bondRatio'].forEach(id => {
+  document.getElementById(id).addEventListener('change', updateScore);
+  document.getElementById(id).addEventListener('input', updateScore);
+});
+
+// init
+loadData();
+updateScore();
+</script>
+</body>
+</html>
