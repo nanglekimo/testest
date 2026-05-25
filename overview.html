@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>前端作業總覽</title>
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --surface: #fffdf9;
+      --surface-strong: #ffffff;
+      --ink: #1f2420;
+      --muted: #6d716a;
+      --line: #dfd8cc;
+      --green: #2f6956;
+      --green-soft: #e3efe8;
+      --brick: #a64f37;
+      --brick-soft: #f4e4dd;
+      --gold: #9b742f;
+      --gold-soft: #f1e7ce;
+      --blue: #315f82;
+      --blue-soft: #dfeaf0;
+      --shadow: 0 18px 44px rgba(42, 34, 22, 0.09);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(47, 105, 86, 0.16), transparent 32rem),
+        linear-gradient(135deg, #f6f3ee 0%, #eef3ef 48%, #f7f1e8 100%);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding: 28px 0 22px;
+      border-bottom: 1px solid rgba(31, 36, 32, 0.14);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 112px);
+      gap: 10px;
+    }
+
+    .stat {
+      background: rgba(255, 253, 249, 0.76);
+      border: 1px solid rgba(31, 36, 32, 0.1);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(42, 34, 22, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin: 22px 0;
+    }
+
+    .search {
+      min-width: 0;
+      width: 100%;
+      border: 1px solid rgba(31, 36, 32, 0.16);
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: rgba(255, 253, 249, 0.82);
+      color: var(--ink);
+      font-size: 15px;
+      outline: none;
+      box-shadow: inset 0 0 0 1px transparent;
+    }
+
+    .search:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(47, 105, 86, 0.12);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .filter {
+      border: 1px solid rgba(31, 36, 32, 0.15);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 253, 249, 0.7);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project {
+      display: flex;
+      min-width: 0;
+      min-height: 520px;
+      flex-direction: column;
+      overflow: hidden;
+      background: rgba(255, 253, 249, 0.86);
+      border: 1px solid rgba(31, 36, 32, 0.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .preview {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+      background: #e9e2d6;
+      border-bottom: 1px solid rgba(31, 36, 32, 0.1);
+    }
+
+    .preview iframe {
+      width: 1440px;
+      height: 900px;
+      border: 0;
+      pointer-events: none;
+      transform: scale(0.22);
+      transform-origin: top left;
+      background: white;
+    }
+
+    .preview::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 -54px 54px rgba(246, 243, 238, 0.18);
+      pointer-events: none;
+    }
+
+    .content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tag.finance { background: var(--green-soft); color: var(--green); }
+    .tag.prototype { background: var(--blue-soft); color: var(--blue); }
+    .tag.showcase { background: var(--brick-soft); color: var(--brick); }
+    .tag.plan { background: var(--gold-soft); color: var(--gold); }
+
+    .file {
+      color: var(--muted);
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .project h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .desc {
+      margin: 10px 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: auto 0 16px;
+      padding-top: 8px;
+    }
+
+    .note {
+      border: 1px solid rgba(31, 36, 32, 0.12);
+      border-radius: 999px;
+      padding: 6px 9px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 11px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: white;
+    }
+
+    .btn.secondary {
+      background: rgba(31, 36, 32, 0.06);
+      color: var(--ink);
+      border: 1px solid rgba(31, 36, 32, 0.1);
+    }
+
+    .empty {
+      display: none;
+      padding: 42px;
+      border: 1px dashed rgba(31, 36, 32, 0.22);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+      background: rgba(255, 253, 249, 0.55);
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 22px, 1180px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        padding-top: 18px;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        justify-content: flex-start;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        min-height: auto;
+      }
+
+      .preview {
+        height: 210px;
+      }
+
+      .preview iframe {
+        transform: scale(0.19);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Frontend Collection</p>
+        <h1>前端作業總覽</h1>
+        <p class="intro">把過去試做的頁面集中成一個檢視入口。每張卡片都有簡短說明與即時預覽，方便快速回看作品狀態，也方便後續新增頁面時一起管理。</p>
+      </div>
+      <div class="stats" aria-label="作品統計">
+        <div class="stat">
+          <strong id="totalCount">0</strong>
+          <span>頁面</span>
+        </div>
+        <div class="stat">
+          <strong>4</strong>
+          <span>分類</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="篩選工具">
+      <input class="search" id="searchInput" type="search" placeholder="搜尋作品名稱、說明或檔名">
+      <div class="filters" id="filters"></div>
+    </section>
+
+    <section class="grid" id="projectGrid" aria-live="polite"></section>
+    <p class="empty" id="emptyState">沒有符合條件的頁面。</p>
+  </main>
+
+  <script>
+    const projects = [
+      {
+        title: "公會轉職鑑定系統",
+        file: "index.html",
+        category: "prototype",
+        categoryLabel: "互動原型",
+        description: "用問答流程包裝職涯鑑定，包含新會員引導、測驗結果、隱私權與聯絡頁面。",
+        notes: ["問答流程", "遊戲化介面", "單頁切換"]
+      },
+      {
+        title: "數位財金公會認證中心",
+        file: "login.html",
+        category: "prototype",
+        categoryLabel: "互動原型",
+        description: "深色玻璃風格的登入與註冊頁，Firebase 認證流程目前是前端模擬版本。",
+        notes: ["登入註冊", "Firebase 模擬", "深色 UI"]
+      },
+      {
+        title: "投資現金水位管理",
+        file: "investment_cash_manager.html",
+        category: "finance",
+        categoryLabel: "財務工具",
+        description: "依市場週期評分估算現金、債券與股票比例，支援本機儲存使用者設定。",
+        notes: ["資產配置", "本機儲存", "互動計算"]
+      },
+      {
+        title: "市場觀察報告",
+        file: "finflow.html",
+        category: "finance",
+        categoryLabel: "財務工具",
+        description: "大型財金資訊儀表板，彙整市場情緒、台灣與國際個股、新聞連結與合規提示。",
+        notes: ["市場報告", "資料彙整", "大量連結"]
+      },
+      {
+        title: "貸款月付金試算器",
+        file: "LoanCalculator.html",
+        category: "finance",
+        categoryLabel: "財務工具",
+        description: "輸入貸款金額、年利率與期數後，計算月付金、總還款與利息，並可下載 CSV。",
+        notes: ["貸款試算", "CSV 匯出", "表單工具"]
+      },
+      {
+        title: "LinkedIn 風格履歷",
+        file: "resume.html",
+        category: "showcase",
+        categoryLabel: "展示頁",
+        description: "個人履歷展示頁，含關於、經歷、學歷、專案、技能與互動式起卦小工具。",
+        notes: ["個人履歷", "專案展示", "互動彈窗"]
+      },
+      {
+        title: "溫暖咖啡",
+        file: "cofee.html",
+        category: "showcase",
+        categoryLabel: "展示頁",
+        description: "精品咖啡品牌頁，包含品牌理念、主打商品、產品彈窗與聯絡表單。",
+        notes: ["品牌頁", "商品卡片", "聯絡表單"]
+      },
+      {
+        title: "山嶺之宿旅宿介紹",
+        file: "hotel_info.html",
+        category: "showcase",
+        categoryLabel: "展示頁",
+        description: "旅宿介紹頁，以山景住宿為主題，呈現關於我們、特色與預約互動。",
+        notes: ["旅宿頁", "形象展示", "預約按鈕"]
+      },
+      {
+        title: "MVP 演進路線圖",
+        file: "route.html",
+        category: "plan",
+        categoryLabel: "規劃提案",
+        description: "用階段式卡片呈現靜態 HTML 與 JavaScript 專案的 MVP 演進規劃。",
+        notes: ["路線圖", "階段規劃", "Tailwind"]
+      },
+      {
+        title: "Fin Flow Studio 自動化系統",
+        file: "suggestion.html",
+        category: "plan",
+        categoryLabel: "規劃提案",
+        description: "多平台財經媒體自動化系統提案，整理架構、平台矩陣與收益模型。",
+        notes: ["系統提案", "平台策略", "收益模型"]
+      },
+      {
+        title: "Fin Flow Studio 內容版型",
+        file: "suggestion2.html",
+        category: "plan",
+        categoryLabel: "規劃提案",
+        description: "偏內容媒體風格的財經資訊頁，展示首頁、文章卡片、訂閱與 Dock 動效。",
+        notes: ["媒體版型", "文章卡片", "動效原型"]
+      }
+    ];
+
+    const categories = [
+      ["all", "全部"],
+      ["finance", "財務工具"],
+      ["prototype", "互動原型"],
+      ["showcase", "展示頁"],
+      ["plan", "規劃提案"]
+    ];
+
+    const grid = document.getElementById("projectGrid");
+    const filters = document.getElementById("filters");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+    const totalCount = document.getElementById("totalCount");
+    let activeCategory = "all";
+
+    totalCount.textContent = projects.length;
+
+    function makeProjectCard(project) {
+      const notes = project.notes.map(note => `<span class="note">${note}</span>`).join("");
+      return `
+        <article class="project" data-category="${project.category}" data-search="${`${project.title} ${project.file} ${project.categoryLabel} ${project.description} ${project.notes.join(" ")}`.toLowerCase()}">
+          <div class="preview" aria-hidden="true">
+            <iframe src="${project.file}" title="${project.title} 預覽" loading="lazy"></iframe>
+          </div>
+          <div class="content">
+            <div class="meta">
+              <span class="tag ${project.category}">${project.categoryLabel}</span>
+              <span class="file">${project.file}</span>
+            </div>
+            <h2>${project.title}</h2>
+            <p class="desc">${project.description}</p>
+            <div class="notes">${notes}</div>
+            <div class="actions">
+              <a class="btn primary" href="${project.file}">開啟頁面</a>
+              <a class="btn secondary" href="${project.file}" target="_blank" rel="noopener">新分頁檢視</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderFilters() {
+      filters.innerHTML = categories.map(([value, label]) => `
+        <button class="filter ${value === activeCategory ? "active" : ""}" type="button" data-category="${value}">${label}</button>
+      `).join("");
+
+      filters.querySelectorAll(".filter").forEach(button => {
+        button.addEventListener("click", () => {
+          activeCategory = button.dataset.category;
+          renderFilters();
+          applyFilters();
+        });
+      });
+    }
+
+    function renderProjects() {
+      grid.innerHTML = projects.map(makeProjectCard).join("");
+    }
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      grid.querySelectorAll(".project").forEach(card => {
+        const categoryMatch = activeCategory === "all" || card.dataset.category === activeCategory;
+        const searchMatch = !query || card.dataset.search.includes(query);
+        const isVisible = categoryMatch && searchMatch;
+        card.style.display = isVisible ? "" : "none";
+        if (isVisible) visibleCount += 1;
+      });
+
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    renderFilters();
+    renderProjects();
+    applyFilters();
+  </script>
+</body>
+</html>
