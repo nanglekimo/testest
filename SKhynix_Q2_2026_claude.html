@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK海力士 (000660.KS) Q2 2026財報查證與市場分析報告</title>
+<style>
+  :root{
+    --navy:#0b1f3a;
+    --navy2:#14315c;
+    --accent:#c9a24b;
+    --red:#b23b3b;
+    --green:#2f7d5c;
+    --grey:#6b7280;
+    --bg:#f6f5f1;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",-apple-system,sans-serif;
+    background:var(--bg);
+    color:#1c1c1c;
+    line-height:1.7;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 60px;}
+  header.hero{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy2) 60%, #1d4272 100%);
+    color:#f4f1e8;
+    padding:52px 20px 40px;
+    text-align:center;
+    margin-bottom:36px;
+  }
+  header.hero .tag{
+    letter-spacing:3px;
+    font-size:12px;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  header.hero h1{
+    font-size:30px;
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  header.hero p.sub{
+    font-size:14.5px;
+    color:#d8d3c2;
+    margin:0;
+  }
+  .meta-row{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-top:22px;
+    font-size:13px;
+    color:#cfd6e6;
+  }
+  .price-card{
+    background:var(--card);
+    border-radius:12px;
+    box-shadow:0 2px 14px rgba(11,31,58,.08);
+    padding:26px 28px;
+    margin-bottom:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    justify-content:space-between;
+    align-items:center;
+    border-left:5px solid var(--red);
+  }
+  .price-block h2{margin:0;font-size:15px;color:var(--grey);font-weight:500;}
+  .price-block .val{font-size:34px;font-weight:700;color:var(--navy);margin-top:4px;}
+  .price-block .chg{font-size:15px;font-weight:600;color:var(--red);}
+  .price-note{font-size:12.5px;color:var(--grey);max-width:340px;}
+
+  section{margin-bottom:38px;}
+  h2.section-title{
+    font-size:20px;
+    color:var(--navy);
+    border-bottom:2px solid var(--accent);
+    padding-bottom:8px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  h2.section-title .no{
+    font-family:Georgia,serif;
+    color:var(--accent);
+    font-size:16px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:10px;
+    padding:20px 24px;
+    box-shadow:0 1px 8px rgba(11,31,58,.06);
+    margin-bottom:16px;
+  }
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #eae7de;}
+  th{background:#f0eee6;color:var(--navy);font-weight:600;font-size:13px;}
+  tr:last-child td{border-bottom:none;}
+  .pos{color:var(--green);font-weight:600;}
+  .neg{color:var(--red);font-weight:600;}
+  .badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    background:#e9f4ee;
+    color:var(--green);
+  }
+  .badge.warn{background:#fbecec;color:var(--red);}
+  .qa{margin-bottom:14px;padding-left:14px;border-left:3px solid #e4dfcf;}
+  .qa .q{font-weight:600;color:var(--navy2);font-size:14.5px;margin-bottom:4px;}
+  .qa .a{font-size:14px;color:#333;}
+  .qa .who{font-size:12px;color:var(--grey);margin-top:3px;}
+  .verify-box{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:#eef7f1;
+    border:1px solid #cfe8d8;
+    border-radius:10px;
+    padding:16px 18px;
+    font-size:13.5px;
+    color:#245c3d;
+    margin-bottom:20px;
+  }
+  .verify-box .icon{font-size:20px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr;} .price-card{flex-direction:column;align-items:flex-start;}}
+  .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px;}
+  @media(max-width:640px){.metric-grid{grid-template-columns:1fr 1fr;}}
+  .metric{background:#faf9f5;border-radius:8px;padding:14px;text-align:center;}
+  .metric .label{font-size:12px;color:var(--grey);}
+  .metric .num{font-size:19px;font-weight:700;color:var(--navy);margin-top:4px;}
+  .metric .sub{font-size:11.5px;color:var(--green);margin-top:2px;}
+  .forecast-box{
+    background:linear-gradient(135deg,#f4ede1,#faf7ef);
+    border:1px solid #e6d9bd;
+    border-radius:12px;
+    padding:22px 24px;
+  }
+  .bull-bear{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+  @media(max-width:640px){.bull-bear{grid-template-columns:1fr;}}
+  .bull{background:#eef7f1;border-radius:10px;padding:16px;border-top:4px solid var(--green);}
+  .bear{background:#fbecec;border-radius:10px;padding:16px;border-top:4px solid var(--red);}
+  .bull h3,.bear h3{margin:0 0 8px;font-size:15px;}
+  .bull h3{color:var(--green);}
+  .bear h3{color:var(--red);}
+  ul{padding-left:20px;margin:8px 0;}
+  li{margin-bottom:6px;font-size:14px;}
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--grey);
+    padding-top:20px;
+    border-top:1px solid #e3e0d5;
+  }
+  .src{font-size:11px;color:#9aa0a8;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="tag">Equity Research Note · 個股分析報告</div>
+  <h1>SK海力士 (SK hynix)</h1>
+  <p class="sub">000660.KS（首爾）／ SKHY（那斯達克 ADR）— 2026年第二季財報查證與市場展望</p>
+  <div class="meta-row">
+    <span>報告日期：2026年7月29日</span>
+    <span>財報發布：2026年7月28–29日</span>
+    <span>產業：記憶體半導體 / AI基礎設施</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="price-card">
+    <div class="price-block">
+      <h2>韓國掛牌股價（KRX: 000660）</h2>
+      <div class="val">₩1,550,000</div>
+      <div class="chg">▼ -14.65%（單日，財報公布後首個交易日）</div>
+    </div>
+    <div class="price-block">
+      <h2>那斯達克ADR（SKHY）</h2>
+      <div class="val">$130.49</div>
+      <div class="chg">▼ -8.76%（創掛牌以來新低）</div>
+    </div>
+    <div class="price-note">股價數據反映財報公布後市場即時反應，波動極大，隔日（7/29）首爾股市曾一度反彈逾3%後又翻黑，盤中最深跌逾11%，請以看盤軟體即時報價為準。</div>
+  </div>
+
+  <div class="verify-box">
+    <div class="icon">✅</div>
+    <div>
+      <strong>查證結論：</strong>原始逐字稿內容（Q1–Q10問答）之議題與提問機構，與2026年7月28–29日SK海力士正式公布的Q2 2026財報電話會議公開報導之主題高度吻合，包括HBM需求韌性、LTA長約結構、HBM4/HBM4E進度、ASP走勢、資本支出規劃、ADR轉換機制與股東回饋規劃等，均與公司官方新聞稿及路透、TradingKey等多方報導交叉核對一致。惟逐字稿中管理層引述的具體語句無法逐字比對官方原文，建議以此作為議題脈絡參考，具體數字以公司IR公告為準。
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title"><span class="no">01</span> Q2 2026 財務數據總覽</h2>
+    <div class="card">
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="label">營收</div>
+          <div class="num">₩79.32兆</div>
+          <div class="sub">YoY +257% ／ QoQ +51%</div>
+        </div>
+        <div class="metric">
+          <div class="label">營業利益</div>
+          <div class="num">₩60.54兆</div>
+          <div class="sub">YoY +557% ／ 營業利益率76%</div>
+        </div>
+        <div class="metric">
+          <div class="label">淨利</div>
+          <div class="num">₩93.92兆</div>
+          <div class="sub">含Kioxia股權出售等63.3兆投資收益</div>
+        </div>
+        <div class="metric">
+          <div class="label">上半年累計營收</div>
+          <div class="num">突破₩100兆</div>
+          <div class="sub">歷史首次</div>
+        </div>
+        <div class="metric">
+          <div class="label">淨現金</div>
+          <div class="num">₩69.4兆</div>
+          <div class="sub">現金88兆／負債18.6兆</div>
+        </div>
+        <div class="metric">
+          <div class="label">對比市場預期</div>
+          <div class="num">未達共識</div>
+          <div class="sub">營收共識約84兆／營業利益約64兆，落差約8%</div>
+        </div>
+      </div>
+      <p style="margin-top:16px;font-size:13.5px;color:var(--grey);">
+        DRAM平均售價（ASP）季增約30%，NAND ASP季增中段50%區間；企業級SSD營收季增翻倍，Solidigm高容量（30TB以上）eSSD營收季增逾兩倍。321層NAND已成公司NAND出貨主力，年底前目標占韓國國內產能50%。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">02</span> 為何獲利創新高、股價仍重挫？</h2>
+    <div class="card">
+      <p>儘管單季獲利creates歷史紀錄，股價仍大幅下挫，主因在於「成長是否能持續」的疑慮蓋過了「當下有多好」：</p>
+      <ul>
+        <li><strong>財報未達預期：</strong>部分高附加價值產品出貨遞延、產品組合變化，使DRAM整體ASP成長不如預期強勁，營收與獲利均低於分析師共識約8%。</li>
+        <li><strong>中國記憶體廠CXMT於上海掛牌上市：</strong>激勵市場對中國供給快速追趕、長期恐壓抑價格的疑慮升溫。</li>
+        <li><strong>Nvidia宣布對OpenAI高達2,500億美元的融資合作案：</strong>引發市場對AI資本支出結構與資金流向是否可持續的再評估。</li>
+        <li><strong>中國DUV微影技術傳出進展：</strong>加深市場對中系半導體供應鏈加速自主化的擔憂。</li>
+        <li>三項利空同步發酵，導致南韓KOSPI指數當日重挫近11%，創單日最大跌幅之一，記憶體類股（SK海力士、三星電子、Kioxia）全面遭殃。</li>
+      </ul>
+      <p>值得留意的是，SK海力士過去一個月股價自6月高點已回落約47%，此次財報效應是在原本就已劇烈修正的基礎上疊加。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">03</span> 逐字稿重點問答查證對照</h2>
+    <div class="card">
+      <div class="qa">
+        <div class="q">Q：AI模型效率提升、資料中心租賃消息是否代表CSP投資放緩？</div>
+        <div class="a">管理層重申既有基礎設施利用率提升與商業化加速，而非投資降溫；AI仍是CSP核心戰略。此立場與公司在法說會上「AI基礎設施投資明年後仍將維持穩健」的公開表態一致。</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q：LTA（長期供貨協議）架構為何？</div>
+        <div class="a">官方確認已與約10家主要客戶簽署多年期長約，年限約5年，目的在鎖定中長期供需能見度、提升營運效率。此為本次法說會公司主動揭露的重點政策，與逐字稿內容相符。</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q：HBM4進度與競爭優勢？</div>
+        <div class="a">公司證實HBM4已於Q2開始量產、下半年擴大出貨，HBM4E完成樣品交付並採成熟穩定製程。市場推估SK海力士掌握Nvidia Vera Rubin平台約60–70%的HBM4分配額，三星約25–30%，美光供應其餘部分。</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q：ADR轉換機制？</div>
+        <div class="a">7月30日起ADR可自由轉換為韓股，但韓股轉ADR仍受轉換上限（本次發行1,779萬股）限制，與逐字稿描述一致；此為公司7月完成那斯達克史上最大外國企業IPO（募資約265億美元）後的後續機制安排。</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">04</span> 專業機構最新分析觀點</h2>
+    <div class="grid2">
+      <div class="card">
+        <span class="badge">結構性多頭論點</span>
+        <p style="margin-top:10px;">高盛估計2026年DRAM供需缺口達4.9%，為近15年最嚴重的短缺，DRAM現貨價自年初以來已上漲約52%，緊缺狀況預期將延續至2027年。</p>
+      </div>
+      <div class="card">
+        <span class="badge warn">短期雜訊風險</span>
+        <p style="margin-top:10px;">部分機構認為此次股價重挫主因是三大突發利空疊加短期恐慌，而非基本面轉弱，「市場對此反應過度」的觀點也在分析師評論中出現。</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <table>
+        <tr><th>機構／來源</th><th>評等 / 觀點</th><th>目標價</th></tr>
+        <tr><td>S&P Global（37位分析師共識，經stockanalysis.com彙整）</td><td>強力買進</td><td>約₩3,170,124（較當前潛在漲幅約19.6%，統計時點股價不同）</td></tr>
+        <tr><td>Investing.com（37位分析師共識）</td><td>強力買進（36買進／1持有／0賣出）</td><td>平均約₩3,408,502</td></tr>
+        <tr><td>Simply Wall St（分析師共識模型）</td><td>共識目標價持續上修</td><td>約₩3,048,502–3,408,502區間</td></tr>
+        <tr><td>Barclays（財報前）</td><td>買進</td><td>ADR目標價 $330</td></tr>
+      </table>
+      <p class="src" style="margin-top:8px;">註：不同機構統計時點與股本結構（含ADR上市稀釋效果）不同，目標價區間僅供參考，非投資建議。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">05</span> EPS／本益比：現況與未來1年、2年預估對比</h2>
+    <div class="card">
+      <p style="font-size:13.5px;color:var(--grey);margin-top:0;">下表整理S&P Global／MarketScreener分析師共識對SK海力士2026–2028會計年度的每股盈餘（EPS）預估，並以財報公布後最新股價（韓股₩1,550,000）重新試算對應本益比，同時列出分析師原始發布時的基準本益比供對照。由於EPS預估多數為財報前所編製，實際數字後續可能因本次財報結果而上修或下修，僅供參考。</p>
+      <table>
+        <tr>
+          <th>會計年度</th>
+          <th>每股盈餘（EPS）共識預估</th>
+          <th>年增率</th>
+          <th>本益比（以現價₩1,550,000試算）</th>
+          <th>分析師原始基準本益比</th>
+        </tr>
+        <tr>
+          <td>FY2025（已實現）</td>
+          <td>₩60,372</td>
+          <td>+113.2%</td>
+          <td>約25.7x</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>FY2026E（今年，含Q2已公布數字）</strong></td>
+          <td>₩304,046</td>
+          <td>+403.6%</td>
+          <td><strong>約5.1x</strong></td>
+          <td>約9.1x（基準價₩2,764,000）</td>
+        </tr>
+        <tr>
+          <td><strong>FY2027E（未來1年後）</strong></td>
+          <td>₩411,991</td>
+          <td>+35.5%</td>
+          <td><strong>約3.8x</strong></td>
+          <td>約6.7x（基準價₩2,764,000）</td>
+        </tr>
+        <tr>
+          <td><strong>FY2028E（未來2年後）</strong></td>
+          <td>₩440,086</td>
+          <td>+6.8%</td>
+          <td><strong>約3.5x</strong></td>
+          <td>—</td>
+        </tr>
+      </table>
+      <div class="metric-grid" style="margin-top:18px;grid-template-columns:repeat(3,1fr);">
+        <div class="metric">
+          <div class="label">目前追蹤本益比（TTM P/E）</div>
+          <div class="num">約14.7x–16.7x</div>
+          <div class="sub">依S&P Global／GuruFocus統計時點不同</div>
+        </div>
+        <div class="metric">
+          <div class="label">未來12個月遠期本益比（Forward P/E）</div>
+          <div class="num">約4.4x–4.9x</div>
+          <div class="sub">GuruFocus，財報公布後試算</div>
+        </div>
+        <div class="metric">
+          <div class="label">PEG比率</div>
+          <div class="num">約0.05</div>
+          <div class="sub">遠低於1，反映獲利成長速度遠快於股價</div>
+        </div>
+      </div>
+      <p style="margin-top:16px;font-size:13.5px;">
+        <strong>解讀重點：</strong>若以財報公布後重挫的最新股價計算，SK海力士2026年預估本益比僅約5倍，2027年（未來一年後）降至約3.8倍，2028年（未來兩年後）進一步降至約3.5倍——遠低於半導體產業約30倍的中位數本益比（GuruFocus數據，公司遠期本益比較產業中位數低逾8成）。這種「獲利成長率遠高於股價漲幅」的現象，正是本次股價重挫後市場出現「錯殺／低估」討論的主要依據；但須留意，這些EPS預估多數編製於本次財報公布之前，且高度仰賴HBM及DRAM價格能否維持現有的高成長軌跡，一旦後續CSP資本支出或中系供給出現超預期變化，分析師estimate仍有大幅下修風險。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">06</span> 展望與預測（Forecast）</h2>
+    <div class="forecast-box">
+      <p><strong>短期（Q3 2026）：</strong>公司guidance顯示DRAM出貨量季增約10%，NAND出貨低個位數成長；隨HBM4放量出貨與1c製程DRAM占比提升，管理層預期下半年位元成長將優於上半年，產品組合改善可望帶動ASP及獲利率回升。2026年資本支出預估將提升至逾新台幣兆元等值（韓元40兆中段至近50兆區間，各報導估算略有差異），主要投向HBM4擴產與清州先進封裝基地。</p>
+      <p><strong>中長期（2027年展望）：</strong>2027年HBM供貨與價格協商據稱進展順利，需求能見度已透過LTA大幅提升；但長約定價機制在DRAM現貨價急漲的環境下，可能限制公司充分捕捉價格上升的獲利彈性，這也是本次財報「獲利創高、股價卻重挫」的核心矛盾之一。</p>
+
+      <div class="bull-bear">
+        <div class="bull">
+          <h3>多方論點</h3>
+          <ul>
+            <li>AI伺服器與HBM結構性短缺，供需缺口料為15年最嚴峻</li>
+            <li>Nvidia HBM4供應鏈中占據主導分配比重</li>
+            <li>LTA長約提升中期營收能見度與客戶黏著度</li>
+            <li>淨現金部位雄厚（₩69.4兆），具備持續擴產與股東回饋雙重彈性</li>
+            <li>分析師共識評等仍為「強力買進」</li>
+          </ul>
+        </div>
+        <div class="bear">
+          <h3>空方論點／風險</h3>
+          <ul>
+            <li>中國CXMT等本土記憶體廠加速擴產，長期恐衝擊傳統DRAM/NAND定價</li>
+            <li>AI資本支出永續性存疑，CSP投資步調若放緩將直接影響需求</li>
+            <li>LTA固定價格機制可能使公司在現貨價飆升時無法完全受惠</li>
+            <li>資本支出持續攀升，若供需反轉恐帶來毛利率壓力與產能過剩風險</li>
+            <li>短期股價波動劇烈，市場情緒面顯著影響評價，估值修正風險仍在</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="no">07</span> 股東回饋與資本配置</h2>
+    <div class="card">
+      <p>公司出售Kioxia持股加上ADR募資（約265億美元，那斯達克史上最大外國企業IPO）後，現金部位大幅增加。管理層在法說會中表示資本配置將兼顧三大目標：把握AI成長機會投資、維持財務穩健、提升股東報酬，目前正評估額外股東回饋方案，惟受ADR相關法規限制暫無法提前公布細節，預計年內完成規劃後對外說明。</p>
+    </div>
+  </section>
+
+  <footer>
+    本報告內容整理自SK海力士官方財報公告及公開財經媒體報導（Reuters、TradingKey、BigGo Finance、TechTimes、MarketScreener、Yahoo Finance、Investing.com、Simply Wall St、StockAnalysis.com等），僅供資訊參考，不構成投資建議。股價與分析師預測具高度時效性，請以最新市場資訊為準。
+  </footer>
+
+</div>
+</body>
+</html>

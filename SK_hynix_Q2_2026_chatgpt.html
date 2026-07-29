@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SK hynix Q2 2026：完整財報、EPS／本益比與 Forecast</title>
+<style>
+:root {
+ --bg:#09101d;--panel:#111b2c;--panel2:#17243a;--text:#eef4fb;--muted:#a6b4c8;
+ --line:#2a3b58;--green:#38d39f;--red:#ff7373;--amber:#f2c75c;--blue:#6ab8ff;--purple:#b69cff;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif;line-height:1.65}
+main{max-width:1180px;margin:auto;padding:32px 20px 64px} h1{font-size:2.05rem;line-height:1.24;margin:0 0 8px}
+h2{margin-top:38px;padding-bottom:9px;border-bottom:1px solid var(--line)} h3{margin:22px 0 9px}
+.sub,.note,footer{color:var(--muted)} .sub{margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px} .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card,.scenario,.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card strong{display:block;font-size:1.38rem;margin-top:4px} .metric{font-size:1.7rem;font-weight:800}
+.good{color:var(--green)}.bad{color:var(--red)}.warn{color:var(--amber)}.blue{color:var(--blue)}.purple{color:var(--purple)}
+table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden;margin:12px 0 18px}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:right}
+th:first-child,td:first-child{text-align:left} th{background:var(--panel2)} tr:last-child td{border-bottom:0}
+.callout{border-left:4px solid var(--blue);background:var(--panel);padding:15px 17px;border-radius:8px;margin:15px 0}
+.alert{border-left-color:var(--amber)} .risk{border-left-color:var(--red)} ul{padding-left:21px}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.8rem;font-weight:700}
+.verified{background:#153f33;color:#83f1c8}.partial{background:#493b16;color:#ffe083}
+.bar{height:10px;background:#263752;border-radius:8px;overflow:hidden;margin:8px 0} .bar span{display:block;height:100%;background:linear-gradient(90deg,#6ab8ff,#38d39f)}
+.matrix td,.matrix th{text-align:center} .matrix .base{background:#203550;font-weight:800}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto}
+svg text{font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif;fill:#cdd8e8}
+a{color:#92ccff} .toc a{text-decoration:none} .toc{columns:2;column-gap:30px}
+.small{font-size:.9rem} .nowrap{white-space:nowrap}
+@media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.toc{columns:1}}
+</style>
+</head>
+<body>
+<main>
+<h1>SK hynix（000660 / SKHY）Q2 2026 完整分析</h1>
+<div class="sub">財報查證｜股價下跌原因｜ADR價差｜EPS／本益比｜同業比較｜DCF｜2027–2028 Forecast<br>資料截點：2026-07-29；基準韓股價格採 ₩1,550,000。價格與共識會持續變動。</div>
+
+<div class="grid">
+ <div class="card"><span>韓股基準價</span><strong>₩1,550,000</strong><small class="note">財報後市場快照</small></div>
+ <div class="card"><span>2025A EPS</span><strong>₩62,382</strong><small class="note">最後完整年度實績</small></div>
+ <div class="card"><span>2026E EPS</span><strong class="good">₩333,578</strong><small class="note">共識淨利換算</small></div>
+ <div class="card"><span>2027E Forward P/E</span><strong class="blue">3.17x</strong><small class="note">以目前股價不變計算</small></div>
+</div>
+
+<h2>目錄</h2>
+<div class="toc">
+<a href="#summary">1. 核心結論</a><br><a href="#qa">2. 財報Q&A查證</a><br>
+<a href="#selloff">3. 大跌原因</a><br><a href="#eps">4. EPS與本益比</a><br>
+<a href="#quality">5. EPS品質</a><br><a href="#peer">6. 同業估值</a><br>
+<a href="#valuation">7. 四種估值</a><br><a href="#forecast">8. Forecast</a><br>
+<a href="#adr">9. ADR分析</a><br><a href="#monitor">10. 驗證指標</a>
+</div>
+
+<h2 id="summary">一、核心結論</h2>
+<div class="callout">
+財報後下跌的本質不是需求崩潰，而是<strong>預期落差與週期折價重新出現</strong>。Q2營收與營業利益創高但低於共識，HBM4收入認列遞延、DRAM ASP不及期待、資本支出大幅增加，而市場開始質疑2027–2028年供給紀律與AI資本支出回報。
+</div>
+<ul>
+<li><strong>基本面：</strong>HBM、Server DRAM及Enterprise SSD需求仍強，LTA提高未來五年能見度。</li>
+<li><strong>估值：</strong>以2027E共識EPS計算，韓股約僅3.17倍本益比；低估值反映市場不相信高獲利可長期維持。</li>
+<li><strong>關鍵爭點：</strong>不是2026年能否賺錢，而是2028年後EPS會否因供給擴張、競爭追趕與價格正常化急跌。</li>
+<li><strong>合理價值：</strong>綜合P/E、EV/EBITDA、DCF與情境機率後，12–18個月基準區間為<strong>₩2.15m–₩2.65m</strong>；極端情境範圍₩1.20m–₩3.60m。</li>
+</ul>
+
+<h2 id="qa">二、財報Q&A查證摘要</h2>
+<table>
+<thead><tr><th>題次／主題</th><th>判定</th><th>查證與投資含義</th></tr></thead>
+<tbody>
+<tr><td>AI效率與CSP投資</td><td><span class="tag partial">部分核實</span></td><td>管理層持續強調AI基建需求與追加訂單；模型效率帶動普及的完整逐字措辭未由可抓取官方全文確認。</td></tr>
+<tr><td>擴產與過剩</td><td><span class="tag verified">已核實</span></td><td>2026 CapEx約高40兆韓元，採分階段投產。需求能見度高，但折舊與2028供給風險上升。</td></tr>
+<tr><td>LTA</td><td><span class="tag verified">已核實</span></td><td>典型約五年、約10份協議已完成或接近完成，含訂金與採購承諾。降低波動，也限制現貨急漲時的獲利彈性。</td></tr>
+<tr><td>DRAM ASP／HBM4</td><td><span class="tag verified">主軸核實</span></td><td>高階產品遞延與組合影響ASP；下半年能否補回HBM4收入，是下一輪EPS上修關鍵。</td></tr>
+<tr><td>HBM競爭</td><td><span class="tag partial">部分核實</span></td><td>量產、良率、品質及穩定供貨是海力士核心護城河；後續HBM4E／HBM5細節仍需官方逐字稿確認。</td></tr>
+<tr><td>ADR轉換</td><td><span class="tag verified">核心核實</span></td><td>ADR轉韓股較自由，韓股轉ADR受法規與上限限制，套利不對稱，ADR可持續帶有稀缺溢價。</td></tr>
+<tr><td>股東回饋</td><td><span class="tag verified">已核實</span></td><td>公司表示年內提出額外方案，但本次未立即宣布明確回購或特別股利，形成短線失望。</td></tr>
+</tbody>
+</table>
+
+<h2 id="selloff">三、財報後股價大跌原因</h2>
+<div class="grid3">
+<div class="box"><h3>1. 預期差</h3><p>Q2營收約₩79.3兆，低於市場約₩84兆；營業利益約₩60.5兆，低於約₩64兆。高估值、高擁擠交易下，小幅miss會造成非線性跌幅。</p></div>
+<div class="box"><h3>2. 週期頂部疑慮</h3><p>市場認為2026–2027獲利已高度可見，轉而折現2028供給開出、ASP正常化與CSP投資回報風險。</p></div>
+<div class="box"><h3>3. 資本配置落差</h3><p>巨額現金與Kioxia處分收益沒有立即轉成回購或特別股利，反而伴隨高CapEx，使股東回報不確定性升高。</p></div>
+</div>
+
+<h2 id="eps">四、現有EPS、本益比與未來兩年對比</h2>
+<p>下表以MarketScreener彙整的年度淨利共識除以約6.88億股估算EPS。2025為實績，2026–2028為市場預估；本益比均以韓股₩1,550,000不變計算。</p>
+<table>
+<thead><tr><th>年度</th><th>淨利</th><th>EPS</th><th>EPS年增</th><th>以現價計算P/E</th><th>解讀</th></tr></thead>
+<tbody>
+<tr><td>2025A</td><td>₩42.9兆</td><td>₩62,382</td><td>—</td><td>24.8x</td><td>最後完整年度實績；落後目前獲利加速。</td></tr>
+<tr><td>2026E</td><td>₩229.5兆</td><td>₩333,578</td><td class="good">+435%</td><td class="blue">4.65x</td><td>當年度爆發，但含投資收益與極高記憶體價格環境。</td></tr>
+<tr><td>2027E</td><td>₩336.4兆</td><td>₩488,946</td><td class="good">+46.6%</td><td class="blue">3.17x</td><td>市場預期HBM4、Server DRAM及eSSD全面放量。</td></tr>
+<tr><td>2028E</td><td>₩355.3兆</td><td>₩516,471</td><td class="warn">+5.6%</td><td class="blue">3.00x</td><td>成長明顯放緩；真正風險是共識可能在週期反轉時快速下修。</td></tr>
+</tbody>
+</table>
+
+<div class="chart">
+<svg width="1000" height="330" viewBox="0 0 1000 330" role="img" aria-label="EPS與本益比趨勢圖">
+<line x1="85" y1="270" x2="950" y2="270" stroke="#52647e"/>
+<line x1="85" y1="45" x2="85" y2="270" stroke="#52647e"/>
+<text x="20" y="50">EPS</text><text x="930" y="305">年度</text>
+<rect x="145" y="243" width="110" height="27" rx="5" fill="#6ab8ff"/><text x="163" y="236">₩62k</text>
+<rect x="345" y="123" width="110" height="147" rx="5" fill="#6ab8ff"/><text x="356" y="115">₩333k</text>
+<rect x="545" y="55" width="110" height="215" rx="5" fill="#38d39f"/><text x="554" y="47">₩488k</text>
+<rect x="745" y="43" width="110" height="227" rx="5" fill="#38d39f"/><text x="754" y="35">₩516k</text>
+<text x="177" y="295">2025A</text><text x="377" y="295">2026E</text><text x="577" y="295">2027E</text><text x="777" y="295">2028E</text>
+<text x="155" y="320">P/E 24.8x</text><text x="355" y="320">P/E 4.65x</text><text x="555" y="320">P/E 3.17x</text><text x="755" y="320">P/E 3.00x</text>
+</svg>
+</div>
+
+<div class="callout alert">
+<strong>低P/E不等於無風險。</strong>記憶體股常在盈利最高點呈現最低本益比。市場給3–5倍P/E，是因為它預期高EPS不可永久維持，而不是單純漏看獲利。
+</div>
+
+<h2 id="quality">五、EPS品質：報表數字與核心獲利</h2>
+<table>
+<thead><tr><th>項目</th><th>對EPS的影響</th><th>估值處理</th></tr></thead>
+<tbody>
+<tr><td>Kioxia持股處分／投資收益</td><td>推升單季淨利，但不具每年重複性</td><td>不應給一般營運獲利相同倍數；DCF中排除一次性收益。</td></tr>
+<tr><td>HBM／DRAM高ASP</td><td>屬營業獲利，但具有週期性</td><td>使用2027與正常化2028–2029獲利交叉估值。</td></tr>
+<tr><td>LTA訂金及採購承諾</td><td>提高可見度與現金流品質</td><td>可支持比傳統記憶體週期更高的中樞倍數，但不能消除供給風險。</td></tr>
+<tr><td>巨額CapEx與折舊</td><td>短期不全反映於EPS，未來折舊上升</td><td>必須同時看FCF、EV/EBITDA與ROIC，不能只看P/E。</td></tr>
+</tbody>
+</table>
+
+<h2 id="peer">六、同業估值比較</h2>
+<table>
+<thead><tr><th>公司</th><th>Forward P/E</th><th>EV/EBITDA</th><th>比較重點</th></tr></thead>
+<tbody>
+<tr><td>SK hynix</td><td class="blue">約 4.65x（2026E）／3.17x（2027E）</td><td>約3.0x（2026E推算）</td><td>HBM領先、獲利增速最高，但韓國折價及週期疑慮最大。</td></tr>
+<tr><td>Samsung Electronics</td><td>約3.8x</td><td>約9.0x</td><td>業務多元、淨現金高；HBM執行仍是折價核心。</td></tr>
+<tr><td>Micron</td><td>約10.2x NTM</td><td>資料口徑差異大</td><td>美國市場、美元資產與較少治理折價，使本益比顯著較高。</td></tr>
+</tbody>
+</table>
+<p class="note small">同業倍數的會計年度、估值日期與資料商口徑不同，只能作方向比較。SK hynix的極低EV/EBITDA主要由超高2026E EBITDA及淨現金預估推動，需防共識下修。</p>
+
+<h2 id="valuation">七、四種估值交叉驗證</h2>
+
+<h3>7.1 Forward P/E</h3>
+<table class="matrix">
+<thead><tr><th>2027E EPS／合理P/E</th><th>4x</th><th>5x</th><th>6x</th><th>7x</th><th>8x</th></tr></thead>
+<tbody>
+<tr><td>₩400,000</td><td>₩1.60m</td><td>₩2.00m</td><td>₩2.40m</td><td>₩2.80m</td><td>₩3.20m</td></tr>
+<tr class="base"><td>₩489,000 共識</td><td>₩1.96m</td><td>₩2.45m</td><td>₩2.93m</td><td>₩3.42m</td><td>₩3.91m</td></tr>
+<tr><td>₩550,000</td><td>₩2.20m</td><td>₩2.75m</td><td>₩3.30m</td><td>₩3.85m</td><td>₩4.40m</td></tr>
+</tbody>
+</table>
+<p><strong>採用：</strong>基準情境不直接套市場共識EPS的6–8倍，而對週期風險打折，使用2027E調整EPS₩420k–₩460k與5.0–5.8倍，得到₩2.10m–₩2.67m。</p>
+
+<h3>7.2 EV/EBITDA</h3>
+<p>2026E EBITDA約₩298兆，市場價對應企業價值約₩900兆，EV/EBITDA約3.0倍。即使將EBITDA正常化下修至₩220–₩250兆，給3.5–4.5倍，再加回淨現金，股權價值約落在<strong>₩1.85m–₩2.75m</strong>。</p>
+
+<h3>7.3 DCF</h3>
+<p>以2026–2028市場FCF共識約₩156兆、₩250兆、₩286兆為起點，但將終端正常化FCF降至₩140–₩220兆，WACC採10%–13%、終端成長0%–1%。敏感度結果約為：</p>
+<table class="matrix">
+<thead><tr><th>正常化FCF／WACC</th><th>10%</th><th>11.5%</th><th>13%</th></tr></thead>
+<tbody>
+<tr><td>₩140兆</td><td>₩2.35m</td><td>₩2.05m</td><td>₩1.82m</td></tr>
+<tr class="base"><td>₩180兆</td><td>₩2.92m</td><td>₩2.52m</td><td>₩2.21m</td></tr>
+<tr><td>₩220兆</td><td>₩3.49m</td><td>₩2.99m</td><td>₩2.59m</td></tr>
+</tbody>
+</table>
+
+<h3>7.4 PEG</h3>
+<p>2026–2027 EPS增長極快，使PEG表面上遠低於1，但該成長來自週期與低基期，PEG在此階段容易產生誤導。僅適合作為補充，不宜作主要估值方法。</p>
+
+<h3>估值方法加權</h3>
+<table>
+<thead><tr><th>方法</th><th>合理區間</th><th>權重</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>Forward P/E</td><td>₩2.10m–₩2.67m</td><td>40%</td><td>市場最常用，但需對峰值EPS打折。</td></tr>
+<tr><td>DCF</td><td>₩2.05m–₩2.99m</td><td>30%</td><td>可納入CapEx與現金流，但對終端假設高度敏感。</td></tr>
+<tr><td>EV/EBITDA</td><td>₩1.85m–₩2.75m</td><td>20%</td><td>降低折舊差異干擾，但仍受峰值EBITDA影響。</td></tr>
+<tr><td>相對估值／PEG</td><td>₩2.00m–₩3.10m</td><td>10%</td><td>反映美韓估值差，但口徑差異最大。</td></tr>
+</tbody>
+</table>
+<p class="metric blue">加權12–18個月合理區間：₩2.15m–₩2.65m</p>
+
+<h2 id="forecast">八、2026H2–2028 Forecast</h2>
+<div class="grid3">
+<div class="scenario">
+<h3 class="bad">熊市情境｜25%</h3><div class="metric">₩1.20m–₩1.55m</div><div class="bar"><span style="width:25%"></span></div>
+<ul><li>2027 EPS降至₩300k–₩360k</li><li>合理P/E 4.0–4.3倍</li><li>HBM4延遲、CSP削CapEx、競爭供給提前</li><li>股東回饋低於預期</li></ul>
+</div>
+<div class="scenario">
+<h3 class="warn">基準情境｜50%</h3><div class="metric">₩2.15m–₩2.65m</div><div class="bar"><span style="width:55%"></span></div>
+<ul><li>2027調整EPS₩420k–₩460k</li><li>合理P/E 5.0–5.8倍</li><li>HBM4正常放量，LTA壓低波動</li><li>年內公布中等規模回購／股利</li></ul>
+</div>
+<div class="scenario">
+<h3 class="good">多頭情境｜25%</h3><div class="metric">₩3.00m–₩3.60m</div><div class="bar"><span style="width:88%"></span></div>
+<ul><li>2027 EPS₩500k–₩550k</li><li>合理P/E 6.0–6.5倍</li><li>HBM4良率、價格及eSSD全面超預期</li><li>大額股東回饋與韓國折價收斂</li></ul>
+</div>
+</div>
+<p><strong>機率加權中位數：</strong>約₩2.35m–₩2.45m。以₩1.55m基準價計，理論上行約52%–58%；但在止跌確認前，事件風險仍可能使價格先低於基本面估值。</p>
+
+<h3>年度Forecast路徑</h3>
+<table>
+<thead><tr><th>期間</th><th>市場主要交易變數</th><th>基準判斷</th></tr></thead>
+<tbody>
+<tr><td>2026 H2</td><td>HBM4遞延收入補回、ADR轉換、股東回饋</td><td>高波動修復期；估值由情緒主導。</td></tr>
+<tr><td>2027</td><td>HBM4量產、LTA價格、Server DRAM與eSSD</td><td>EPS高成長，但市場開始檢查CapEx回報。</td></tr>
+<tr><td>2028</td><td>新增產能、三星／Micron追趕、CSP投資回報</td><td>成長放緩；EPS共識下修風險高於2027。</td></tr>
+<tr><td>2029+</td><td>HBM是否結構性產品或回歸一般週期</td><td>決定海力士長期應給3–5倍或6–9倍P/E。</td></tr>
+</tbody>
+</table>
+
+<h2 id="adr">九、ADR與韓股價差</h2>
+<div class="callout">
+ADR估值必須先換算：<strong>韓股價格 × ADR換股比例 ÷ USD/KRW</strong>。由於韓股轉ADR受上限與法規程序限制，而ADR轉韓股相對較自由，套利機制不對稱。ADR溢價的一部分是美元流動性與稀缺供給，但高溢價也會放大修正風險。
+</div>
+<ul>
+<li>持有韓股：主要承擔韓元與韓國市場折價，但估值通常較低。</li>
+<li>持有ADR：交易便利、美元計價，但需額外承擔ADR溢價收斂。</li>
+<li>估值時不應把ADR市場價格直接套用韓股P/E，必須先還原成每股韓股等值。</li>
+</ul>
+
+<h2 id="monitor">十、後續驗證清單</h2>
+<table>
+<thead><tr><th>指標</th><th>偏多</th><th>偏空</th></tr></thead>
+<tbody>
+<tr><td>HBM4出貨／收入</td><td>Q3明確補回遞延量、良率穩定</td><td>再次延後或客戶驗證問題</td></tr>
+<tr><td>2027 LTA</td><td>價格高、預付款與採購承諾明確</td><td>僅保量但大幅讓價</td></tr>
+<tr><td>CSP CapEx</td><td>AI收入增速追上投資、FCF穩定</td><td>租賃與負債升高、投資回收期延長</td></tr>
+<tr><td>CapEx／折舊</td><td>分階段投產、ROIC維持高位</td><td>產能開出快於需求、折舊侵蝕毛利</td></tr>
+<tr><td>競爭</td><td>海力士維持良率與供貨領先</td><td>Samsung／Micron在HBM4快速追平</td></tr>
+<tr><td>股東回饋</td><td>具體金額、期限與回購執行</td><td>只有原則性聲明</td></tr>
+</tbody>
+</table>
+
+<h2>來源與口徑</h2>
+<ol>
+<li><a href="https://www.skhynix.com/ir/UI-FR-IR06/">SK hynix Investor Relations — FY2026 Q2 Earnings Results</a></li>
+<li><a href="https://www.reuters.com/world/asia-pacific/sk-hynix-q2-profit-jumps-557-ai-chip-demand-misses-forecasts-2026-07-28/">Reuters — Q2 earnings and market reaction</a></li>
+<li><a href="https://www.marketscreener.com/quote/stock/SK-HYNIX-INC-6494929/finances/">MarketScreener — 2026–2028 consensus financial estimates</a></li>
+<li><a href="https://www.marketscreener.com/quote/stock/SK-HYNIX-INC-6494929/consensus/">MarketScreener — analyst targets and consensus</a></li>
+<li><a href="https://www.trendforce.com/news/2026/07/22/news-sk-hynix-set-to-post-record-operating-margin-in-q2-as-hbm-mix-weighs-on-asp-growth-and-ltas-gain-focus/">TrendForce — HBM mix, ASP and LTA</a></li>
+<li><a href="https://www.ft.com/content/e8e3a60a-059c-45b5-bbe3-49add14fd343">Financial Times — earnings miss and oversupply concerns</a></li>
+<li><a href="https://stockanalysis.com/quote/krx/005930/statistics/">StockAnalysis — Samsung valuation metrics</a></li>
+<li><a href="https://www.ebc.com/forex/mu-stock-before-june-24-10x-forward-p-e-third-in-hbm4-200b-capex-cycle">Micron NTM valuation reference</a></li>
+</ol>
+
+<footer>
+重要限制：不同資料商對2026–2028的共識在財報公布後會快速修正；本文EPS由共識淨利與約6.88億股換算，非公司正式指引。DCF與目標價屬情境模型，不是報酬保證。記憶體股在盈利高峰常出現最低P/E，因此必須同時追蹤ASP、供給、CapEx、FCF與ROIC。
+</footer>
+</main>
+</body>
+</html>
