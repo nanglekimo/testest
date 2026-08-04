@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IBKR 韓元借款利息驗證報告</title>
+<style>
+:root {
+  --bg:#f7f3ec;
+  --paper:#fffdf9;
+  --ink:#2f2a25;
+  --muted:#756d64;
+  --line:#e5ddd2;
+  --accent:#9b5f43;
+  --accent-soft:#f3e4d9;
+  --olive:#71806a;
+  --gold:#b58a47;
+  --danger:#a45243;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif;
+  line-height:1.55;
+}
+.wrap{max-width:1120px;margin:auto;padding:32px 20px 64px}
+.hero{
+  background:var(--paper);border:1px solid var(--line);border-radius:20px;
+  padding:30px;box-shadow:0 8px 30px rgba(80,55,35,.06)
+}
+.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-size:32px;line-height:1.25;margin:8px 0 10px}
+.subtitle{color:var(--muted);max-width:780px}
+.verdict{
+  margin-top:22px;padding:18px 20px;border-left:5px solid var(--olive);
+  background:#f1f4ee;border-radius:10px;font-size:18px;font-weight:650
+}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.metric{background:#fbf7f1;border:1px solid var(--line);border-radius:14px;padding:16px}
+.metric .label{font-size:13px;color:var(--muted)}
+.metric .value{font-size:24px;font-weight:750;margin-top:4px}
+.metric .note{font-size:12px;color:var(--muted);margin-top:3px}
+section{
+  margin-top:20px;background:var(--paper);border:1px solid var(--line);
+  border-radius:18px;padding:24px
+}
+h2{font-size:21px;margin:0 0 8px}
+.section-note{color:var(--muted);font-size:14px;margin-bottom:18px}
+.chart-wrap{width:100%;overflow:hidden}
+svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted);margin-top:12px}
+.legend span::before{content:"";display:inline-block;width:18px;height:3px;margin-right:7px;vertical-align:middle;border-radius:2px}
+.l1::before{background:var(--accent)} .l2::before{background:var(--olive)} .l3::before{background:var(--gold)}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.callout{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fcfaf6}
+.callout strong{display:block;margin-bottom:5px}
+.logic{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.step{padding:16px;border-radius:12px;background:var(--accent-soft);border:1px solid #ead2c3}
+.step b{color:var(--accent)}
+.table-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+input{
+  max-width:260px;width:100%;padding:10px 12px;border:1px solid var(--line);
+  border-radius:10px;background:#fff;color:var(--ink)
+}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{position:sticky;top:0;background:#f5efe7;color:#574d44}
+tbody tr:hover{background:#fcf7f1}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.source-list{font-size:13px;color:var(--muted)}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:700}
+footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:820px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .callouts,.logic{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .wrap{padding:14px 10px 40px}
+  .hero,section{padding:18px}
+  h1{font-size:26px}
+  .metrics{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff} .wrap{max-width:none;padding:0}
+  .hero,section{box-shadow:none;break-inside:avoid}
+  input{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">IBKR MARGIN INTEREST REVIEW</div>
+  <h1>韓元借款利息驗證報告</h1>
+  <div class="subtitle">分析期間：2026/07/01–2026/08/03。資料基礎為 IBKR 每日活動報表、現金報告與應計利息紀錄；帳號於報告中不顯示。</div>
+  <div class="verdict">結論：US$62.83 的期末應計利息與期間內的韓元「已結算負現金」規模相符。利息偏高的主因不是 8/3 尚餘約 545.8 萬韓元，而是 7 月中下旬曾長時間維持約 2,860 萬韓元的借款。</div>
+  <div class="metrics">
+    <div class="metric"><div class="label">期末 KRW 借款</div><div class="value">₩5,457,565</div><div class="note">2026/08/03 期末現金</div></div>
+    <div class="metric"><div class="label">最高帳面借款</div><div class="value">₩28,601,544</div><div class="note">07/27，約為期末的 5.2 倍</div></div>
+    <div class="metric"><div class="label">期末應計利息</div><div class="value">₩89,810.15</div><div class="note">IBKR 換算為 US$62.83</div></div>
+    <div class="metric"><div class="label">主要隱含年率</div><div class="value">6.36%</div><div class="note">依每日應計額反推的中位數；非合約報價</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>借款本金與累積利息</h2>
+  <div class="section-note">褐線為帳面負現金，綠線為 IBKR 實際計息所依據的期末已結算負現金，金線為累積應計利息。交易後帳面借款下降，不代表已結算借款會在同一天同步下降。</div>
+  <div class="chart-wrap"><svg id="mainChart" viewBox="0 0 1000 430" role="img" aria-label="韓元借款本金與累積應計利息折線圖"></svg></div>
+  <div class="legend"><span class="l1">帳面負現金（百萬 KRW）</span><span class="l2">已結算負現金（百萬 KRW）</span><span class="l3">累積應計利息（千 KRW）</span></div>
+  <div class="callouts">
+    <div class="callout"><strong>7/13–7/27 是主要成本區間</strong>帳面借款升至約 2,860 萬韓元並維持多日，週末利息會在下一個報表日合併顯示，因此 7/20、7/27 的單日應計額明顯較大。</div>
+    <div class="callout"><strong>7/29 的帳面下降尚未立即降低計息本金</strong>7/29 帳面借款已降至約 9.8 萬韓元，但已結算負現金仍約 2,861 萬韓元；結算完成後，計息本金才在後續日期下降。</div>
+  </div>
+</section>
+
+<section>
+  <h2>反推年化利率</h2>
+  <div class="section-note">以「本次報表新增應計利息 ÷ 前一報表日已結算負現金 ÷ 經過日數 × 365」反推。此線用於合理性檢查；遇到結算切換、極小本金或跨期入帳時不顯示，不能取代 IBKR 官方利率表。</div>
+  <div class="chart-wrap"><svg id="rateChart" viewBox="0 0 1000 280" role="img" aria-label="反推年化利率折線圖"></svg></div>
+</section>
+
+<section>
+  <h2>為什麼 US$62.83 並不異常</h2>
+  <div class="logic">
+    <div class="step"><b>1. 計息基礎</b><br>IBKR 官方說明以 Daily Statement 的 <strong>Ending Settled Cash</strong> 判定借款本金，而非只看交易畫面的即時現金。</div>
+    <div class="step"><b>2. 每日累積</b><br>利息每日應計，並於次月第三個工作日正式入帳。週末與假日常在下一報表日合併呈現。</div>
+    <div class="step"><b>3. 本案結果</b><br>期間新增 KRW 應計利息最終為 ₩89,810.15，報表換算 US$62.83；每日借款曲線與應計增加方向一致。</div>
+  </div>
+</section>
+
+<section>
+  <div class="table-tools">
+    <div>
+      <h2>逐日數字變化</h2>
+      <div class="section-note" style="margin:4px 0 0">金額以絕對值呈現，方便閱讀；原始報表中的負號代表借款或應付利息。</div>
+    </div>
+    <input id="filter" type="search" placeholder="篩選日期，例如 7/29">
+  </div>
+  <div class="table-scroll">
+    <table id="dailyTable">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th class="num">帳面借款 KRW</th>
+          <th class="num">已結算借款 KRW</th>
+          <th class="num">本次新增利息 KRW</th>
+          <th class="num">累積應計利息 KRW</th>
+          <th class="num">反推年率</th>
+        </tr>
+      </thead>
+      <tbody>
+    <tr>
+      <td>2026/07/01</td>
+      <td class="num">5,477.69</td>
+      <td class="num">5,477.69</td>
+      <td class="num">0.78</td>
+      <td class="num">23,409.53</td>
+      <td class="num">—</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/02</td>
+      <td class="num">8,541.14</td>
+      <td class="num">12,580.68</td>
+      <td class="num">0.00</td>
+      <td class="num">23,409.53</td>
+      <td class="num">—</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/03</td>
+      <td class="num">2,079,541.14</td>
+      <td class="num">16,580.68</td>
+      <td class="num">0.00</td>
+      <td class="num">23,409.53</td>
+      <td class="num">—</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/06</td>
+      <td class="num">2,103,024.54</td>
+      <td class="num">36,024.54</td>
+      <td class="num">0.00</td>
+      <td class="num">0.00</td>
+      <td class="num">—</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/07</td>
+      <td class="num">10,540,108.13</td>
+      <td class="num">2,108,108.13</td>
+      <td class="num">0.00</td>
+      <td class="num">0.00</td>
+      <td class="num">—</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/08</td>
+      <td class="num">10,540,132.19</td>
+      <td class="num">2,108,132.19</td>
+      <td class="num">388.98</td>
+      <td class="num">388.98</td>
+      <td class="num">6.73%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/09</td>
+      <td class="num">10,540,154.88</td>
+      <td class="num">10,540,154.88</td>
+      <td class="num">354.96</td>
+      <td class="num">743.94</td>
+      <td class="num">6.15%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/10</td>
+      <td class="num">10,540,183.33</td>
+      <td class="num">10,540,183.33</td>
+      <td class="num">1,769.63</td>
+      <td class="num">2,513.57</td>
+      <td class="num">6.13%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/13</td>
+      <td class="num">20,045,968.44</td>
+      <td class="num">10,545,968.44</td>
+      <td class="num">5,142.09</td>
+      <td class="num">7,655.66</td>
+      <td class="num">5.94%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/14</td>
+      <td class="num">28,601,122.45</td>
+      <td class="num">10,551,122.45</td>
+      <td class="num">1,877.74</td>
+      <td class="num">9,533.40</td>
+      <td class="num">6.50%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/15</td>
+      <td class="num">28,601,147.35</td>
+      <td class="num">20,051,147.35</td>
+      <td class="num">1,839.18</td>
+      <td class="num">11,372.58</td>
+      <td class="num">6.36%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/16</td>
+      <td class="num">28,601,179.86</td>
+      <td class="num">28,601,179.86</td>
+      <td class="num">3,334.61</td>
+      <td class="num">14,707.19</td>
+      <td class="num">6.07%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/17</td>
+      <td class="num">28,601,213.42</td>
+      <td class="num">28,601,213.42</td>
+      <td class="num">4,911.33</td>
+      <td class="num">19,618.52</td>
+      <td class="num">6.27%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/20</td>
+      <td class="num">28,601,314.10</td>
+      <td class="num">28,601,314.10</td>
+      <td class="num">14,734.02</td>
+      <td class="num">34,352.54</td>
+      <td class="num">6.27%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/21</td>
+      <td class="num">28,601,346.24</td>
+      <td class="num">28,601,346.24</td>
+      <td class="num">4,975.69</td>
+      <td class="num">39,328.23</td>
+      <td class="num">6.35%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/22</td>
+      <td class="num">28,601,379.69</td>
+      <td class="num">28,601,379.69</td>
+      <td class="num">4,910.42</td>
+      <td class="num">44,238.65</td>
+      <td class="num">6.27%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/23</td>
+      <td class="num">28,601,413.03</td>
+      <td class="num">28,601,413.03</td>
+      <td class="num">4,974.76</td>
+      <td class="num">49,213.41</td>
+      <td class="num">6.35%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/24</td>
+      <td class="num">28,601,447.99</td>
+      <td class="num">28,601,447.99</td>
+      <td class="num">5,098.89</td>
+      <td class="num">54,312.30</td>
+      <td class="num">6.51%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/27</td>
+      <td class="num">28,601,544.14</td>
+      <td class="num">28,601,544.14</td>
+      <td class="num">15,502.17</td>
+      <td class="num">69,814.47</td>
+      <td class="num">6.59%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/28</td>
+      <td class="num">14,619,527.00</td>
+      <td class="num">28,609,577.23</td>
+      <td class="num">5,338.10</td>
+      <td class="num">75,152.57</td>
+      <td class="num">6.81%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/29</td>
+      <td class="num">98,401.88</td>
+      <td class="num">28,613,605.47</td>
+      <td class="num">5,597.61</td>
+      <td class="num">80,750.18</td>
+      <td class="num">7.14%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/30</td>
+      <td class="num">5,457,427.41</td>
+      <td class="num">14,639,580.77</td>
+      <td class="num">6,002.78</td>
+      <td class="num">86,752.96</td>
+      <td class="num">7.66%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/07/31</td>
+      <td class="num">5,457,454.94</td>
+      <td class="num">114,454.94</td>
+      <td class="num">3,033.15</td>
+      <td class="num">89,786.11</td>
+      <td class="num">7.56%</td>
+    </tr>
+    
+
+    <tr>
+      <td>2026/08/03</td>
+      <td class="num">5,457,564.95</td>
+      <td class="num">5,457,564.95</td>
+      <td class="num">24.04</td>
+      <td class="num">89,810.15</td>
+      <td class="num">—</td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>判讀限制與來源</h2>
+  <div class="source-list">
+    <p><span class="badge">已驗證</span> 期末應計利息：KRW −89,810.15；USD 換算 −62.83。每日本金採各日 CSV 的「期末現金」與「期末已結算現金」。</p>
+    <p><span class="badge">推算值</span> 年化利率為報表數字反推值，受日數、週末合併應計、結算切換與四捨五入影響；不應視為 IBKR 對帳戶承諾的固定報價。</p>
+    <p>官方規則來源：Interactive Brokers「Margin Interest Calculations」「Margin Reference Benchmark Rates」「Interest Charged Examples」。核心規則為每日應計、按月入帳，以及以 Ending Settled Cash 作為借款計息基礎。</p>
+    <p>本報告用途為對帳與資訊整理，不構成投資、稅務或法律意見。</p>
+  </div>
+</section>
+
+<footer>Generated from user-provided IBKR statements · 2026-08-04</footer>
+</div>
+
+<script>
+const data = [{"date": "2026-07-01", "label": "7/1", "endingCash": 0.0055, "settledCash": 0.0055, "dailyInterest": 0.78, "cumInterest": 23.41, "impliedRate": null}, {"date": "2026-07-02", "label": "7/2", "endingCash": 0.0085, "settledCash": 0.0126, "dailyInterest": 0, "cumInterest": 23.41, "impliedRate": null}, {"date": "2026-07-03", "label": "7/3", "endingCash": 2.0795, "settledCash": 0.0166, "dailyInterest": 0, "cumInterest": 23.41, "impliedRate": null}, {"date": "2026-07-06", "label": "7/6", "endingCash": 2.103, "settledCash": 0.036, "dailyInterest": 0, "cumInterest": 0.0, "impliedRate": null}, {"date": "2026-07-07", "label": "7/7", "endingCash": 10.5401, "settledCash": 2.1081, "dailyInterest": 0, "cumInterest": 0.0, "impliedRate": null}, {"date": "2026-07-08", "label": "7/8", "endingCash": 10.5401, "settledCash": 2.1081, "dailyInterest": 388.98, "cumInterest": 0.389, "impliedRate": 6.73}, {"date": "2026-07-09", "label": "7/9", "endingCash": 10.5402, "settledCash": 10.5402, "dailyInterest": 354.96, "cumInterest": 0.744, "impliedRate": 6.15}, {"date": "2026-07-10", "label": "7/10", "endingCash": 10.5402, "settledCash": 10.5402, "dailyInterest": 1769.63, "cumInterest": 2.514, "impliedRate": 6.13}, {"date": "2026-07-13", "label": "7/13", "endingCash": 20.046, "settledCash": 10.546, "dailyInterest": 5142.09, "cumInterest": 7.656, "impliedRate": 5.94}, {"date": "2026-07-14", "label": "7/14", "endingCash": 28.6011, "settledCash": 10.5511, "dailyInterest": 1877.74, "cumInterest": 9.533, "impliedRate": 6.5}, {"date": "2026-07-15", "label": "7/15", "endingCash": 28.6011, "settledCash": 20.0511, "dailyInterest": 1839.18, "cumInterest": 11.373, "impliedRate": 6.36}, {"date": "2026-07-16", "label": "7/16", "endingCash": 28.6012, "settledCash": 28.6012, "dailyInterest": 3334.61, "cumInterest": 14.707, "impliedRate": 6.07}, {"date": "2026-07-17", "label": "7/17", "endingCash": 28.6012, "settledCash": 28.6012, "dailyInterest": 4911.33, "cumInterest": 19.619, "impliedRate": 6.27}, {"date": "2026-07-20", "label": "7/20", "endingCash": 28.6013, "settledCash": 28.6013, "dailyInterest": 14734.02, "cumInterest": 34.353, "impliedRate": 6.27}, {"date": "2026-07-21", "label": "7/21", "endingCash": 28.6013, "settledCash": 28.6013, "dailyInterest": 4975.69, "cumInterest": 39.328, "impliedRate": 6.35}, {"date": "2026-07-22", "label": "7/22", "endingCash": 28.6014, "settledCash": 28.6014, "dailyInterest": 4910.42, "cumInterest": 44.239, "impliedRate": 6.27}, {"date": "2026-07-23", "label": "7/23", "endingCash": 28.6014, "settledCash": 28.6014, "dailyInterest": 4974.76, "cumInterest": 49.213, "impliedRate": 6.35}, {"date": "2026-07-24", "label": "7/24", "endingCash": 28.6014, "settledCash": 28.6014, "dailyInterest": 5098.89, "cumInterest": 54.312, "impliedRate": 6.51}, {"date": "2026-07-27", "label": "7/27", "endingCash": 28.6015, "settledCash": 28.6015, "dailyInterest": 15502.17, "cumInterest": 69.814, "impliedRate": 6.59}, {"date": "2026-07-28", "label": "7/28", "endingCash": 14.6195, "settledCash": 28.6096, "dailyInterest": 5338.1, "cumInterest": 75.153, "impliedRate": 6.81}, {"date": "2026-07-29", "label": "7/29", "endingCash": 0.0984, "settledCash": 28.6136, "dailyInterest": 5597.61, "cumInterest": 80.75, "impliedRate": 7.14}, {"date": "2026-07-30", "label": "7/30", "endingCash": 5.4574, "settledCash": 14.6396, "dailyInterest": 6002.78, "cumInterest": 86.753, "impliedRate": 7.66}, {"date": "2026-07-31", "label": "7/31", "endingCash": 5.4575, "settledCash": 0.1145, "dailyInterest": 3033.15, "cumInterest": 89.786, "impliedRate": 7.56}, {"date": "2026-08-03", "label": "8/3", "endingCash": 5.4576, "settledCash": 5.4576, "dailyInterest": 24.04, "cumInterest": 89.81, "impliedRate": null}];
+const NS = "http://www.w3.org/2000/svg";
+const css = getComputedStyle(document.documentElement);
+const colors = {
+  accent: css.getPropertyValue("--accent").trim(),
+  olive: css.getPropertyValue("--olive").trim(),
+  gold: css.getPropertyValue("--gold").trim(),
+  line: css.getPropertyValue("--line").trim(),
+  muted: css.getPropertyValue("--muted").trim(),
+  ink: css.getPropertyValue("--ink").trim(),
+  paper: css.getPropertyValue("--paper").trim()
+};
+
+function el(name, attrs={}, text="") {
+  const n=document.createElementNS(NS,name);
+  Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));
+  if(text) n.textContent=text;
+  return n;
+}
+function pathFor(points) {
+  return points.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
+}
+function drawMain() {
+  const svg=document.getElementById("mainChart"), W=1000,H=430;
+  const m={l:70,r:78,t:25,b:55}, w=W-m.l-m.r,h=H-m.t-m.b;
+  const maxDebt=Math.ceil(Math.max(...data.map(d=>Math.max(d.endingCash,d.settledCash)))/5)*5;
+  const maxInt=Math.ceil(Math.max(...data.map(d=>d.cumInterest))/10)*10;
+  const x=i=>m.l+i*w/(data.length-1);
+  const yDebt=v=>m.t+h-(v/maxDebt)*h;
+  const yInt=v=>m.t+h-(v/maxInt)*h;
+  for(let i=0;i<=5;i++){
+    const y=m.t+h*i/5;
+    svg.appendChild(el("line",{x1:m.l,y1:y,x2:m.l+w,y2:y,stroke:colors.line,"stroke-width":1}));
+    svg.appendChild(el("text",{x:m.l-10,y:y+4,"text-anchor":"end",fill:colors.muted,"font-size":12},(maxDebt*(1-i/5)).toFixed(0)));
+    svg.appendChild(el("text",{x:m.l+w+10,y:y+4,fill:colors.muted,"font-size":12},(maxInt*(1-i/5)).toFixed(0)));
+  }
+  const tickEvery=Math.max(1,Math.ceil(data.length/9));
+  data.forEach((d,i)=>{
+    if(i%tickEvery===0 || i===data.length-1){
+      svg.appendChild(el("text",{x:x(i),y:H-24,"text-anchor":"middle",fill:colors.muted,"font-size":12},d.label));
+    }
+  });
+  svg.appendChild(el("text",{x:18,y:m.t+h/2,transform:`rotate(-90 18 ${m.t+h/2})`,"text-anchor":"middle",fill:colors.muted,"font-size":12},"借款（百萬 KRW）"));
+  svg.appendChild(el("text",{x:982,y:m.t+h/2,transform:`rotate(90 982 ${m.t+h/2})`,"text-anchor":"middle",fill:colors.muted,"font-size":12},"累積利息（千 KRW）"));
+
+  const series=[
+    {key:"endingCash",color:colors.accent,y:yDebt,dash:""},
+    {key:"settledCash",color:colors.olive,y:yDebt,dash:"6 4"},
+    {key:"cumInterest",color:colors.gold,y:yInt,dash:""}
+  ];
+  series.forEach(s=>{
+    const pts=data.map((d,i)=>[x(i),s.y(d[s.key])]);
+    svg.appendChild(el("path",{d:pathFor(pts),fill:"none",stroke:s.color,"stroke-width":3,"stroke-linejoin":"round","stroke-linecap":"round","stroke-dasharray":s.dash}));
+  });
+  // Highlight major settlement gap on 7/29
+  const idx=data.findIndex(d=>d.date==="2026-07-29");
+  if(idx>=0){
+    svg.appendChild(el("line",{x1:x(idx),y1:m.t,x2:x(idx),y2:m.t+h,stroke:colors.muted,"stroke-width":1,"stroke-dasharray":"3 5",opacity:.7}));
+    svg.appendChild(el("text",{x:x(idx),y:m.t+14,"text-anchor":"middle",fill:colors.ink,"font-size":12,"font-weight":600},"7/29 帳面清償"));
+  }
+}
+function drawRate() {
+  const svg=document.getElementById("rateChart"), W=1000,H=280;
+  const m={l:70,r:30,t:25,b:50}, w=W-m.l-m.r,h=H-m.t-m.b;
+  const valid=data.map((d,i)=>({...d,i})).filter(d=>d.impliedRate!==null && d.impliedRate<=10);
+  const min=4,max=9;
+  const x=i=>m.l+i*w/(data.length-1);
+  const y=v=>m.t+h-(v-min)/(max-min)*h;
+  for(let v=min;v<=max;v++){
+    const yy=y(v);
+    svg.appendChild(el("line",{x1:m.l,y1:yy,x2:m.l+w,y2:yy,stroke:colors.line,"stroke-width":1}));
+    svg.appendChild(el("text",{x:m.l-10,y:yy+4,"text-anchor":"end",fill:colors.muted,"font-size":12},v+"%"));
+  }
+  const pts=valid.map(d=>[x(d.i),y(d.impliedRate)]);
+  svg.appendChild(el("path",{d:pathFor(pts),fill:"none",stroke:colors.accent,"stroke-width":3,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  valid.forEach(d=>{
+    svg.appendChild(el("circle",{cx:x(d.i),cy:y(d.impliedRate),r:4,fill:colors.paper,stroke:colors.accent,"stroke-width":2}));
+  });
+  const tickEvery=Math.max(1,Math.ceil(data.length/9));
+  data.forEach((d,i)=>{
+    if(i%tickEvery===0 || i===data.length-1)
+      svg.appendChild(el("text",{x:x(i),y:H-20,"text-anchor":"middle",fill:colors.muted,"font-size":12},d.label));
+  });
+  svg.appendChild(el("text",{x:18,y:m.t+h/2,transform:`rotate(-90 18 ${m.t+h/2})`,"text-anchor":"middle",fill:colors.muted,"font-size":12},"反推年率"));
+}
+drawMain();
+drawRate();
+
+document.getElementById("filter").addEventListener("input", e=>{
+  const q=e.target.value.trim();
+  document.querySelectorAll("#dailyTable tbody tr").forEach(tr=>{
+    tr.style.display = !q || tr.cells[0].textContent.includes(q) ? "" : "none";
+  });
+});
+</script>
+</body>
+</html>
