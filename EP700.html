@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EP700｜個股與 AI 產業鏈互動式簡報</title><style>
+:root{--bg:#081018;--panel:#0f1b26;--panel2:#122333;--text:#eef5f8;--muted:#94a8b4;--line:#203746;--accent:#6ee7d8;--accent2:#7aa7ff;--hot:#ffb86b;--danger:#ff7f8a;--good:#79e2a7}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 80% 0%,#143447 0,#081018 45%,#050b10 100%);color:var(--text);font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif}body{min-height:100vh;overflow:hidden}
+.deck{height:100vh;position:relative}.slide{display:none;height:100vh;padding:54px 7vw 70px;overflow:auto}.slide.active{display:block}.kicker{font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}.title{font-size:clamp(28px,4vw,58px);line-height:1.08;margin:0 0 28px;letter-spacing:-.035em}.sub{color:var(--muted);font-size:15px}.big{font-size:clamp(36px,6vw,82px);font-weight:850;line-height:.98;letter-spacing:-.055em}.big span{font-size:.38em;color:var(--muted);letter-spacing:-.01em}.lead{font-size:19px;line-height:1.65;color:#cbd9df;max-width:1000px}.note,.warning{background:#0d1821;border:1px solid var(--line);padding:13px 16px;border-radius:12px;color:#9fb2bd;font-size:13px;line-height:1.55}.warning{border-color:#69404a;color:#ffb6bd}.quote{margin-top:25px;padding:20px 24px;border-left:3px solid var(--accent);background:linear-gradient(90deg,#10242a55,#0b131a00);font-size:18px;line-height:1.55;color:#d9e7ea}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;height:72vh}.orbit{height:430px;position:relative;border-radius:50%;border:1px dashed #315063;box-shadow:0 0 90px #16384655 inset}.orbit:before,.orbit:after{content:"";position:absolute;inset:15%;border:1px dashed #284454;border-radius:50%}.orbit:after{inset:31%}.node{position:absolute;padding:13px 18px;border-radius:999px;background:#132735;border:1px solid #355163;font-weight:800;font-size:12px}.center{left:50%;top:50%;transform:translate(-50%,-50%);background:#173d43;border-color:var(--accent);box-shadow:0 0 40px #6ee7d833}.n1{left:10%;top:18%}.n2{right:7%;top:18%}.n3{right:2%;bottom:24%}.n4{left:11%;bottom:17%}.n5{left:42%;bottom:4%}
+.cards{display:grid;gap:15px}.six{grid-template-columns:repeat(3,1fr)}.card{background:linear-gradient(145deg,#10202c,#0b151e);border:1px solid var(--line);border-radius:17px;padding:20px;min-height:150px}.card b{font-size:12px;color:var(--accent);letter-spacing:.12em}.card strong{display:block;font-size:19px;margin:8px 0}.card p{margin:0;color:var(--muted);line-height:1.55}.card.hot{border-color:#735538;background:linear-gradient(145deg,#2a2115,#0b151e)}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.stock{background:#0e1b25;border:1px solid var(--line);border-radius:15px;padding:16px;min-height:130px;position:relative}.stock span{color:var(--accent);font-size:13px;font-weight:900}.stock b{display:block;margin:7px 0;font-size:15px}.stock small{display:block;color:var(--muted);line-height:1.4}.stock em{position:absolute;bottom:13px;right:13px;font-size:10px;color:#b5c7ce;font-style:normal;border:1px solid #2d4654;border-radius:99px;padding:3px 7px}.stock.meta{border-color:#5568a0;background:linear-gradient(145deg,#121d35,#0b151e)}.legend{margin-top:15px;color:var(--muted);font-size:12px}
+.pipeline,.flow,.test-loop,.power-chain{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:40px 0}.pipeline>div,.step,.test-loop div,.power-chain span{padding:18px 20px;background:#10212d;border:1px solid var(--line);border-radius:14px;text-align:center}.pipeline b{display:block}.pipeline small{color:var(--muted)}.pipeline i,.arrow,.test-loop div:nth-child(even),.power-chain i{color:var(--accent);font-style:normal;font-weight:900}.mapping{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.mapping div{padding:16px;background:#0d1821;border-radius:12px}.mapping strong{display:block;color:var(--muted);font-size:12px}.mapping span{font-size:17px;font-weight:800}
+.flow .step{width:210px;min-height:150px}.step span{display:block;color:var(--accent);font-size:12px}.step p{color:var(--muted);line-height:1.45}
+.commerce{display:grid;grid-template-columns:1fr 1.7fr 1fr;gap:20px;align-items:center}.platform{padding:28px;border-radius:20px;border:1px solid var(--line);text-align:center;background:#10202b}.platform.meta{border-color:#5d74bd}.platform.conflict{border-color:#8b4b52}.platform small,.platform span{display:block;color:var(--muted);margin-top:7px}.partners{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.partners span{padding:11px 13px;background:#132630;border:1px solid #294653;border-radius:999px;font-size:12px}.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}.risk-grid>div{background:#0d1821;padding:18px;border-radius:14px;border:1px solid var(--line)}.risk-grid b{color:var(--accent)}.risk-grid p{color:var(--muted);line-height:1.5}
+.compare,.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:#0d1821;border:1px solid var(--line);border-radius:18px;padding:23px}.panel.verify{border-color:#365c52}.panel h3{margin-top:0}.panel li{margin:12px 0;color:#c4d3d9;line-height:1.45}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}.timeline>div{background:#0d1821;border:1px solid var(--line);padding:20px;border-radius:16px}.timeline b{color:var(--accent);font-size:12px}.timeline strong{display:block;font-size:18px;margin:10px 0}.timeline small{color:var(--muted);line-height:1.5}.timeline .highlight{border-color:#5e4c30;background:#211a10}
+.cpu-visual{max-width:900px;margin:25px 0}.bar{display:flex;align-items:center;margin:16px 0;gap:18px}.bar span{width:130px;color:var(--muted)}.bar b{background:#294657;border-radius:10px;padding:12px 15px;color:#d9f2f0}.hotbar b{background:#4b5c34}.formula{margin:25px 0;background:#0d1821;border:1px solid var(--line);padding:20px;border-radius:16px}.formula code{display:block;margin-top:12px;color:var(--accent);font-size:16px;line-height:1.6}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.metric-row div{background:#0d1821;border:1px solid var(--line);border-radius:14px;padding:18px}.metric-row b{display:block;font-size:22px}.metric-row span{display:block;color:var(--muted);margin-top:5px}.company-box{background:linear-gradient(145deg,#0f202a,#0a131a);border:1px solid var(--line);border-radius:18px;padding:23px;margin-top:18px}.company-box h3{font-size:13px;color:var(--accent);letter-spacing:.08em}.company-box p{color:#c6d5db;line-height:1.6}
+.optics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.optics div{padding:25px;background:#0d1821;border:1px solid var(--line);border-radius:17px}.optics b{font-size:22px}.optics small{display:block;color:var(--muted);margin-top:8px;line-height:1.5}.ladder{display:flex;gap:10px;align-items:center;justify-content:center;margin:35px 0}.ladder span{padding:13px 18px;border-radius:999px;background:#132631;border:1px solid var(--line)}.ladder .hot{border-color:var(--accent);box-shadow:0 0 20px #6ee7d81c}
+.big-eq{display:flex;gap:15px;align-items:center;justify-content:center;font-size:18px;margin:50px 0}.big-eq span,.big-eq strong{padding:22px;background:#10212c;border:1px solid var(--line);border-radius:15px}.big-eq strong{border-color:var(--accent)}
+.trade{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center;margin:45px 0}.trade div{padding:20px;text-align:center;background:#10202a;border-radius:14px;border:1px solid var(--line)}.trade .bad{border-color:#633f48;color:#ff9da7}.trade .good{border-color:#35614e;color:#86e8b3}
+.research{width:100%;border-collapse:collapse;background:#0b151e;border-radius:15px;overflow:hidden}.research th,.research td{padding:14px;border-bottom:1px solid var(--line);text-align:left}.research th{color:var(--accent);font-size:12px;letter-spacing:.08em}.research td{color:#c9d6db;font-size:13px;line-height:1.45}.research td:first-child{font-weight:800;color:#f0f6f8}
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}.final-grid div{padding:22px;border-radius:16px;background:#0d1821;border:1px solid var(--line)}.final-grid b{color:var(--accent);font-size:14px}.final-grid p{color:var(--muted);line-height:1.5}
+.nav{position:fixed;left:0;right:0;bottom:0;height:56px;background:#071018dd;backdrop-filter:blur(12px);border-top:1px solid #1c303d;display:flex;align-items:center;justify-content:center;gap:14px;z-index:20}.nav button{background:#10212c;border:1px solid #2b4656;color:#dce8ec;border-radius:10px;padding:8px 14px;cursor:pointer}.nav button:hover{border-color:var(--accent)}.counter{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:30;transition:width .3s}
+.source-btn{position:absolute;right:7vw;top:52px;background:#10222b;border:1px solid #35525f;color:#cde4e6;border-radius:999px;padding:9px 13px;cursor:pointer;font-size:11px}.modal{display:none;position:fixed;inset:0;background:#02070bdd;z-index:50;align-items:center;justify-content:center;padding:30px}.modal.open{display:flex}.modal-card{max-width:850px;max-height:80vh;overflow:auto;background:#0d1821;border:1px solid #31505e;border-radius:20px;padding:28px;box-shadow:0 20px 80px #000}.modal-card h2{margin-top:0}.modal-card .src{color:var(--accent);font-size:13px;line-height:1.6}.modal-card .sup{color:#c7d5da;line-height:1.65;margin-top:18px}.close{float:right;border:0;background:#152833;color:#fff;border-radius:9px;padding:7px 10px;cursor:pointer}
+@media(max-width:900px){.slide{padding:35px 5vw 75px}.hero-grid,.six,.stock-grid,.mapping,.compare,.two-col,.timeline,.optics,.final-grid,.risk-grid{grid-template-columns:1fr 1fr}.commerce{grid-template-columns:1fr}.source-btn{right:5vw;top:30px}.orbit{height:300px}.title{padding-right:70px}.big{font-size:46px}}
+@media(max-width:620px){.hero-grid,.six,.stock-grid,.mapping,.compare,.two-col,.timeline,.optics,.final-grid,.risk-grid,.metric-row{grid-template-columns:1fr}.pipeline,.flow{display:grid}.ladder{flex-wrap:wrap}.source-btn{top:20px}.slide{padding-top:28px}}
+</style></head>
+<body>
+<div class="deck">
+<div class="progress"></div>
+<section class="slide active" data-title="EP700｜個股與 AI 產業鏈重點" data-source="逐字稿：市場與 Meta Connect 2026 段落，約 L358–L642；Meta Muse／Agentic AI 段落約 L640–L1159。" data-supp="Meta 官方資料顯示，2026/9/8 已推出 Muse 個人 AI agent；Connect 2026 又把 Muse 帶到 AI glasses，並擴大 AI glasses 產品線。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">結構化投資簡報｜逐字稿摘要 × 外部資料補充</div>
+      <h1 class="title">EP700｜個股與 AI 產業鏈重點</h1>
+      
+<div class="hero-grid">
+  <div>
+    <div class="big">Meta Muse<br><span>正在把 AI 從 App 推向「代理人＋裝置＋交易」</span></div>
+    <p class="lead">本集最值得投資人拆解的不是單一產品，而是：Agentic AI 如何重新分配 CPU、光通訊、電力、測試與平台的價值。</p>
+  </div>
+  <div class="orbit">
+    <div class="node n1">META</div><div class="node n2">CPU</div><div class="node n3">OPTICS</div>
+    <div class="node n4">POWER</div><div class="node n5">TEST</div><div class="node center">MUSE</div>
+  </div>
+</div>
+<div class="note">本簡報把「節目原話／原文提及」與「外部資料驗證／補充」分開；不把節目觀點直接當成已驗證的投資結論。</div>
+
+    </section><section class="slide " data-title="一頁看懂：本集最重要的 6 條線" data-source="持股名單：逐字稿 L1590–L1655；AI／供應鏈討論：L640–L1159、L1738–L1887。" data-supp="「Blue Energy」為逐字稿轉錄文字；本簡報以外部資料交叉核對後，將其標為「疑似 Bloom Energy（BE）」而非把 OCR 結果當成確定名稱。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Executive Summary</div>
+      <h1 class="title">一頁看懂：本集最重要的 6 條線</h1>
+      
+<div class="cards six">
+<div class="card hot"><b>01｜META</b><strong>核心平台</strong><p>Muse 被節目視為 Meta 從「社群公司」走向個人 AI agent／自有硬體平台的重要一步。</p></div>
+<div class="card"><b>02｜AMD</b><strong>CPU 受益者</strong><p>逐字稿把 Agentic AI 的 CPU 需求視為第二波催化；外部資料也顯示 AMD 正把 EPYC 定位在 agentic AI。</p></div>
+<div class="card"><b>03｜IFX</b><strong>電力半導體</strong><p>持股名單中的 Infineon，實際對應 AI data center 的 grid-to-core power chain。</p></div>
+<div class="card"><b>04｜LITE / COHR / GLW</b><strong>光通訊</strong><p>Lumentum、Coherent、Corning 對應雷射／光模組／光纖與連接；AI 網路升速是共同主題。</p></div>
+<div class="card"><b>05｜TER</b><strong>測試</strong><p>Teradyne 是半導體測試與 AI data center equipment test 的「賣鏟子」角色。</p></div>
+<div class="card"><b>06｜BE</b><strong>AI 電力</strong><p>逐字稿中的「Blue Energy」疑似指 Bloom Energy；外部資料顯示 BE 正積極切入 AI data center onsite power。</p></div>
+</div>
+
+    </section><section class="slide " data-title="被點名／持倉公司：先看這一張" data-source="逐字稿 L1590–L1655 明列前十大持股：0050、QQQ、IFX、Google、Lumentum、Coherent、Blue Energy、GLW、TR、AMD；台積電出現在 L685；台達電交易案例在 L1774–L1778。" data-supp="0050 與 QQQ 是 ETF，不是個股；Google、Meta、Amazon、Walmart、Best Buy、Gap、Sephora、PayPal、Expedia 則主要是生態／平台合作方或競爭方。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Stock Radar｜不排序，只做角色分類</div>
+      <h1 class="title">被點名／持倉公司：先看這一張</h1>
+      
+<div class="stock-grid">
+  <div class="stock meta"><span>META</span><b>Meta Platforms</b><small>AI agent／平台／硬體</small><em>核心平台</em></div>
+  <div class="stock"><span>AMD</span><b>Advanced Micro Devices</b><small>EPYC CPU／Instinct GPU</small><em>CPU／AI compute</em></div>
+  <div class="stock"><span>IFX</span><b>Infineon</b><small>Power semiconductor</small><em>電力鏈</em></div>
+  <div class="stock"><span>LITE</span><b>Lumentum</b><small>Optical／laser／1.6T</small><em>光通訊</em></div>
+  <div class="stock"><span>COHR</span><b>Coherent</b><small>Photonics／1.6T</small><em>光通訊</em></div>
+  <div class="stock"><span>GLW</span><b>Corning</b><small>Fiber／cable／connectivity</small><em>光纖</em></div>
+  <div class="stock"><span>TER</span><b>Teradyne</b><small>ATE／AI semiconductor test</small><em>測試</em></div>
+  <div class="stock"><span>BE?</span><b>Bloom Energy</b><small>Onsite／800V DC power</small><em>電力基建</em></div>
+  <div class="stock"><span>TSM</span><b>台積電</b><small>先進製程／封裝</small><em>製造基礎</em></div>
+  <div class="stock"><span>2308</span><b>台達電</b><small>節目交易案例</small><em>動能／型態案例</em></div>
+</div>
+<div class="legend"><span>●</span>「核心」＝節目主題直接連結；「供應鏈」＝持股／產業鏈連結；「案例」＝只是交易問答中被提及。</div>
+
+    </section><section class="slide " data-title="持股名單透露的其實是一張 AI 基礎設施圖" data-source="逐字稿持股與 AI 供應鏈描述：L1590–L1655；Meta／CPU／光通訊討論：L640–L1159。" data-supp="這張圖是本簡報的整理框架，不是逐字稿原圖；「AI Agent → Compute → Network → Power → Test」是把節目提及的公司與產業角色重新映射。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">從「股票清單」反推投資框架</div>
+      <h1 class="title">持股名單透露的其實是一張 AI 基礎設施圖</h1>
+      
+<div class="pipeline">
+  <div><b>AI Agent</b><small>Muse／代理任務</small></div><i>→</i>
+  <div><b>Compute</b><small>CPU／GPU</small></div><i>→</i>
+  <div><b>Network</b><small>Optics／DSP</small></div><i>→</i>
+  <div><b>Power</b><small>Grid／DC／Power IC</small></div><i>→</i>
+  <div><b>Test</b><small>ATE／HBM／AI devices</small></div>
+</div>
+<div class="mapping">
+  <div><strong>Compute</strong><span>AMD</span></div>
+  <div><strong>Power</strong><span>IFX／BE?</span></div>
+  <div><strong>Optics</strong><span>LITE／COHR／GLW</span></div>
+  <div><strong>Test</strong><span>TER</span></div>
+  <div><strong>Foundry</strong><span>TSM</span></div>
+</div>
+<p class="lead">這比單純「買 AI」更有資訊量：它把 AI 的需求拆成不同瓶頸，讓投資人可以追蹤哪一層先出現訂單、漲價或資本支出。</p>
+
+    </section><section class="slide " data-title="Meta Muse：本集真正的主軸" data-source="逐字稿 L821–L965、L1020–L1174：Muse、合作服務、agentic AI、硬體平台與交易入口。" data-supp="Meta 官方：Muse 於 2026/9/8 推出，定位為個人 AI agent；Connect 2026 宣布 Muse 將進入 AI glasses。Meta 官方：Muse / Connect 2026">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">From chatbot → agent → device → transaction</div>
+      <h1 class="title">Meta Muse：本集真正的主軸</h1>
+      
+<div class="flow">
+<div class="step"><span>01</span><b>Muse</b><p>不是只回答問題，而是替使用者執行任務。</p></div>
+<div class="arrow">→</div>
+<div class="step"><span>02</span><b>Connectors</b><p>購物、旅遊、支付、社群等服務被串進 agent。</p></div>
+<div class="arrow">→</div>
+<div class="step"><span>03</span><b>Devices</b><p>手機之外，進入眼鏡、VR 與專用裝置。</p></div>
+<div class="arrow">→</div>
+<div class="step"><span>04</span><b>Commerce</b><p>agent 逐漸成為交易入口，平台控制權開始改變。</p></div>
+</div>
+<div class="quote">節目核心觀察：真正值得追蹤的可能不是「某一個 AI 裝置賣多少」，而是誰掌握 agent 與使用者之間的入口。</div>
+
+    </section><section class="slide " data-title="Muse 的關鍵不是「酷」，而是能否成為交易入口" data-source="逐字稿 L838–L894、L1093–L1160。" data-supp="外部最新進展：Reuters 報導 Muse 已可處理購物與旅遊等任務；Amazon 則已阻擋 Muse 進行購買，顯示「agent 是否被平台允許」是商業模式的重要變數。Reuters、TechCrunch：Muse 與 Amazon PayPal 則宣布整合 Muse。Barron&#x27;s：PayPal × Muse">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Agentic Commerce｜平台權力重新分配</div>
+      <h1 class="title">Muse 的關鍵不是「酷」，而是能否成為交易入口</h1>
+      
+<div class="commerce">
+  <div class="platform meta"><b>META / MUSE</b><small>Agent</small><span>提出需求</span></div>
+  <div class="partners">
+    <span>Walmart</span><span>Best Buy</span><span>Gap</span><span>Sephora</span><span>PayPal</span><span>Expedia</span>
+  </div>
+  <div class="platform conflict"><b>Amazon</b><small>平台控制</small><span>已阻擋 Muse 購物</span></div>
+</div>
+<div class="risk-grid">
+<div><b>機會</b><p>agent 成為搜尋、比較、下單的第一層介面。</p></div>
+<div><b>風險</b><p>平台不一定願意讓第三方 agent 取得流量、交易資料與廣告價值。</p></div>
+<div><b>觀察指標</b><p>Connector 數量、交易成功率、平台開放程度、付款／身份驗證協議。</p></div>
+</div>
+
+    </section><section class="slide " data-title="Muse Charm：節目看好的理由與必須打問號的地方" data-source="逐字稿 L534–L642；L974–L1046。" data-supp="Bloomberg 2026/9/23 報導 Meta 公開 palm-sized Muse Charm；Meta 官方 Connect 公告則強調 Muse、AI glasses 與多裝置策略。Bloomberg、Meta 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Hardware｜節目觀點 vs 已知資訊</div>
+      <h1 class="title">Muse Charm：節目看好的理由與必須打問號的地方</h1>
+      
+<div class="compare">
+<div class="panel">
+<h3>節目原觀點</h3>
+<ul>
+<li>外型像電子寵物／鑰匙圈，具有情緒與懷舊吸引力。</li>
+<li>相較 AI Pin、Rabbit R1、Limitless Pendant，Meta 自身擁有大型使用者生態。</li>
+<li>可能成為 Muse 的另一個「身體」。</li>
+<li>但手機仍是最強競爭者，不能直接假設會取代手機。</li>
+</ul>
+</div>
+<div class="panel verify">
+<h3>外部資料補充</h3>
+<ul>
+<li>Bloomberg 已報導 Meta 在 Connect 2026 公開專用 Muse Charm 裝置。</li>
+<li>目前仍應區分「公開展示」與「量產／價格／規格已確認」。</li>
+<li>Meta 官方 Connect 公告更明確的主力其實是 AI glasses + Muse。</li>
+</ul>
+</div>
+</div>
+
+    </section><section class="slide " data-title="AI 裝置的前車之鑑" data-source="逐字稿 L591–L642。" data-supp="節目對前代產品的價格與結局有口述性描述；本簡報保留為「節目說法」，不把所有價格／時間點視為獨立驗證。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Why the host is cautious</div>
+      <h1 class="title">AI 裝置的前車之鑑</h1>
+      
+<div class="timeline">
+<div><b>2023–24</b><strong>Humane AI Pin</strong><small>節目提及售價 US$699＋訂閱；後被 HP 收購資產並停止服務。</small></div>
+<div><b>2024</b><strong>Rabbit R1</strong><small>節目以「把 App 功能硬體化」描述其問題。</small></div>
+<div><b>後續</b><strong>Limitless Pendant</strong><small>節目提及 US$99、後被 Meta 收購並停售。</small></div>
+<div class="highlight"><b>2026</b><strong>Muse Charm</strong><small>Meta 有既有社群／AI／平台生態，但仍要證明使用頻率與商業化。</small></div>
+</div>
+<p class="lead">真正的比較基準不是「這次發表會酷不酷」，而是：<b>每天是否真的使用、是否能完成手機做不到的事、是否能形成交易／訂閱收入。</b></p>
+
+    </section><section class="slide " data-title="CPU：本集最值得量化的投資主題" data-source="逐字稿 CPU 討論與數量估算約 L? 本集主要相關內容集中於 Meta／Agentic AI 段落及後續市場問答；本簡報以節目對 CPU／agent 的描述為主。" data-supp="本集逐字稿更早的相關討論延續前幾集 CPU 主題；本次 EP700 的核心新增點是 Muse／agent 對基礎設施需求的映射。不要把前集的 40:1 網路說法當成 EP700 已驗證數字。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Agentic AI → CPU intensity</div>
+      <h1 class="title">CPU：本集最值得量化的投資主題</h1>
+      
+<div class="cpu-visual">
+  <div class="bar"><span>傳統 AI</span><b style="width:45%">CPU ~45%</b></div>
+  <div class="bar hotbar"><span>Agentic AI</span><b style="width:50%">CPU ~50%</b></div>
+</div>
+<div class="formula">
+<strong>合理模型</strong>
+<code>CPU需求 ≈ 活躍使用者 × 每活躍使用者工作量 × 每工作量CPU需求 ÷ 目標利用率</code>
+</div>
+<div class="warning">不要直接把「總用戶數」×「理論 VM 規格」當成實際 CPU 出貨量。節目本身也質疑 40:1 CPU/GPU 的網路說法。</div>
+
+    </section><section class="slide " data-title="AMD：為什麼是這張圖的核心 CPU 標的" data-source="逐字稿 L1590–L1655。" data-supp="AMD 官方資料：第六代 EPYC、Instinct MI400 與 Helios 均以 agentic AI／AI infrastructure 為重點；AMD 表示 Meta 正驗證 EPYC 與 Helios。AMD 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">AMD｜NASDAQ: AMD</div>
+      <h1 class="title">AMD：為什麼是這張圖的核心 CPU 標的</h1>
+      
+<div class="metric-row">
+<div><b>EPYC</b><span>Server CPU</span></div>
+<div><b>Instinct</b><span>AI GPU</span></div>
+<div><b>Helios</b><span>Rack-scale AI</span></div>
+</div>
+<div class="company-box">
+<h3>逐字稿角色</h3>
+<p>AMD 出現在前十大持股，且被放進「光通訊＋測試＋CPU」的完整組合中；節目也把 CPU 視為 Agentic AI 的第二波催化。</p>
+<h3>外部驗證</h3>
+<p>AMD 2026 年推出第六代 EPYC 與 Helios，並明確把 agentic AI 列為 CPU 工作負載；AMD 也披露與 Meta 的大規模 AI 基礎設施合作。</p>
+</div>
+
+    </section><section class="slide " data-title="IFX：不是 AI GPU，而是 AI 電力鏈" data-source="逐字稿 L1590–L1655。" data-supp="Infineon 官方資料顯示其 AI data center power portfolio 覆蓋 grid-to-core；2026 年公司亦將 AI power semiconductors 作為成長方向。Infineon 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Infineon｜FSE: IFX</div>
+      <h1 class="title">IFX：不是 AI GPU，而是 AI 電力鏈</h1>
+      
+<div class="power-chain">
+<span>Grid</span><i>→</i><span>Transformer</span><i>→</i><span>PSU</span><i>→</i><span>IBC</span><i>→</i><span>CPU/GPU</span>
+</div>
+<div class="company-box">
+<p><b>逐字稿：</b>IFX 被列在持股中，並被描述為「往公寓元件」一定會看到的公司。</p>
+<p><b>外部資料：</b>Infineon 將 AI data center power semiconductor 定位在從 grid 到 processor core 的完整 power chain；公司 2026 年預期 AI 市場營收持續成長。</p>
+</div>
+
+    </section><section class="slide " data-title="Lumentum / Coherent / Corning：光通訊是一條鏈，不是一家公司" data-source="逐字稿 L1590–L1655；DSP／光通訊主題亦在節目中反覆出現。" data-supp="Lumentum 2026 財報明確提到 cloud module business 正推進 1.6T adoption；Coherent 在 OFC 2026 展示多種 1.6T transceiver；Corning 則與 Meta 簽署最高 60 億美元多年協議，供應 AI data center optical fiber/cable/connectivity。Lumentum、Coherent、Corning 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Optical｜800G → 1.6T → CPO</div>
+      <h1 class="title">Lumentum / Coherent / Corning：光通訊是一條鏈，不是一家公司</h1>
+      
+<div class="optics">
+<div><b>Lumentum</b><small>Laser / optical components / 1.6T</small></div>
+<div><b>Coherent</b><small>Photonics / transceivers / 1.6T+</small></div>
+<div><b>Corning</b><small>Fiber / cable / connectivity</small></div>
+</div>
+<div class="ladder">
+<span>400G</span><span>800G</span><span class="hot">1.6T</span><span>3.2T</span><span>CPO</span>
+</div>
+<p class="lead">節目把 Lumentum、Coherent、Corning 與 DSP／CPO／LPO 放在同一個光互連敘事裡；真正要追的是規格升級、ASP、出貨量與架構轉換。</p>
+
+    </section><section class="slide " data-title="Teradyne：AI 基建的「測試鏟子」" data-source="逐字稿 L1590–L1655。" data-supp="Teradyne 官方資料：2026 Q1 半導體測試營收首次超過 10 億美元，AI-related demand 是主要驅動；Q2 營收達 13.29 億美元，半導體測試 11.22 億美元。Teradyne 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Teradyne｜NASDAQ: TER</div>
+      <h1 class="title">Teradyne：AI 基建的「測試鏟子」</h1>
+      
+<div class="test-loop">
+<div>AI Chip</div><div>→</div><div>Wafer / HBM</div><div>→</div><div>ATE</div><div>→</div><div>AI Data Center</div>
+</div>
+<div class="company-box">
+<p>逐字稿把 Teradyne 與 AMD CPU、光通訊元件放在同一份持股組合中。這代表的不是「AI 模型公司」，而是 AI 資本支出越大，測試需求越可能跟著增加的間接受益鏈。</p>
+</div>
+<div class="metric-row">
+<div><b>Q1'26</b><span>Revenue $1.282B</span></div>
+<div><b>Q2'26</b><span>Revenue $1.329B</span></div>
+<div><b>AI</b><span>Compute + Memory Test</span></div>
+</div>
+
+    </section><section class="slide " data-title="Bloom Energy？：逐字稿的「Blue Energy」值得重新核對" data-source="逐字稿 L1607–L1636。" data-supp="Bloom Energy 2026/6 擴大與 Brookfield 的 AI infrastructure power framework 至 250 億美元；2026/9 又提出 800V DC-native power。這使「Blue Energy」→ Bloom Energy 的推定具有產業語境支持，但仍屬轉錄核對事項。Bloom Energy 官方">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Power｜BE（名稱存在 OCR 不確定性）</div>
+      <h1 class="title">Bloom Energy？：逐字稿的「Blue Energy」值得重新核對</h1>
+      
+<div class="big-eq"><span>AI Compute</span><b>+</b><span>Power Constraint</span><b>→</b><strong>Onsite Power</strong></div>
+<div class="company-box">
+<p>逐字稿寫作「Blue Energy」，並接著談「表後供電／data center 整體敘事」。這個描述與 Bloom Energy 的 AI data center onsite power 主題高度吻合，但因原始逐字稿存在轉錄誤差，本簡報不把它改寫成「確定就是 BE」。</p>
+</div>
+<div class="metric-row">
+<div><b>BE</b><span>Bloom Energy</span></div>
+<div><b>800V DC</b><span>Power architecture</span></div>
+<div><b>$25B</b><span>Brookfield framework</span></div>
+</div>
+
+    </section><section class="slide " data-title="台積電：逐字稿中的角色是「產能天花板」" data-source="逐字稿 L676–L713。" data-supp="這裡最重要的補充不是股價，而是量化：終端出貨量 × 單位 wafer 用量 × 良率 × ASP，才能把「幾億副眼鏡」轉成真正可驗證的晶圓需求。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">TSMC｜Taiwan semiconductor manufacturing</div>
+      <h1 class="title">台積電：逐字稿中的角色是「產能天花板」</h1>
+      
+<div class="ceiling">
+<div class="chip">AI Glasses / Waveguide</div>
+<div class="arrow">↓</div>
+<div class="chip">Wafer Demand</div>
+<div class="arrow">↓</div>
+<div class="chip hot">Foundry Capacity</div>
+</div>
+<p class="lead">節目談到如果 AI glasses 真正成為下一代大規模平台，光波導等元件可能帶來大量 wafer 需求，甚至把台積電產能拉進討論；但節目同時強調這個推論建立在「眼鏡成為下一個手機」的強假設上。</p>
+<div class="note">因此這不是「台積電會因 Muse Charm 立刻受益」的結論，而是一個需要先驗證終端滲透率、BOM、wafer intensity 的情境分析。</div>
+
+    </section><section class="slide " data-title="台達電：本集是交易方法論案例，不是 AI 基本面主線" data-source="逐字稿 L1738–L1800。" data-supp="這段應與前面的 AI 供應鏈個股分開理解：它是在討論交易風格與進場方式，而不是在建立台達電基本面投資論點。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Delta Electronics｜2308</div>
+      <h1 class="title">台達電：本集是交易方法論案例，不是 AI 基本面主線</h1>
+      
+<div class="trade">
+<div class="bad">追強</div><div>→</div><div class="bad">追高</div><div>→</div><div class="bad">被洗</div>
+<div class="good">強中代弱</div><div>→</div><div class="good">多頭型態</div><div>→</div><div class="good">等回檔</div>
+</div>
+<p class="lead">問答中提到台達電時，節目批評的是「動能策略的一致性」：如果說自己只追強，卻買到當時型態相對落後的台達電，策略與執行就不一致。</p>
+
+    </section><section class="slide " data-title="「持股」與「被提及」要分開" data-source="持股：逐字稿 L1590–L1655；其他公司：Meta 段落 L640–L1159、台達交易案例 L1738–L1800。" data-supp="這是閱讀逐字稿時最重要的分類。尤其 Meta、Amazon 等公司雖是核心產業事件，但不代表節目宣稱其為持股或買進標的。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">避免把節目裡所有公司都當成推薦</div>
+      <h1 class="title">「持股」與「被提及」要分開</h1>
+      
+<div class="two-col">
+<div class="panel">
+<h3>明確出現在前十大持股</h3>
+<ul><li>0050</li><li>QQQ</li><li>Infineon（IFX）</li><li>Google</li><li>Lumentum（LITE）</li><li>Coherent（COHR）</li><li>「Blue Energy」？</li><li>Corning（GLW）</li><li>Teradyne（TER）</li><li>AMD</li></ul>
+</div>
+<div class="panel">
+<h3>節目其他段落被提及</h3>
+<ul><li>Meta</li><li>台積電</li><li>Apple</li><li>Amazon</li><li>Walmart</li><li>Best Buy</li><li>Gap</li><li>Sephora</li><li>PayPal</li><li>Expedia</li><li>台達電</li></ul>
+</div>
+</div>
+<div class="warning">「被提及」≠「看好」≠「持有」。本簡報刻意不替節目增加未說出口的投資結論。</div>
+
+    </section><section class="slide " data-title="把本集變成可追蹤的投資研究表" data-source="本表為本簡報的研究框架，依逐字稿 L1590–L1655、L640–L1159 與外部資料重新整理。" data-supp="建議後續用季度財報驗證，而不是只看股價：營收 → backlog → ASP → capex → 客戶集中度 → 毛利率，形成完整證據鏈。">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">Research Dashboard</div>
+      <h1 class="title">把本集變成可追蹤的投資研究表</h1>
+      
+<table class="research">
+<thead><tr><th>主題</th><th>核心公司</th><th>要驗證什麼</th><th>最重要的反證</th></tr></thead>
+<tbody>
+<tr><td>Agentic AI</td><td>META / AMD</td><td>DAU、任務成功率、token cost、付費轉換</td><td>使用者不願授權／成本過高</td></tr>
+<tr><td>CPU</td><td>AMD / Intel / ARM ecosystem</td><td>CPU per workload、server mix、ASP</td><td>工作負載仍由 GPU 主導</td></tr>
+<tr><td>Optics</td><td>LITE / COHR / GLW</td><td>800G→1.6T 出貨、ASP、DSP attach</td><td>CPO/LPO 改變 BOM</td></tr>
+<tr><td>Power</td><td>IFX / BE</td><td>MW/GW 建置、onsite power、800V DC</td><td>電網擴建速度快於預期</td></tr>
+<tr><td>Test</td><td>TER</td><td>AI/HBM test capex、wafer test</td><td>測試需求被效率提升抵銷</td></tr>
+<tr><td>Foundry</td><td>TSM</td><td>先進製程／封裝需求</td><td>終端產品滲透率不成立</td></tr>
+</tbody></table>
+
+    </section><section class="slide " data-title="最後的投資閱讀方式" data-source="整集內容綜合；特別參考逐字稿 L640–L1159、L1590–L1655、L1738–L1887。" data-supp="外部資料截至 2026/9/26；最新資料顯示 Meta 的 Muse 已快速擴張，但 Amazon 的封鎖也同步揭示 agentic commerce 的平台摩擦。Reuters、TechCrunch：Muse 與 Amazon">
+      <button class="source-btn">⌁ 出處／補充</button>
+      <div class="kicker">不要只問「哪一檔會漲」</div>
+      <h1 class="title">最後的投資閱讀方式</h1>
+      
+<div class="final-grid">
+<div><b>① 題材</b><p>Muse／Agentic AI 是否真的增加計算與交易需求？</p></div>
+<div><b>② 瓶頸</b><p>CPU、Optics、Power、Test 哪一層最先成為限制？</p></div>
+<div><b>③ 訂單</b><p>公司財報是否出現可量化的需求增長？</p></div>
+<div><b>④ 估值</b><p>市場是否已提前反映需求？</p></div>
+<div><b>⑤ 反證</b><p>什麼數據出現時，原本的 thesis 應該被推翻？</p></div>
+<div><b>⑥ 交易</b><p>基本面正確，不等於進場時點與風險管理正確。</p></div>
+</div>
+<div class="quote">本集最有價值的不是「哪家公司最強」，而是提供了一個從終端 AI agent 往下拆到 CPU、光通訊、電力、測試與製造的研究框架。</div>
+
+    </section>
+</div>
+<div class="nav"><button onclick="move(-1)">← 上一頁</button><span class="counter">1 / 19</span><button onclick="move(1)">下一頁 →</button><span class="sub">鍵盤 ← →／Space</span></div>
+<div class="modal"><div class="modal-card"><button class="close">×</button><h2></h2><div class="kicker">SOURCE</div><div class="src"></div><div class="kicker" style="margin-top:22px">SUPPLEMENT / READING NOTE</div><div class="sup"></div></div></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let idx=0;
+function show(n){idx=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===idx));document.querySelector('.counter').textContent=(idx+1)+' / '+slides.length;document.querySelector('.progress').style.width=((idx+1)/slides.length*100)+'%';}
+function move(d){show(idx+d)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')move(1);if(e.key==='ArrowLeft')move(-1);if(e.key==='Escape')closeModal()});
+function openModal(){document.querySelector('.modal').classList.add('open');document.querySelector('.modal h2').textContent=slides[idx].dataset.title;document.querySelector('.src').innerHTML=slides[idx].dataset.source;document.querySelector('.sup').innerHTML=slides[idx].dataset.supp}
+function closeModal(){document.querySelector('.modal').classList.remove('open')}
+document.querySelector('.source-btn').onclick=openModal;
+document.querySelector('.close').onclick=closeModal;
+document.querySelector('.modal').onclick=e=>{if(e.target.classList.contains('modal'))closeModal()};
+show(0);
+</script>
+</body></html>
