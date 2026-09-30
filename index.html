@@ -1,803 +1,219 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>公會轉職鑑定系統</title>
-    <style>
-        :root {
-            --bg-color: #000000;
-            --card-bg: rgba(28, 28, 30, 0.65); /* iOS System Gray 6 + Opacity */
-            --text-main: #ffffff;
-            --text-sub: #8e8e93; /* iOS System Gray */
-            --accent-blue: #0a84ff; /* iOS System Blue */
-            --accent-green: #30d158;
-            --accent-red: #ff453a;
-            --border-color: rgba(255, 255, 255, 0.12);
-            --blur-strength: 20px;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            height: min-height;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            background-image: linear-gradient(160deg, #1c1c1e 0%, #000000 100%);
-            overflow-y: auto;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            padding: 40px 24px;
-            margin: auto;
-            position: relative;
-        }
-
-        /* iOS Glassmorphism Card */
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(var(--blur-strength));
-            -webkit-backdrop-filter: blur(var(--blur-strength));
-            border-radius: 24px;
-            padding: 32px 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            position: relative; /* For the new nav links */
-        }
-
-        h1 {
-            font-weight: 700;
-            font-size: 24px;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        h2 {
-            font-weight: 600;
-            font-size: 20px;
-            margin-bottom: 24px;
-        }
-        
-        /* 針對政策頁面的 h3 */
-        .policy-content h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-        
-        .policy-content p {
-            text-align: left;
-            margin-bottom: 16px;
-            font-size: 14px; /* 政策頁面文字小一點 */
-            color: var(--text-sub);
-        }
-        .policy-content ul {
-            text-align: left;
-            margin: 0 0 16px 20px;
-            padding: 0;
-            list-style-type: disc;
-            color: var(--text-sub);
-        }
-        .policy-content li {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        p {
-            color: var(--text-sub);
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 32px;
-        }
-
-        /* iOS Style Buttons */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
-            border: none;
-            padding: 16px;
-            border-radius: 14px;
-            font-size: 17px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn:active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0.98);
-        }
-
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .btn-primary:active {
-            background: #0071e3;
-        }
-
-        .option-btn {
-            text-align: left;
-            padding: 18px 20px;
-            font-size: 15px;
-            line-height: 1.4;
-            background: rgba(44, 44, 46, 0.8);
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            margin-bottom: 24px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--accent-blue);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        /* Image Overlay for Waiter */
-        .image-overlay {
-            width: 100%;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Utilities */
-        .hidden { display: none; }
-        .fade-in { animation: fadeIn 0.5s forwards; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Result Specifics */
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 14px;
-        }
-        .highlight { color: var(--accent-blue); font-weight: 600; }
-
-        /* ======== Collapsible Card & Analysis ======== */
-        .collapsible-card {
-            background: rgba(44, 44, 46, 0.8); /* iOS System Gray 5 */
-            border-radius: 12px;
-            padding: 0;
-            margin-bottom: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .card-content {
-            padding: 0 20px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-sub);
-            max-height: 0; /* Initially collapsed */
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        }
-
-        .collapsible-card.active .card-content {
-            max-height: 300px; /* Adjust height as needed */
-            padding-bottom: 20px; 
-            padding-top: 10px;
-        }
-
-        .collapse-icon {
-            transition: transform 0.3s ease;
-            font-size: 12px;
-            color: var(--text-sub);
-        }
-
-        .collapsible-card.active .collapse-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Analysis Block Style */
-        .analysis-block {
-            margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 16px 20px;
-            text-align: left;
-        }
-        .analysis-item {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .analysis-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        .item-label {
-            font-size: 12px;
-            color: var(--text-sub);
-            font-weight: 500;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .item-content {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-        
-        /* ======== NEW: Navigation Links (底部導航) ======== */
-        .nav-links {
-            position: absolute;
-            bottom: -30px; /* 放在卡片下方 */
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .nav-link {
-            color: var(--text-sub);
-            font-size: 14px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .nav-link:hover {
-            color: var(--text-main);
-        }
-        
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="集中檢視房地產、股市投資與早期前端作品的專案總覽。">
+  <title>專案作品總覽</title>
+  <style>
+    :root {
+      --bg: #f4f5f2; --surface: #fff; --surface-muted: #eef0ec; --ink: #171b18;
+      --muted: #626a64; --line: #d8ddd7; --accent: #23634d;
+      --property: #9a4f32; --property-soft: #f2e5df;
+      --market: #245b86; --market-soft: #e0eaf2;
+      --episode: #7b3f75; --episode-soft: #eee1ec;
+      --archive: #6b5630; --archive-soft: #eee8dc;
+      --shadow: 0 10px 28px rgba(23, 27, 24, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; min-height: 100vh; color: var(--ink); background: var(--bg); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1440px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 56px; }
+    .topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; padding: 18px 0 24px; border-bottom: 1px solid var(--line); }
+    .heading { min-width: 0; }
+    .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.1; letter-spacing: 0; }
+    .intro { max-width: 760px; margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .summary { display: flex; flex: 0 0 auto; gap: 8px; }
+    .summary-item { min-width: 92px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+    .summary-item strong { display: block; font-size: 24px; line-height: 1; }
+    .summary-item span { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; }
+    .controls { position: sticky; z-index: 10; top: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 360px); gap: 16px; align-items: center; padding: 16px 0; background: rgba(244, 245, 242, .94); backdrop-filter: blur(12px); }
+    .tabs { display: flex; min-width: 0; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+    .tab { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 9px 14px; color: var(--muted); background: transparent; border: 1px solid transparent; border-radius: 6px; font-weight: 750; white-space: nowrap; cursor: pointer; }
+    .tab:hover { background: var(--surface-muted); }
+    .tab[aria-selected="true"] { color: #fff; background: var(--ink); border-color: var(--ink); }
+    .tab-count { min-width: 22px; padding: 2px 6px; color: currentColor; background: rgba(255, 255, 255, .18); border-radius: 999px; font-size: 11px; text-align: center; }
+    .search-wrap { position: relative; }
+    .search-wrap::before { content: "⌕"; position: absolute; top: 50%; left: 14px; color: var(--muted); font-size: 20px; transform: translateY(-53%); pointer-events: none; }
+    .search { width: 100%; min-height: 42px; padding: 10px 40px 10px 42px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; outline: none; }
+    .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(35, 99, 77, .12); }
+    .clear-search { position: absolute; top: 50%; right: 8px; display: none; width: 28px; height: 28px; padding: 0; color: var(--muted); background: transparent; border: 0; border-radius: 50%; font-size: 20px; line-height: 1; cursor: pointer; transform: translateY(-50%); }
+    .clear-search:hover { background: var(--surface-muted); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 8px 0 16px; }
+    .section-head h2 { margin: 0; font-size: 23px; letter-spacing: 0; }
+    .section-head p { margin: 5px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .result-count { flex: 0 0 auto; color: var(--muted); font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .project { display: flex; min-width: 0; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+    .preview { position: relative; height: 220px; overflow: hidden; background: #e5e8e4; border-bottom: 1px solid var(--line); }
+    .preview iframe { width: 1440px; height: 900px; border: 0; background: #fff; pointer-events: none; transform: scale(.24); transform-origin: top left; }
+    .preview-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); background: #e9ece8; font-size: 13px; }
+    .preview.loaded .preview-status { display: none; }
+    .project-body { display: flex; flex: 1; flex-direction: column; padding: 17px; }
+    .meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
+    .type { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; }
+    .type.property { color: var(--property); background: var(--property-soft); }
+    .type.market { color: var(--market); background: var(--market-soft); }
+    .type.episode { color: var(--episode); background: var(--episode-soft); }
+    .type.archive { color: var(--archive); background: var(--archive-soft); }
+    .filename { min-width: 0; overflow: hidden; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .project h3 { margin: 0; font-size: 19px; line-height: 1.35; letter-spacing: 0; }
+    .description { margin: 9px 0 14px; color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 15px; }
+    .tag { padding: 5px 7px; color: var(--muted); background: var(--surface-muted); border-radius: 4px; font-size: 11px; }
+    .actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 39px; padding: 9px 12px; border-radius: 5px; font-size: 13px; font-weight: 800; }
+    .button.primary { color: #fff; background: var(--ink); }
+    .button.secondary { color: var(--ink); background: var(--surface-muted); border: 1px solid var(--line); }
+    .button:hover { filter: brightness(.94); }
+    .empty { display: none; padding: 52px 20px; color: var(--muted); background: var(--surface); border: 1px dashed #b9c0ba; border-radius: 8px; text-align: center; }
+    .empty strong { display: block; margin-bottom: 6px; color: var(--ink); font-size: 17px; }
+    @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .controls { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 24px, 1440px); padding-top: 10px; }
+      .topbar { align-items: stretch; flex-direction: column; gap: 18px; }
+      .summary { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .summary-item { min-width: 0; }
+      .controls { padding: 12px 0; }
+      .tabs { padding-bottom: 2px; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .preview { height: 205px; }
+      .preview iframe { transform: scale(.20); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
 </head>
 <body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="heading">
+        <p class="eyebrow">Project Library</p>
+        <h1>專案作品總覽</h1>
+        <p class="intro">將房地產分析、股市投資研究、股癌 EP 內容與早期前端作品分區管理。切換頁籤即可檢視該主題的全部頁面，並可直接開啟完整作品。</p>
+      </div>
+      <div class="summary" aria-label="專案統計">
+        <div class="summary-item"><strong id="totalCount">0</strong><span>全部頁面</span></div>
+        <div class="summary-item"><strong id="groupCount">0</strong><span>主題分類</span></div>
+      </div>
+    </header>
 
-<div class="app-container">
+    <section class="controls" aria-label="作品瀏覽工具">
+      <div class="tabs" id="tabs" role="tablist" aria-label="作品分類"></div>
+      <div class="search-wrap">
+        <input class="search" id="searchInput" type="search" placeholder="搜尋目前分類的名稱、說明或檔名" autocomplete="off">
+        <button class="clear-search" id="clearSearch" type="button" aria-label="清除搜尋" title="清除搜尋">×</button>
+      </div>
+    </section>
 
-    <div id="gatekeeper-screen" class="glass-card fade-in">
-        <h1>System Access</h1>
-        <p>歡迎來到異世界冒險者公會。<br>系統檢測到陌生的靈魂波動。</p>
-        <h2>請問您是第一次來嗎？</h2>
-        
-        <div class="btn-group">
-            <button class="btn btn-primary" onclick="handleNewUser()">我是會員</button>
-            <button class="btn" onclick="handleVeteranUser()">是，我第一次來</button>
-        </div>
-        
-        <div class="nav-links">
-            <span class="nav-link" onclick="showScreen('privacy-policy-screen')">隱私權政策</span>
-            <span class="nav-link" onclick="showScreen('contact-us-screen')">聯絡我們</span>
-        </div>
-    </div>
+    <section aria-live="polite">
+      <div class="section-head">
+        <div><h2 id="sectionTitle"></h2><p id="sectionDescription"></p></div>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+      <div class="grid" id="projectGrid"></div>
+      <div class="empty" id="emptyState"><strong>找不到符合的頁面</strong>請換一個關鍵字，或切換到其他分類。</div>
+    </section>
+  </main>
 
-    <div id="waiter-screen" class="glass-card hidden">
-        <div class="image-overlay" style="background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-        <h2>正在為您安排專屬引導...</h2>
-        <p>「啊... 失禮了。」</p>
-        <p>系統將在 3 秒後跳轉至登入頁面。</p>
-        <div style="margin-top:20px;">
-            <span style="font-size: 24px;">⏳</span>
-        </div>
-    </div>
-
-    <div id="intro-screen" class="glass-card hidden">
-        <h1>Identity Check</h1>
-        <div style="font-size: 40px; margin: 20px 0;">🛡️</div>
-        <p>「啊... 失禮了。」</p>
-        <p>既然您是第一次來，那就讓我確認您的<strong>真實職業</strong>與<strong>靈魂屬性</strong>吧。</p>
-        <button class="btn btn-primary" onclick="startQuiz()">開始鑑定</button>
-    </div>
-
-    <div id="quiz-screen" class="glass-card hidden">
-        <div class="progress-container">
-            <div class="progress-fill" id="progress-bar"></div>
-        </div>
-        <h2 id="question-text" style="min-height: 60px;">Question</h2>
-        <div id="options-container" class="btn-group">
-            </div>
-    </div>
-
-    <div id="result-screen" class="glass-card hidden">
-        <div style="font-size: 13px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analysis Complete</div>
-        
-        <div id="result-icon" style="font-size: 48px; margin-bottom: 10px;">🔥</div>
-        <h1 id="result-title" style="color: var(--accent-blue); font-size: 28px;">職業名稱</h1>
-        <div class="collapsible-card" onclick="toggleCollapse(this)">
-            <div class="card-header">
-                <strong>📜 職業起源故事</strong>
-                <span class="collapse-icon">▼</span>
-            </div>
-            <div class="card-content" id="story-block">
-                </div>
-        </div>
-
-        <div class="analysis-block">
-            <div class="analysis-item">
-                <div class="item-label">👤 核心性格 (Personality)</div>
-                <div class="item-content" id="analysis-personality"></div>
-            </div>
-            <div class="analysis-item">
-                <div class="item-label">📊 操作風格 (Style)</div>
-                <div class="item-content" id="analysis-style"></div>
-            </div>
-        </div>
-
-        <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
-            <div class="stat-row">
-                <span>元素 (Element)</span>
-                <span id="stat-element" class="highlight">Fire</span>
-            </div>
-            <div class="stat-row">
-                <span>職業 (Class)</span>
-                <span id="stat-class" class="highlight">Warrior</span>
-            </div>
-            <div class="stat-row" style="border-bottom: none;">
-                <span>風險偏好</span>
-                <span id="stat-risk">High</span>
-            </div>
-        </div>
-
-        <div style="background: rgba(10, 132, 255, 0.15); border: 1px solid rgba(10, 132, 255, 0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: left;">
-            <strong style="color: #60a5fa; display: block; margin-bottom: 8px; font-size: 13px;">💡 公會建議</strong>
-            <p id="result-solution" style="margin: 0; font-size: 13px; color: #d1d5db;">Solution text.</p>
-        </div>
-
-        <button id="cta-btn" class="btn btn-primary" onclick="handleCTA(this)">
-            領取專屬攻略書
-        </button>
-        <button class="btn" style="margin-top: 10px; background: transparent; color: var(--text-sub);" onclick="location.reload()">重新鑑定</button>
-    </div>
-
-    <div id="privacy-policy-screen" class="glass-card hidden">
-        <h1 style="font-size: 28px;">🛡️ 隱私權政策</h1>
-        <div style="font-size: 12px; color: var(--text-sub); margin-bottom: 30px;">生效日期：2025 年 11 月 23 日</div>
-        
-        <div class="policy-content">
-            <p><strong>[您的網站名稱/公會名稱]</strong> 尊重並承諾保護您的個人隱私。本政策說明了當您使用本鑑定系統時，我們如何收集、使用和保護您的資訊。</p>
-
-            <h3>收集的資訊</h3>
-            <p>在使用本鑑定系統時，我們僅收集以下**非個人身份識別資訊**：</p>
-            <ul>
-                <li><strong>測驗答案：</strong> 您在鑑定問答中的選擇。這些答案被用於即時計算您的職業屬性，並在會話結束後即時清除。</li>
-                <li><strong>設備資訊：</strong> 您的瀏覽器類型、操作系統、訪問時間等標準日誌數據，用於改善系統兼容性。</li>
-            </ul>
-
-            <h3>資訊使用</h3>
-            <p>我們收集的資訊僅用於以下目的：</p>
-            <ul>
-                <li>提供並完善轉職鑑定結果服務。</li>
-                <li>分析用戶行為模式，以優化問答設計和用戶體驗。</li>
-            </ul>
-            <p><strong>本系統不會儲存任何個人身份資訊（如姓名、電子郵件、IP 地址）。</strong> 您的測驗結果為一次性計算，不會被連結到任何個人標識。</p>
-
-            <h3>第三方服務 (AdSense)</h3>
-            <p>本網站可能透過 Google AdSense 服務顯示廣告。Google 可能會使用 Cookie 和 Web Beacon 來收集非個人化資訊，以便向您提供您可能感興趣的廣告。請參閱 Google 的隱私權政策以了解更多資訊。</p>
-        </div>
-
-        <button class="btn btn-primary" style="margin-top: 20px;" onclick="showScreen('gatekeeper-screen')">返回首頁</button>
-    </div>
-
-    <div id="contact-us-screen" class="glass-card hidden">
-        <h1 style="font-size: 28px;">📧 聯絡我們</h1>
-        <div style="font-size: 40px; margin: 20px 0;">📜</div>
-        <p>若您對鑑定系統有任何疑問、合作提案或技術反饋，請透過以下方式與公會管理員聯繫。</p>
-        
-        <div class="analysis-block" style="text-align: left;">
-            <div class="analysis-item">
-                <div class="item-label">公會信箱 (Email)</div>
-                <div class="item-content" style="word-break: break-all;">
-                    <a href="mailto:your.guild.email@example.com" style="color: var(--accent-blue); text-decoration: none;">your.guild.email@example.com</a>
-                </div>
-            </div>
-            <div class="analysis-item">
-                <div class="item-label">公會管理員</div>
-                <div class="item-content">管理員 NangleKimo</div>
-            </div>
-            <div class="analysis-item" style="border-bottom: none; padding-bottom: 0;">
-                <div class="item-label">回覆時效</div>
-                <div class="item-content">約 3-5 個工作日</div>
-            </div>
-        </div>
-
-        <button class="btn btn-primary" style="margin-top: 20px;" onclick="showScreen('gatekeeper-screen')">返回首頁</button>
-    </div>
-
-</div>
-
-<script>
-    // ================= 0. DATA =================
-
-    const jobProfiles = {
-        fire_warrior: {
-            story: "烈焰狂戰士擁有炙熱的行動力，總在市場最火熱之時率先衝鋒。他以熱血與直覺為武器，無懼波動。",
-            personality: "衝動、熱血、敢賭一把，行動速度極快。",
-            style: "短線偏好、追強勢股、搶動能、停損果斷。"
-        },
-        fire_mage: {
-            story: "烈焰魔導士以火焰為媒介，以指標為法杖。他將情緒與技術融合，能在轉折處召喚烈焰。",
-            personality: "理性與激情並存，既看指標也靠直覺。",
-            style: "動能策略、突破交易、偏快速節奏。"
-        },
-        fire_sage: {
-            story: "烈焰大賢者是極少數同時擁有研究深度與強烈行動力的人。他的知識越深，火焰越旺。",
-            personality: "深思熟慮但敢提前布局。",
-            style: "基本面導向但偏積極，敢買成長股。"
-        },
-        fire_rogue: {
-            story: "烈焰盜賊是火之影子，擅長在市場狂熱中搶第一波機會。他的眼中永遠燃燒著獵物。",
-            personality: "敏銳、反應快、敢玩題材。",
-            style: "消息多、題材快、吃第一段、多短線。"
-        },
-
-        water_warrior: {
-            story: "深海狂戰士外表強悍，內心卻像大海般冷靜。他的每次出擊都有邏輯支撐。",
-            personality: "穩定、務實、行動派但不衝動。",
-            style: "低估反彈、快進快出但風險偏低。"
-        },
-        water_mage: {
-            story: "深海魔導士透過冰冷的技術與邏輯掌控市場波動，像潮水般穩定。",
-            personality: "冷靜、精算、以數據為中心。",
-            style: "技術操作、破線即撤、節奏穩健。"
-        },
-        water_sage: {
-            story: "深海大賢者沉入資訊深處，洞察公司運作的本質，判斷冷靜無比。",
-            personality: "研究派、理性、穩重。",
-            style: "價值投資、低估布局、長期耐心。"
-        },
-        water_rogue: {
-            story: "深海盜賊在市場縫隙裡流動，善於建立低風險套利策略。",
-            personality: "務實、冷靜、計算型。",
-            style: "低風險套利、小波段、機會主義。"
-        },
-
-        wind_warrior: {
-            story: "疾風狂戰士以速度為信仰，市場風吹草動都能引發他的行動。",
-            personality: "急性子、追求效率、反應極快。",
-            style: "當沖、隔日沖、強勢突破。"
-        },
-        wind_mage: {
-            story: "疾風魔導士掌握風的節奏，用指標判斷每次風吹的方向。",
-            personality: "善於觀察節奏、技術細膩。",
-            style: "快節奏技術交易、突破與回測策略。"
-        },
-        wind_sage: {
-            story: "疾風大賢者研究宏觀風向，善於抓住最重要的趨勢走向。",
-            personality: "洞察力強、重視大局。",
-            style: "趨勢投資、中長期順勢交易。"
-        },
-        wind_rogue: {
-            story: "疾風盜賊是消息流第一線，永遠比他人更快嗅到市場氣息。",
-            personality: "靈敏、反應快、擅長資訊差。",
-            style: "題材搶跑、快訊交易、不留倉。"
-        },
-
-        earth_warrior: {
-            story: "大地狂戰士是最穩定的前排，沉著面對市場所有噪音。",
-            personality: "耐沉、抗震、不輕易動搖。",
-            style: "反彈交易、穩健短線、安全第一。"
-        },
-        earth_mage: {
-            story: "大地魔導士用時間與節奏構築堅固的策略，像山脈般可靠。",
-            personality: "穩健、計畫型、有耐性。",
-            style: "中長線技術策略、周期觀察。"
-        },
-        earth_sage: {
-            story: "大地大賢者掌握複利的規律，長年堅守投資信仰。",
-            personality: "穩健、耐心、抗波動超高。",
-            style: "存股、長抱、配息與低估布局。"
-        },
-        earth_rogue: {
-            story: "大地盜賊精通低風險套利，腳步輕盈但策略沉穩。",
-            personality: "精算、低風險偏好。",
-            style: "區間套利、小獲利高勝率交易。"
-        },
-
-        light_warrior: {
-            story: "聖光狂戰士以信念為劍，朝向未來願景全力衝刺。",
-            personality: "樂觀、熱情、行動派。",
-            style: "成長股衝刺、題材追夢、中線偏多。"
-        },
-        light_mage: {
-            story: "聖光魔導士藉由指標確認願景是否被市場認可。",
-            personality: "理性 + 理想混合。",
-            style: "願景 + 技術並用、中線成長股。"
-        },
-        light_sage: {
-            story: "聖光大賢者研究未來文明趨勢，擅於早期發掘巨型成長股。",
-            personality: "前瞻、穩重、樂觀理性。",
-            style: "長期成長投資、科技趨勢布局。"
-        },
-        light_rogue: {
-            story: "聖光盜賊會在敘事萌芽時偷跑布局，被稱為『敘事偷跑者』。",
-            personality: "直覺、嗅覺敏銳、擅預測未來。",
-            style: "早期題材佈局、敘事交易。"
-        },
-
-        dark_warrior: {
-            story: "闇影狂戰士以恐懼為武器，越是市場混亂他越強大。",
-            personality: "逆向、冷靜、極度抗壓。",
-            style: "抄底、逆向進場、恐慌時買進。"
-        },
-        dark_mage: {
-            story: "闇影魔導士走在所有風險模型的最前線，是『防禦系法師』。",
-            personality: "細心、理性、避險派。",
-            style: "風險指標驅動、穩健避險策略。"
-        },
-        dark_sage: {
-            story: "闇影大賢者能看穿泡沫本質，被稱為市場黑暗的洞察者。",
-            personality: "悲觀中立、洞察深度極高。",
-            style: "逆勢研究、宏觀風險觀察、避險布局。"
-        },
-        dark_rogue: {
-            story: "闇影盜賊擅長利用市場恐慌的縫隙進行套利，是混亂中的收割者。",
-            personality: "精算、冷靜、逆向機會主義。",
-            style: "恐慌套利、暴跌撿屍、事件驅動。"
-        }
+  <script>
+    const groups = {
+      property: { label: "房地產", description: "房價評估、物件追蹤、銷售策略與貸款試算集中於此。" },
+      market: { label: "股市與投資", description: "個股研究、財報查證、投資框架與資金配置工具集中於此。" },
+      episode: { label: "股癌專區", description: "所有以 EP 開頭的股癌內容與互動式簡報集中於此。" },
+      archive: { label: "舊作品集", description: "早期前端作業、互動原型與個人展示頁集中於此。" }
     };
 
-    const elements = {
-        fire: { name: "烈焰", icon: "🔥", desc: "你相信直覺與動能，傾向在市場最熱絡時進場。" },
-        water: { name: "深海", icon: "💧", desc: "你討厭盲目，喜歡透過數據與邏輯分析找到低估標的。" },
-        wind: { name: "疾風", icon: "🌪️", desc: "你對資訊極度敏感，追求效率，不喜歡等待。" },
-        earth: { name: "大地", icon: "⛰️", desc: "你不動如山，相信時間的複利，對波動無動於衷。" },
-        light: { name: "聖光", icon: "✨", desc: "你投資的是未來，容易被宏大的敘事吸引。" },
-        dark: { name: "闇影", icon: "🌑", desc: "你總是能看到繁榮背後的危機，善於避險。" }
-    };
-
-    const classes = {
-        warrior: { name: "狂戰士", desc: "行動派，手動操作頻率高，相信執行力。" },
-        mage: { name: "魔導士", desc: "系統派，依賴指標與模型，不帶感情。" },
-        sage: { name: "大賢者", desc: "研究派，重視基本面，決策週期長。" },
-        rogue: { name: "盜賊", desc: "機會派，尋找套利與消息面落差。" }
-    };
-
-    const questions = [
-        {
-            q: "當市場暴跌 5%，一片恐慌時，你的反應是？",
-            options: [
-                { text: "拔刀抄底！這是錯殺，快搶反彈！", e: { fire: 2, wind: 1 }, c: { warrior: 2 } },
-                { text: "翻閱圖書館：確認基本面有沒有改變？", e: { water: 2, earth: 1 }, c: { sage: 2 } },
-                { text: "檢查結界：看技術指標是否跌破支撐？", e: { wind: 1, dark: 1 }, c: { mage: 2 } },
-                { text: "暗中觀察：看有沒有人爆倉，準備撿屍體。", e: { dark: 2, fire: 1 }, c: { rogue: 2 } }
-            ]
-        },
-        {
-            q: "你進入市場副本時，手上一定要拿著什麼？",
-            options: [
-                { text: "手機看盤軟體：速度最重要。", e: { wind: 2 }, c: { warrior: 2, rogue: 1 } },
-                { text: "複雜的線圖：布林通道是我的法杖。", e: { fire: 1, water: 1 }, c: { mage: 2 } },
-                { text: "產業研究報告：了解公司的靈魂。", e: { light: 1, earth: 1 }, c: { sage: 2 } },
-                { text: "Twitter/新聞快訊：話題就是錢。", e: { wind: 2, fire: 1 }, c: { rogue: 2 } }
-            ]
-        },
-        {
-            q: "你的一筆交易通常會持有（詠唱）多久？",
-            options: [
-                { text: "瞬發 (當沖)：絕不留倉過夜。", e: { wind: 2, fire: 1 }, c: { warrior: 2, rogue: 1 } },
-                { text: "短波段 (數週)：等待趨勢完成。", e: { water: 1, fire: 1 }, c: { mage: 1, rogue: 1 } },
-                { text: "永久 (存股)：除非世界毀滅不賣。", e: { earth: 3, light: 2 }, c: { sage: 1 } },
-                { text: "直到願景實現：可能是一年或十年。", e: { light: 3 }, c: { sage: 2 } }
-            ]
-        },
-        {
-            q: "在冒險過程中，你最常受到的負面狀態是？",
-            options: [
-                { text: "混亂：資訊太多，不知聽誰的。", e: { wind: 2, light: 1 }, c: { rogue: 1, warrior: 1 } },
-                { text: "狂暴：情緒失控，追高殺低。", e: { fire: 3 }, c: { warrior: 2 } },
-                { text: "石化：研究太久，不敢進場。", e: { water: 2, dark: 1 }, c: { sage: 2 } },
-                { text: "故障：過度依賴指標卻失靈。", e: { water: 1, earth: 1 }, c: { mage: 2 } }
-            ]
-        },
-        {
-            q: "如果有個精靈能幫你，你希望祂做什麼？",
-            options: [
-                { text: "幫我過濾雜音！只給關鍵情報。", e: { wind: 2, fire: 1 }, c: { warrior: 1, rogue: 2 } },
-                { text: "幫我監控風險！快崩盤時叫我。", e: { earth: 1, dark: 2 }, c: { sage: 1 } },
-                { text: "給我明確買賣點！告訴我勝率。", e: { fire: 1, water: 1 }, c: { mage: 2 } },
-                { text: "告訴我下一個偉大趨勢在哪？", e: { light: 2 }, c: { sage: 1, rogue: 1 } }
-            ]
-        }
+    const projects = [
+      { title: "南豐街 150-2 號 3 樓", file: "nanfeng-150-2-3f.html", group: "property", type: "售價評估", description: "桃園區住宅物件的售價評估與銷售策略，整理行情、價格帶與執行建議。", tags: ["桃園住宅", "售價策略", "市場比較"] },
+      { title: "清豐路 78 巷 7 號", file: "project20260912001.html", group: "property", type: "物件分析", description: "透天物件的價格與風險評估，整合區域行情、物件條件與判斷依據。", tags: ["透天厝", "價格評估", "風險分析"] },
+      { title: "房產追蹤清單", file: "property-tracker.html", group: "property", type: "管理工具", description: "用表格集中追蹤房產標的、價格與狀態，方便持續整理候選物件。", tags: ["物件追蹤", "清單管理", "本機工具"] },
+      { title: "貸款月付金試算器", file: "LoanCalculator.html", group: "property", type: "貸款工具", description: "依貸款金額、年利率與期數計算月付金、總還款與利息，並支援 CSV 匯出。", tags: ["房貸試算", "本息攤還", "CSV 匯出"] },
+      { title: "TSLA × SPCX × Optimus 投資框架", file: "TSLA_SPCX_Optimus_投資框架_查證版.html", group: "market", type: "投資框架", description: "以查證版架構拆解 Tesla、SpaceX 與 Optimus 的關聯、敘事與投資判斷。", tags: ["Tesla", "SpaceX", "Optimus"] },
+      { title: "EP701 市場主線總覽", file: "EP701.html", group: "episode", type: "股癌 EP", description: "從個股、AI 產業鏈與多重市場敘事切入的互動式重點整理。", tags: ["EP701", "AI 產業鏈", "市場敘事"] },
+      { title: "EP700 個股與 AI 產業鏈", file: "EP700.html", group: "episode", type: "股癌 EP", description: "整理個股觀察與 AI 產業鏈互動關係，提供分段式研究檢視。", tags: ["EP700", "個股研究", "AI 產業鏈"] },
+      { title: "IBKR 韓元借款利息驗證", file: "IBKR_KRW_interest_visual_report_20260804.html", group: "market", type: "查證報告", description: "針對 IBKR 韓元借款利息與相關計算進行視覺化驗證與說明。", tags: ["IBKR", "韓元借款", "利息驗證"] },
+      { title: "SK hynix Q2 2026｜ChatGPT 版", file: "SK_hynix_Q2_2026_chatgpt.html", group: "market", type: "財報分析", description: "涵蓋完整財報、EPS、本益比與預測情境的 SK hynix 研究版本。", tags: ["SK hynix", "Q2 2026", "Forecast"] },
+      { title: "SK hynix Q2 2026｜Claude 版", file: "SKhynix_Q2_2026_claude.html", group: "market", type: "財報分析", description: "SK hynix 2026 年第二季財報查證與市場分析的另一份比較版本。", tags: ["SK hynix", "財報查證", "版本比較"] },
+      { title: "投資現金水位管理", file: "investment_cash_manager.html", group: "market", type: "配置工具", description: "依市場週期評分估算現金、債券與股票配置比例，並保存本機設定。", tags: ["資產配置", "現金水位", "本機儲存"] },
+      { title: "數位財金公會認證中心", file: "login.html", group: "archive", type: "登入原型", description: "深色風格的登入與註冊介面，展示數位財金主題的認證流程。", tags: ["登入註冊", "介面原型", "深色 UI"] },
+      { title: "LinkedIn 風格個人履歷", file: "resume.html", group: "archive", type: "展示頁", description: "包含個人簡介、經歷、學歷、專案與技能的履歷展示頁。", tags: ["個人履歷", "專案展示", "互動內容"] }
     ];
 
-    let currQ = 0;
-    let eScores = { fire:0, water:0, wind:0, earth:0, light:0, dark:0 };
-    let cScores = { warrior:0, mage:0, sage:0, rogue:0 };
+    const tabs = document.getElementById("tabs");
+    const grid = document.getElementById("projectGrid");
+    const searchInput = document.getElementById("searchInput");
+    const clearSearch = document.getElementById("clearSearch");
+    const emptyState = document.getElementById("emptyState");
+    const sectionTitle = document.getElementById("sectionTitle");
+    const sectionDescription = document.getElementById("sectionDescription");
+    const resultCount = document.getElementById("resultCount");
+    let activeGroup = "property";
 
-    // ================= 1. FLOW LOGIC =================
+    document.getElementById("totalCount").textContent = projects.length;
+    document.getElementById("groupCount").textContent = Object.keys(groups).length;
 
-    function handleNewUser() {
-        alert("好的，冒險者大人，請往這邊走。");
-        showScreen('waiter-screen');
-        setTimeout(() => {
-            // 跳轉目標：會員登入頁
-            window.location.href = "https://nanglekimo.github.io/testest/login.html"; 
-        }, 3000);
-    }
-
-    function handleVeteranUser() {
-        // 因為「第一次來」表示開始測驗
-        showScreen('intro-screen');
-    }
-
-    function startQuiz() {
-        showScreen('quiz-screen');
-        renderQuestion();
-    }
-
-    // [修改] showScreen 函數，確保每次切換頁面時，舊頁面都被隱藏，新頁面被顯示
-    function showScreen(id) {
-        document.querySelectorAll('.app-container > div').forEach(div => div.classList.add('hidden'));
-        const target = document.getElementById(id);
-        target.classList.remove('hidden');
-        target.classList.add('fade-in');
-        
-        // 【新增】針對隱私權和聯絡我們頁面，確保其內容位於頂部
-        if (id === 'privacy-policy-screen' || id === 'contact-us-screen') {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        }
-    }
-
-    // ================= 2. QUIZ LOGIC =================
-    
-    // [新增] 洗牌函數
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    function renderQuestion() {
-        const q = questions[currQ];
-        document.getElementById('question-text').innerText = q.q;
-        
-        const pct = ((currQ) / questions.length) * 100;
-        document.getElementById('progress-bar').style.width = `${pct}%`;
-
-        const container = document.getElementById('options-container');
-        container.innerHTML = '';
-
-        // [修改] 複製一份選項陣列並進行隨機排序
-        const shuffledOptions = shuffleArray([...q.options]);
-
-        shuffledOptions.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'btn option-btn';
-            btn.innerText = opt.text;
-            btn.style.animation = `fadeIn 0.3s ease forwards ${idx * 0.1}s`;
-            btn.style.opacity = '0'; 
-            
-            btn.onclick = () => {
-                if(opt.e) Object.keys(opt.e).forEach(k => eScores[k] += opt.e[k]);
-                if(opt.c) Object.keys(opt.c).forEach(k => cScores[k] += opt.c[k]);
-                nextQuestion();
-            };
-            container.appendChild(btn);
+    function renderTabs() {
+      tabs.innerHTML = Object.entries(groups).map(([key, group]) => {
+        const count = projects.filter(project => project.group === key).length;
+        return `<button class="tab" type="button" role="tab" data-group="${key}" aria-selected="${key === activeGroup}" aria-controls="projectGrid">${group.label}<span class="tab-count">${count}</span></button>`;
+      }).join("");
+      tabs.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          activeGroup = tab.dataset.group;
+          searchInput.value = "";
+          updateClearButton();
+          renderTabs();
+          renderProjects();
         });
+      });
     }
 
-    function nextQuestion() {
-        currQ++;
-        if (currQ < questions.length) {
-            renderQuestion();
-        } else {
-            document.getElementById('progress-bar').style.width = '100%';
-            setTimeout(showResult, 300);
-        }
+    function cardTemplate(project) {
+      return `<article class="project">
+        <div class="preview"><span class="preview-status">正在載入預覽…</span><iframe data-src="${project.file}" title="${project.title} 預覽" loading="lazy"></iframe></div>
+        <div class="project-body">
+          <div class="meta"><span class="type ${project.group}">${project.type}</span><span class="filename" title="${project.file}">${project.file}</span></div>
+          <h3>${project.title}</h3><p class="description">${project.description}</p>
+          <div class="tags">${project.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>
+          <div class="actions"><a class="button primary" href="${project.file}">開啟完整頁面</a><a class="button secondary" href="${project.file}" target="_blank" rel="noopener" aria-label="在新分頁開啟 ${project.title}" title="在新分頁開啟">↗</a></div>
+        </div></article>`;
     }
 
-    function showResult() {
-        showScreen('result-screen');
-
-        const maxE = Object.keys(eScores).reduce((a, b) => eScores[a] > eScores[b] ? a : b);
-        const maxC = Object.keys(cScores).reduce((a, b) => cScores[a] > cScores[b] ? a : b);
-
-        const eData = elements[maxE];
-        const cData = classes[maxC];
-        
-        // NEW: Get Job Profile Key and Data
-        const jobKey = `${maxE}_${maxC}`;
-        const profileData = jobProfiles[jobKey] || {}; // Fallback in case of missing data
-
-        // UI Updates - Title
-        document.getElementById('result-icon').innerText = eData.icon;
-        document.getElementById('result-title').innerText = `${eData.name}${cData.name}`;
-
-        // UI Updates - Detailed Profile
-        document.getElementById('story-block').innerText = profileData.story || "此職業的起源故事正在撰寫中...";
-        document.getElementById('analysis-personality').innerText = profileData.personality || "未知領域，待發掘。";
-        document.getElementById('analysis-style').innerText = profileData.style || "未知領域，待發掘。";
-
-        // UI Updates - Stats
-        document.getElementById('stat-element').innerText = eData.name;
-        document.getElementById('stat-class').innerText = cData.name;
-        document.getElementById('stat-risk').innerText = (maxE === 'fire' || maxE === 'wind') ? "高 (High)" : (maxE === 'dark' ? "中 (Moderate)" : "低 (Low)");
-
-        // Solution Logic
-        let solution = "";
-        if (maxE === 'wind' || maxE === 'fire') {
-            solution = "您的屬性顯示您易受市場雜訊干擾。我們提供<b>「降噪雷達」</b>，每日過濾無效資訊，只給您 3 個關鍵情報。";
-        } else if (maxE === 'water' || maxE === 'earth') {
-            solution = "您偏向穩健，但研究耗時。我們提供<b>「深度濃縮包」</b>，5分鐘看完法人級邏輯梳理。";
-        } else if (maxE === 'dark') {
-            solution = "作為逆勢交易者，我們提供<b>「情緒量化指標」</b>，佐證您的直覺，精準捕捉轉折點。";
-        } else {
-            solution = "對於追逐願景的您，我們監控<b>「敘事基本面」</b>的變化，確保您的信仰有數據支撐。";
-        }
-        document.getElementById('result-solution').innerHTML = solution;
-        
-        // NEW: 預設展開故事區塊，讓使用者第一眼看到
-        document.querySelector('#result-screen .collapsible-card').classList.add('active');
+    function loadVisiblePreviews() {
+      grid.querySelectorAll("iframe[data-src]").forEach(frame => {
+        frame.addEventListener("load", () => frame.closest(".preview").classList.add("loaded"), { once: true });
+        frame.src = frame.dataset.src;
+        frame.removeAttribute("data-src");
+      });
     }
 
-    // ================= 3. UTILITIES & CTA LOGIC =================
-    
-    // [新增] Collapsible Card Toggle
-    function toggleCollapse(card) {
-        card.classList.toggle('active');
+    function renderProjects() {
+      const group = groups[activeGroup];
+      const query = searchInput.value.trim().toLowerCase();
+      const groupProjects = projects.filter(project => project.group === activeGroup);
+      const visibleProjects = groupProjects.filter(project => {
+        const searchable = [project.title, project.file, project.type, project.description, ...project.tags].join(" ").toLowerCase();
+        return !query || searchable.includes(query);
+      });
+      sectionTitle.textContent = group.label;
+      sectionDescription.textContent = group.description;
+      resultCount.textContent = query ? `${visibleProjects.length} / ${groupProjects.length} 個結果` : `共 ${groupProjects.length} 個頁面`;
+      grid.innerHTML = visibleProjects.map(cardTemplate).join("");
+      grid.style.display = visibleProjects.length ? "grid" : "none";
+      emptyState.style.display = visibleProjects.length ? "none" : "block";
+      loadVisiblePreviews();
     }
 
-    function handleCTA(btn) {
-        // CTA Feedback
-        btn.disabled = true;
-        btn.style.opacity = '0.7';
-        btn.innerHTML = `<span style="animation: pulse 1s infinite">跳轉中...</span>`;
-        
-        setTimeout(() => {
-            alert("✨ 系統權限確認！\n\n正在開啟傳送門，前往領取您的「專屬攻略書」。");
-            // 跳轉目標：領取攻略書頁面
-            window.location.href = "https://nanglekimo.github.io/testest/login.html";
-        }, 300);
-    }
-
-</script>
-
+    function updateClearButton() { clearSearch.style.display = searchInput.value ? "block" : "none"; }
+    searchInput.addEventListener("input", () => { updateClearButton(); renderProjects(); });
+    clearSearch.addEventListener("click", () => { searchInput.value = ""; updateClearButton(); renderProjects(); searchInput.focus(); });
+    renderTabs();
+    renderProjects();
+  </script>
 </body>
 </html>

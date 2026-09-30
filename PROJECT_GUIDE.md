@@ -1,6 +1,6 @@
 # 專案使用說明書
 
-最後更新：2026-08-10
+最後更新：2026-09-30
 
 ## 目錄
 
@@ -20,7 +20,7 @@
 
 核心使用方式：
 
-- 用 `overview.html` 快速檢視所有作品。
+- 用 `index.html` 快速檢視所有作品。
 - 保留每個 HTML 檔作為獨立作品。
 - 新增作品時同步更新總覽頁與本說明文件。
 - 每次進度更新都在修改日誌中留下紀錄。
@@ -49,15 +49,20 @@
 
 | 路徑 | 用途 | 簡述 |
 | --- | --- | --- |
-| `overview.html` | 總覽入口 | 作品集合首頁，包含搜尋、分類、作品卡片、簡短說明與預覽。 |
-| `index.html` | 互動原型 | 公會轉職鑑定系統。保留作為作品，不要直接覆蓋成總覽頁。 |
+| `index.html` | 總覽入口 | 網站正式首頁，收錄 13 個作品，以「房地產」、「股市與投資」、「股癌專區」、「舊作品集」四個頁籤分區，包含搜尋、簡述、預覽與開啟連結。 |
 | `login.html` | 互動原型 | 數位財金公會認證中心，登入/註冊 UI。Firebase 為模擬描述。 |
-| `investment_cash_manager.html` | 財務工具 | 投資現金水位管理，含市場評分、配置比例、本機儲存。 |
-| `LoanCalculator.html` | 財務工具 | 貸款月付金試算器，含 CSV 下載。 |
+| `investment_cash_manager.html` | 股市與投資 | 投資現金水位管理，含市場評分、配置比例、本機儲存。 |
+| `LoanCalculator.html` | 房地產 | 貸款月付金試算器，含 CSV 下載。 |
 | `resume.html` | 展示頁 | LinkedIn 風格履歷與互動小工具。 |
-| `IBKR_KRW_interest_visual_report_20260804.html` | 視覺化報告 | IBKR/KRW 利率主題報告。 |
-| `SKhynix_Q2_2026_claude.html` | 視覺化報告 | SK hynix Q2 2026 報告版本。 |
-| `SK_hynix_Q2_2026_chatgpt.html` | 視覺化報告 | SK hynix Q2 2026 報告版本。 |
+| `nanfeng-150-2-3f.html` | 房地產 | 桃園區南豐街住宅售價評估與銷售策略。 |
+| `project20260912001.html` | 房地產 | 清豐路透天物件價格與風險評估。 |
+| `property-tracker.html` | 房地產 | 房產標的與狀態追蹤清單。 |
+| `IBKR_KRW_interest_visual_report_20260804.html` | 股市與投資 | IBKR/KRW 借款利息驗證報告。 |
+| `SKhynix_Q2_2026_claude.html` | 股市與投資 | SK hynix Q2 2026 財報查證與市場分析版本。 |
+| `SK_hynix_Q2_2026_chatgpt.html` | 股市與投資 | SK hynix Q2 2026 完整財報與預測版本。 |
+| `TSLA_SPCX_Optimus_投資框架_查證版.html` | 股市與投資 | Tesla、SpaceX 與 Optimus 投資框架查證版。 |
+| `EP700.html` | 股癌專區 | 個股與 AI 產業鏈互動式簡報。 |
+| `EP701.html` | 股癌專區 | 個股、AI 產業鏈與多重市場敘事簡報。 |
 | `img/` | 圖片素材 | 既有作品使用的圖片資料夾。 |
 | `PROJECT_RECORD.md` | 專案紀錄 | 整理目前討論、已完成成果與重要決策。 |
 | `PROJECT_GUIDE.md` | 使用說明書 | 本文件。規範後續維護方式、目錄與修改日誌。 |
@@ -68,12 +73,12 @@
 最推薦的檢視入口：
 
 ```text
-overview.html
+index.html
 ```
 
 可用方式：
 
-1. 直接用瀏覽器打開 `overview.html`。
+1. 直接用瀏覽器打開 `index.html`。
 2. 或在本機資料夾啟動簡單伺服器後瀏覽。
 
 若直接用 `file://` 打開時，部分瀏覽器可能限制內嵌預覽或外部資源；若預覽不完整，可改用本機伺服器方式。
@@ -84,11 +89,11 @@ overview.html
 
 1. 把新的 `.html` 檔放在專案根目錄，或放在清楚命名的子資料夾。
 2. 確認新檔案可以獨立開啟。
-3. 更新 `overview.html` 內的 `projects` 清單：
+3. 更新 `index.html` 內的 `projects` 清單：
    - `title`：作品名稱
    - `file`：檔案路徑
-   - `category`：分類代碼
-   - `categoryLabel`：分類顯示名稱
+   - `group`：頁籤分類代碼；以 `EP` 開頭的頁面使用 `episode`
+   - `type`：卡片顯示的內容類型
    - `description`：一到兩句簡述
    - `notes`：幾個短標籤
 4. 更新本文件的「檔案目錄與簡述」。
@@ -100,8 +105,8 @@ overview.html
 
 修改既有 HTML 頁面時：
 
-1. 先確認這個檔案是否被 `overview.html` 收錄。
-2. 若作品名稱、用途、分類或描述有改，更新 `overview.html`。
+1. 先確認這個檔案是否被 `index.html` 收錄。
+2. 若作品名稱、用途、分類或描述有改，更新 `index.html`。
 3. 若修改影響專案定位、維護方式或使用方式，更新本文件。
 4. 若修改是重大成果或方向變更，更新 `PROJECT_RECORD.md`。
 5. 在「修改日誌」新增一筆紀錄。
@@ -118,9 +123,9 @@ overview.html
 
 | 情境 | 要更新的文件 |
 | --- | --- |
-| 新增作品 | `overview.html`、`PROJECT_GUIDE.md`、`PROJECT_RECORD.md` |
-| 移除作品 | `overview.html`、`PROJECT_GUIDE.md`、必要時 `PROJECT_RECORD.md` |
-| 修改作品說明或分類 | `overview.html`、`PROJECT_GUIDE.md` |
+| 新增作品 | `index.html`、`PROJECT_GUIDE.md`、`PROJECT_RECORD.md` |
+| 移除作品 | `index.html`、`PROJECT_GUIDE.md`、必要時 `PROJECT_RECORD.md` |
+| 修改作品說明或分類 | `index.html`、`PROJECT_GUIDE.md` |
 | 改變專案方向 | `PROJECT_RECORD.md`、`PROJECT_GUIDE.md` |
 | 改變 AI 接手流程 | `AI_HANDOFF.md`、`PROJECT_GUIDE.md`、`PROJECT_RECORD.md` |
 | 推送或完成一個里程碑 | `PROJECT_RECORD.md`，並在本文件修改日誌登錄 |
@@ -131,7 +136,7 @@ overview.html
 - 文件要反映目前實際工作區狀態。
 - 不要把已刪除或不存在的檔案寫成仍在使用。
 - 若有不確定狀態，標記為「待確認」，不要硬寫成既定事實。
-- 不要覆蓋 `index.html`，除非使用者明確要求改變入口頁策略。
+- `index.html` 是正式總覽入口；不要把單一作品覆蓋到此檔案。
 
 ## Git 與推送流程
 
@@ -157,6 +162,16 @@ main
 ```
 
 ## 修改日誌
+
+### 2026-09-30
+
+- 重新盤點專案內全部 HTML 頁面，確認總覽頁以外共有 14 個可檢視頁面。
+- 重做 `overview.html`，移除已不存在的舊頁面，補入目前所有房地產與投資研究頁面。
+- 將總覽改為「房地產」、「股市與投資」、「舊作品集」三個獨立頁籤，避免不同用途的內容混在一起。
+- 各頁籤保留搜尋、簡短說明、標籤、即時預覽與完整頁面連結；預覽只載入目前頁籤內容以降低負擔。
+- 同步更新 `PROJECT_GUIDE.md`、`PROJECT_RECORD.md` 與 `AI_HANDOFF.md`。
+- 依使用者指示刪除原 `index.html` 公會轉職鑑定系統，將重做後的總覽頁改為新的 `index.html` 正式首頁；目前收錄 13 個作品。
+- 新增「股癌專區」第四個頁籤，將 `EP700.html`、`EP701.html` 及後續所有 EP 開頭頁面與一般股市研究分開管理。
 
 ### 2026-08-10
 
