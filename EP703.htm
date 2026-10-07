@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EP703 逐字稿重點、個股查證、供應鏈敘事與風險框架。">
+  <title>EP703｜高檔行情、供應鏈反轉與股票內部避險</title>
+  <style>
+    :root {
+      --paper:#f4f2ed; --surface:#fff; --ink:#111312; --muted:#616762; --line:#d4d7d2;
+      --green:#25a66a; --green-soft:#dff3e9; --red:#d84b3e; --red-soft:#f8e1dd;
+      --cyan:#197a9c; --cyan-soft:#dceff5; --yellow:#e6b63d; --yellow-soft:#f8edca;
+      --purple:#7553a6; --purple-soft:#ebe3f4; --shadow:0 12px 34px rgba(18,22,19,.09);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-width:320px;background:var(--paper);color:var(--ink);font-family:Inter,"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+    button,a{font:inherit} a{color:inherit} button{color:inherit}.wrap{width:min(1220px,calc(100% - 36px));margin:auto}
+    .top{position:sticky;top:0;z-index:20;background:rgba(244,242,237,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .top-inner{display:flex;align-items:center;gap:16px;min-height:58px}.brand{font-weight:900;letter-spacing:.08em}.top nav{display:flex;gap:4px;overflow:auto;margin-left:auto}.top nav a{padding:8px 10px;border-radius:5px;text-decoration:none;color:var(--muted);font-size:13px;white-space:nowrap}.top nav a:hover{background:#e7e8e4;color:var(--ink)}
+    .download{border:0;border-radius:5px;background:var(--ink);color:#fff;padding:9px 12px;font-weight:800;cursor:pointer;white-space:nowrap}
+    .hero{padding:74px 0 42px;border-bottom:1px solid var(--line);overflow:hidden}.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr);gap:44px;align-items:end}
+    .eyebrow{margin:0 0 12px;color:var(--red);font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.hero h1{margin:0;max-width:900px;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:0}.lead{max-width:790px;margin:20px 0 0;color:#414742;font-size:clamp(16px,1.6vw,21px);line-height:1.7}
+    .hero-side{border-left:5px solid var(--green);padding:5px 0 5px 22px}.hero-side strong{display:block;font-size:45px;line-height:1}.hero-side p{margin:8px 0 0;color:var(--muted);line-height:1.55}
+    .ticker{display:flex;gap:10px;margin-top:34px;overflow:hidden}.ticker span{display:inline-flex;align-items:center;min-height:32px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+    section{padding:58px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:220px 1fr;gap:26px;margin-bottom:26px}.section-no{color:var(--red);font-weight:900;letter-spacing:.12em}.section-head h2{margin:0;font-size:clamp(28px,3.6vw,47px);line-height:1.08;letter-spacing:0}.section-head p{margin:12px 0 0;max-width:790px;color:var(--muted);line-height:1.7}
+    .summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.summary-card{min-height:210px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:7px;box-shadow:var(--shadow)}.summary-card b{display:block;color:var(--red);font-size:12px}.summary-card h3{margin:18px 0 9px;font-size:20px;line-height:1.25}.summary-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+    .cite{display:inline-grid;place-items:center;min-width:30px;height:25px;margin-left:5px;padding:0 7px;border:1px solid currentColor;border-radius:4px;background:transparent;color:var(--cyan);font-size:11px;font-weight:900;cursor:pointer;vertical-align:middle}.cite:hover{background:var(--cyan);color:#fff}
+    .chain{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;counter-reset:chain}.chain-node{position:relative;min-height:150px;padding:18px;background:#171a18;color:#fff;border-radius:7px}.chain-node:not(:last-child)::after{content:"→";position:absolute;right:-23px;top:50%;color:var(--red);font-size:25px;font-weight:900;transform:translateY(-50%)}.chain-node small{color:#94a099;font-weight:800}.chain-node strong{display:block;margin:12px 0 7px;font-size:19px}.chain-node span{color:#c6cec9;font-size:13px;line-height:1.55}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:7px}.panel.good{border-top:5px solid var(--green)}.panel.bad{border-top:5px solid var(--red)}.panel h3{margin:0 0 10px;font-size:23px}.panel p,.panel li{color:var(--muted);line-height:1.65}.panel ul{padding-left:20px}.signal{display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:center;margin-top:12px}.signal-label{font-size:12px;font-weight:900}.track{height:12px;background:#e5e7e3;border-radius:2px;overflow:hidden}.fill{height:100%;background:var(--green)}.fill.red{background:var(--red)}.fill.yellow{background:var(--yellow)}
+    .stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stock{display:flex;min-height:225px;flex-direction:column;padding:20px;background:#fff;border:1px solid var(--line);border-radius:7px}.stock-top{display:flex;justify-content:space-between;gap:10px}.ticker-code{font-size:26px;font-weight:950}.status{height:25px;padding:5px 8px;border-radius:4px;background:var(--green-soft);color:#176c48;font-size:11px;font-weight:900}.status.context{background:var(--yellow-soft);color:#725615}.status.risk{background:var(--red-soft);color:#8e2f28}.stock h3{margin:13px 0 7px;font-size:18px}.stock p{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.65}.stock .why{margin-top:auto;padding-top:11px;border-top:1px solid var(--line);font-size:12px;line-height:1.55}.stock .why b{color:var(--red)}
+    .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{padding:19px;background:#171a18;color:#fff;border-radius:7px}.metric span{display:block;color:#a9b3ad;font-size:12px}.metric strong{display:block;margin:9px 0 6px;font-size:31px}.metric small{color:#c8cfcb;line-height:1.5}.metric.accent{background:var(--red)}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.compare-card{padding:22px;background:#fff;border:1px solid var(--line);border-radius:7px}.compare-card h3{display:flex;justify-content:space-between;gap:12px;margin:0 0 17px}.bar-row{display:grid;grid-template-columns:108px 1fr 76px;gap:10px;align-items:center;margin:12px 0;font-size:12px}.bar{height:18px;background:#e7e9e5}.bar i{display:block;height:100%;background:var(--purple)}.bar-row b{text-align:right}
+    .truth-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line)}.truth-table th,.truth-table td{padding:15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}.truth-table th{font-size:12px;color:var(--muted)}.truth-table td{font-size:13px;line-height:1.55}.truth-table tr:last-child td{border-bottom:0}.truth{display:inline-block;padding:4px 7px;border-radius:4px;font-size:10px;font-weight:900}.truth.ok{background:var(--green-soft);color:#176c48}.truth.partial{background:var(--yellow-soft);color:#725615}.truth.no{background:var(--red-soft);color:#8e2f28}
+    .playbook{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{padding:19px;background:#fff;border:1px solid var(--line);border-radius:7px}.step em{display:grid;width:32px;height:32px;place-items:center;background:var(--ink);color:#fff;border-radius:50%;font-style:normal;font-weight:900}.step h3{margin:18px 0 8px}.step p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+    .note{margin-top:22px;padding:18px 20px;background:var(--cyan-soft);border-left:5px solid var(--cyan);line-height:1.65}.warning{background:var(--red-soft);border-left-color:var(--red)}
+    footer{padding:36px 0 60px}.footer-grid{display:grid;grid-template-columns:1fr auto;gap:20px;color:var(--muted);font-size:12px;line-height:1.7}
+    .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(12,14,13,.76);backdrop-filter:blur(8px)}.modal.open{display:flex}.dialog{width:min(720px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:8px;box-shadow:0 28px 100px #0007}.dialog-head{position:sticky;top:0;display:flex;justify-content:space-between;gap:16px;padding:18px 20px;background:#fff;border-bottom:1px solid var(--line)}.dialog-head h2{margin:0;font-size:20px}.close{width:34px;height:34px;border:0;border-radius:50%;background:#eceeeb;font-size:22px;cursor:pointer}.dialog-body{padding:20px}.source-type{display:inline-block;margin-bottom:12px;padding:5px 8px;border-radius:4px;background:var(--purple-soft);color:var(--purple);font-size:11px;font-weight:900}.dialog-body p{color:#454b46;line-height:1.7}.excerpt{padding:15px;background:#f0f1ee;border-left:4px solid var(--yellow);font-size:13px;line-height:1.7}.source-link{display:inline-flex;margin-top:14px;padding:10px 12px;border-radius:5px;background:var(--ink);color:#fff;text-decoration:none;font-weight:800}.hidden{display:none!important}
+    @media(max-width:1000px){.summary-grid{grid-template-columns:repeat(3,1fr)}.chain{grid-template-columns:1fr 1fr}.chain-node:not(:last-child)::after{display:none}.stock-grid{grid-template-columns:1fr 1fr}.metric-grid,.playbook{grid-template-columns:1fr 1fr}}
+    @media(max-width:720px){.wrap{width:min(100% - 24px,1220px)}.top nav{display:none}.hero{padding:45px 0 32px}.hero-grid,.section-head,.split,.compare,.footer-grid{grid-template-columns:1fr}.hero-side{margin-top:8px}.summary-grid,.stock-grid,.metric-grid,.playbook,.chain{grid-template-columns:1fr}.summary-card{min-height:0}.section-head{gap:8px}.ticker{overflow:auto}.truth-table{display:block;overflow-x:auto}.signal{grid-template-columns:1fr}.bar-row{grid-template-columns:84px 1fr 60px}section{padding:44px 0}.download{margin-left:auto}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="brand">EP703 / RESEARCH</div>
+      <nav aria-label="頁面章節">
+        <a href="#summary">摘要</a><a href="#cycle">供應鏈</a><a href="#stocks">個股</a><a href="#neocloud">NeoCloud</a><a href="#verify">查證</a><a href="#playbook">框架</a>
+      </nav>
+      <button class="download" id="downloadPage" type="button">下載 HTML</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">EP703 · Transcript to Thesis · 2026-10-08</p>
+            <h1>高檔行情、供應鏈反轉與股票內部避險</h1>
+            <p class="lead">這一集真正的核心不是預測指數終點，而是在多頭後段先想好退路：砍掉沒有跟上市場的弱股、提高流動性，再尋找「缺貨結束後才會受惠」的反向供應鏈。</p>
+          </div>
+          <aside class="hero-side">
+            <strong>5</strong>
+            <p>條完整敘事鏈<br>13 個明確公司／標的語境<br>14 組逐字稿與外部查證來源</p>
+          </aside>
+        </div>
+        <div class="ticker" aria-label="本集提及標的">
+          <span>2330 台積電</span><span>2454 聯發科</span><span>3105 穩懋</span><span>3443 創意</span><span>3491 昇達科</span><span>NVDA</span><span>NBIS</span><span>CRWV</span><span>SpaceXAI</span><span>5274 信驊</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="summary">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">01 / EXECUTIVE MAP</div><div><h2>先抓住五件事</h2><p>節目內容、外部查證與本報告推論分層呈現。「被提及」不等於持有，也不等於推薦。</p></div></div>
+        <div class="summary-grid">
+          <article class="summary-card"><b>敘事 01</b><h3>AI 還強，週期仍在</h3><p>台積電被當成台股估值錨；最新官方展望仍支持多年 AI 需求，但不代表供應鏈永遠沒有修正。<button class="cite" data-source="s1">01</button><button class="cite" data-source="s6">06</button></p></article>
+          <article class="summary-card"><b>敘事 02</b><h3>缺貨不是永續狀態</h3><p>記憶體與零組件漲價先肥上游、傷下游；價格拉平時，量能型公司可能由受害者變受惠者。<button class="cite" data-source="s2">02</button><button class="cite" data-source="s7">07</button></p></article>
+          <article class="summary-card"><b>敘事 03</b><h3>弱股先於指數說話</h3><p>大盤創高但個股連波段高都過不了，節目主張先減碼，而不是期待無限補漲。<button class="cite" data-source="s3">03</button></p></article>
+          <article class="summary-card"><b>敘事 04</b><h3>現金是選擇權</h3><p>不追求滿倉對沖；降低槓桿、保留流動性，讓下一次快速修正時仍能決策。<button class="cite" data-source="s3">03</button><button class="cite" data-source="s12">12</button></p></article>
+          <article class="summary-card"><b>敘事 05</b><h3>好運要靠持續判斷留下</h3><p>NVDA、NBIS 與 SpaceXAI 的例子都指向同一點：最初理由可變，持有理由必須持續更新。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s8">08</button></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cycle">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">02 / SUPPLY CHAIN</div><div><h2>缺貨漲價如何變成反轉交易</h2><p>主持人的想法不是直接放空強勢上游，而是預先建立一個觀察池：當成本漲勢降溫、供貨恢復、終端量回來時，下游獲利彈性可能轉正。</p></div></div>
+        <div class="chain" aria-label="供應鏈因果鏈">
+          <div class="chain-node"><small>STEP 1</small><strong>AI 搶產能</strong><span>記憶體與高階零組件優先流向伺服器。</span></div>
+          <div class="chain-node"><small>STEP 2</small><strong>消費端成本升</strong><span>PC／手機 BOM 變貴，品牌漲價或吸收毛利。</span></div>
+          <div class="chain-node"><small>STEP 3</small><strong>需求被破壞</strong><span>售價上升、規格下修、採購轉保守，出貨量承壓。</span></div>
+          <div class="chain-node"><small>STEP 4</small><strong>價格漲勢降溫</strong><span>供需緊張緩解，不一定要立刻跌價。</span></div>
+          <div class="chain-node"><small>STEP 5</small><strong>量能型公司修復</strong><span>成本壓力下降，加上出貨恢復，營運槓桿反向展開。</span></div>
+        </div>
+        <div class="split" style="margin-top:18px">
+          <article class="panel good"><h3>目前已被資料支持</h3><p>TrendForce 估 2026 Q3 傳統 DRAM 合約價季增 13–18%、NAND 季增 10–15%；同時指出消費者承受力已接近上限、筆電價格上升將壓抑全年出貨。<button class="cite" data-source="s7">07</button></p><div class="signal"><span class="signal-label">DRAM Q3 漲幅</span><div class="track"><div class="fill" style="width:72%"></div></div></div><div class="signal"><span class="signal-label">NAND Q3 漲幅</span><div class="track"><div class="fill yellow" style="width:56%"></div></div></div></article>
+          <article class="panel bad"><h3>仍然只是待驗證訊號</h3><p>「價格停止上漲＝下游立刻大賺」太簡化。還要同時看到庫存天數下降、終端出貨回升、品牌促銷減少，以及毛利率連續改善。</p><ul><li>價格只是不再惡化，不代表需求已回來。</li><li>下游可能先清高價庫存，財報改善有時間差。</li><li>股票內部反向配置仍有共同市場 Beta。</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stocks">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">03 / STOCK MAP</div><div><h2>附件提及個股：真正的語境</h2><p>把「核心論點」、「市場例子」、「聽眾故事」分開。這張表最重要的用途，是防止把一句口語提及加工成不存在的薦股。</p></div></div>
+        <div class="stock-grid">
+          <article class="stock"><div class="stock-top"><span class="ticker-code">2330</span><span class="status">核心錨點</span></div><h3>台積電 TSMC</h3><p>主持人以未來 1–3 年 EPS 與 AI 訂單能見度作為台股指數的「定海神針」。官方 Q2 2026 法說預估全年美元營收成長略高於 40%，AI 需求仍極強。<button class="cite" data-source="s1">01</button><button class="cite" data-source="s6">06</button></p><div class="why"><b>觀察：</b>AI 需求、先進製程利用率、資本支出與客戶集中。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">2454</span><span class="status context">趨勢例子</span></div><h3>聯發科 MediaTek</h3><p>與台積電、穩懋、創意、昇達科並列，僅用來說明大型／中型股的走勢是市場集合意志，非單一主力可任意畫線。<button class="cite" data-source="s4">04</button><button class="cite" data-source="s13">13</button></p><div class="why"><b>不是：</b>本集沒有提出聯發科營運或估值論證。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">3105</span><span class="status context">趨勢例子</span></div><h3>穩懋 WIN Semi</h3><p>逐字稿辨識為「文貌」，依上下文與公司名校正為穩懋。只出現在「中型股不易被單一主力決定方向」的例子。<button class="cite" data-source="s4">04</button><button class="cite" data-source="s14">14</button></p><div class="why"><b>限制：</b>未提供產業基本面主張，不應延伸成買賣訊號。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">3443</span><span class="status context">趨勢例子</span></div><h3>創意 GUC</h3><p>同樣僅被列為中型股例子。節目後段更明確主張：突破只是第一層，長期仍要回到 EPS 成長趨勢。<button class="cite" data-source="s4">04</button></p><div class="why"><b>觀察：</b>先進 ASIC 專案、NRE 與量產收入節奏。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">3491</span><span class="status context">趨勢例子</span></div><h3>昇達科 UMT</h3><p>列在市場集合意志的例子中，沒有個別公司論證；不可把「被點名」直接等同推薦。<button class="cite" data-source="s4">04</button></p><div class="why"><b>觀察：</b>衛星通訊題材與實際營收／獲利落差。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">NVDA</span><span class="status">持有哲學</span></div><h3>NVIDIA</h3><p>主持人回顧 2018 年買的是顯卡故事，後來公司變成 AI 核心股；真正的能力不是當初猜中，而是每一天重新決定是否續抱。最新 Q2 FY2027 資料中心營收 890 億美元、年增 117%。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s8">08</button></p><div class="why"><b>風險：</b>高基期、供應限制、客戶資本支出與中國營收限制。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">NBIS</span><span class="status risk">聽眾案例</span></div><h3>Nebius</h3><p>聽眾從 Yandex 重組後持有 NBIS，成為高報酬交易。公司 Q2 2026 營收 5.823 億美元，但半年設備與無形資產採購達 81.3 億美元，成長高度依賴融資與建置執行。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s10">10</button></p><div class="why"><b>重點：</b>成長是真的，資本密集與稀釋／負債風險也是真的。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">CRWV</span><span class="status risk">風險對照</span></div><h3>CoreWeave</h3><p>主持人明確表示不特別喜歡 NeoCloud 題材。CoreWeave Q2 2026 營收 25.75 億美元，但淨利息費用 6.40 億、淨損 6.26 億美元，凸顯規模成長背後的資金成本。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s11">11</button></p><div class="why"><b>觀察：</b>backlog 轉營收、利息覆蓋、客戶集中與 GPU 殘值。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">PRIVATE</span><span class="status context">推論敘事</span></div><h3>SpaceXAI</h3><p>主持人假設 SpaceX 未來可能因 AI／NeoCloud 賺更多錢。外部資料只確認 SpaceXAI 將部署 NVIDIA Vera CPU 與 Vera Rubin、擴大 Grok 基礎設施；「成為最大 NeoCloud」仍是推測。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s9">09</button></p><div class="why"><b>注意：</b>SpaceXAI 非一般公開市場可直接交易標的。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">5274</span><span class="status context">軼事</span></div><h3>信驊 ASPEED</h3><p>節目轉述有人忘記自己持有十張信驊，後來才發現足以退休；這是「忘記持有才是真靠賽」的笑談，不是基本面分析。<button class="cite" data-source="s5">05</button></p><div class="why"><b>不是：</b>本集沒有針對信驊提出買賣觀點。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">AMD</span><span class="status context">非投資內容</span></div><h3>AMD</h3><p>只出現在聽眾暱稱「AMD 帥潮」的生日祝福，沒有任何 AMD 公司、產品或股票論點。</p><div class="why"><b>結論：</b>不列入本集投資敘事。</div></article>
+          <article class="stock"><div class="stock-top"><span class="ticker-code">US TSY</span><span class="status context">配置工具</span></div><h3>美國公債</h3><p>節目把股債配置視為合理但非完美的緩衝。研究顯示股債相關性會隨通膨與景氣狀態改變，債券不是每一段都即時反向。<button class="cite" data-source="s1">01</button><button class="cite" data-source="s12">12</button></p><div class="why"><b>重點：</b>分散效果不等於保證對沖。</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="neocloud">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">04 / NEOCLOUD</div><div><h2>高成長，也高度吃資本</h2><p>Nebius 與 CoreWeave 都證明 AI 算力需求真實存在；但需求成立與股票報酬成立之間，還隔著建置成本、融資、折舊、利息與估值。</p></div></div>
+        <div class="metric-grid">
+          <div class="metric"><span>NBIS Q2 2026 營收</span><strong>$582M</strong><small>2025 同期 $105M</small></div>
+          <div class="metric accent"><span>NBIS H1 資產採購</span><strong>$8.13B</strong><small>遠高於同期營收規模</small></div>
+          <div class="metric"><span>CRWV Q2 2026 營收</span><strong>$2.58B</strong><small>年增約 112%</small></div>
+          <div class="metric accent"><span>CRWV Q2 淨利息費用</span><strong>$640M</strong><small>約為單季營收 25%</small></div>
+        </div>
+        <div class="compare">
+          <article class="compare-card"><h3><span>Nebius</span><button class="cite" data-source="s10">10</button></h3><div class="bar-row"><span>營收</span><div class="bar"><i style="width:10%"></i></div><b>0.58B</b></div><div class="bar-row"><span>Q2 資產採購</span><div class="bar"><i style="width:100%"></i></div><b>5.66B</b></div><div class="bar-row"><span>期末現金</span><div class="bar"><i style="width:100%"></i></div><b>8.04B</b></div><p>用大量資金先建容量，再等待合約轉成收入；執行速度與融資條件是核心變數。</p></article>
+          <article class="compare-card"><h3><span>CoreWeave</span><button class="cite" data-source="s11">11</button></h3><div class="bar-row"><span>營收</span><div class="bar"><i style="width:100%"></i></div><b>2.58B</b></div><div class="bar-row"><span>淨利息費用</span><div class="bar"><i style="width:25%"></i></div><b>0.64B</b></div><div class="bar-row"><span>淨損</span><div class="bar"><i style="width:24%"></i></div><b>0.63B</b></div><p>backlog 很大，但必須持續把容量準時上線，並讓營業現金流超過利息與資本支出。</p></article>
+        </div>
+        <div class="note warning"><b>邏輯斷點：</b>「AI 算力需求強」只能證明產業需求，不會自動證明每一家 NeoCloud 的股東報酬。若融資成本、折舊或稀釋速度超過單位算力經濟改善，營收高速成長仍可能沒有足夠自由現金流。</div>
+      </div>
+    </section>
+
+    <section id="verify">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">05 / FACT CHECK</div><div><h2>哪些成立，哪些還只是故事</h2><p>把附件的說法拆成可驗證命題，避免用一個好故事包住所有不確定性。</p></div></div>
+        <table class="truth-table">
+          <thead><tr><th>命題</th><th>判定</th><th>查證與補充</th></tr></thead>
+          <tbody>
+            <tr><td>AI 訂單不會立刻雪崩</td><td><span class="truth ok">目前支持</span></td><td>台積電 Q2 法說稱 AI 需求極強，2026 全年美元營收成長略高於 40%；NVIDIA Q2 FY27 資料中心營收年增 117%。<button class="cite" data-source="s6">06</button><button class="cite" data-source="s8">08</button></td></tr>
+            <tr><td>記憶體漲價正在傷害終端需求</td><td><span class="truth ok">已出現</span></td><td>TrendForce 指出筆電零售價上升、全年出貨承壓，智慧手機品牌也因 LPDRAM 成本轉保守。<button class="cite" data-source="s7">07</button></td></tr>
+            <tr><td>缺貨結束後，下游量能股會反轉</td><td><span class="truth partial">合理待驗證</span></td><td>方向合理，但需等價格、庫存、出貨與毛利率共同確認；目前記憶體仍然緊張，只是漲幅降溫。</td></tr>
+            <tr><td>股票內部反向配置等同避險</td><td><span class="truth no">不完全成立</span></td><td>同屬股票資產仍承擔市場流動性與風險偏好衝擊。這是因子分散，不是保證反向的對沖。</td></tr>
+            <tr><td>SpaceXAI 可能成為最大 NeoCloud</td><td><span class="truth partial">方向有跡象</span></td><td>已確認擴大 Vera Rubin 與 Grok AI 基礎設施；「最大」與可獨立變現的 NeoCloud 商業模式尚未由公司證實。<button class="cite" data-source="s9">09</button></td></tr>
+            <tr><td>大盤新高而個股不漲，必然會崩</td><td><span class="truth no">非必然</span></td><td>這是風控訊號，不是統計必然。弱勢股可能補漲，也可能成為下一次修正的高 Beta 落後者。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="playbook">
+      <div class="wrap">
+        <div class="section-head"><div class="section-no">06 / PLAYBOOK</div><div><h2>把敘事變成可執行檢查表</h2><p>這不是買賣建議，而是把節目的風控思路改寫成可以重複檢查的流程。</p></div></div>
+        <div class="playbook">
+          <article class="step"><em>1</em><h3>強弱分層</h3><p>大盤創高時，標記仍低於月線、季線或連波段高都無法突破的持股；先問基本面是否同步變差。</p></article>
+          <article class="step"><em>2</em><h3>降低共同風險</h3><p>賣弱股後不必立刻追最強股。先降低槓桿、提高現金，保留下一次事件的行動空間。</p></article>
+          <article class="step"><em>3</em><h3>建立反轉觀察池</h3><p>搜尋曾因 CPU、記憶體與零組件漲價而下修出貨或毛利的公司，但不在價格尚未止穩前預設轉機。</p></article>
+          <article class="step"><em>4</em><h3>等四個確認</h3><p>成本漲幅趨緩、庫存下降、出貨回升、毛利改善。至少兩項連續出現，再判斷反轉是否進入財報。</p></article>
+        </div>
+        <div class="note"><b>本集最值得留下的一句話：</b>不是要猜中哪一天結束，而是不要等到流動性消失後，才第一次思考自己要怎麼退。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-grid"><div>EP703 逐字稿整理與外部查證｜資料檢核日：2026-10-08<br>逐字稿為自動辨識文字，已依上下文修正明顯公司名，但仍可能存在辨識誤差。</div><div>研究用途，不構成投資建議。<br>所有數字請以公司最新公告為準。</div></div></footer>
+
+  <div class="modal" id="sourceModal" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
+    <div class="dialog"><div class="dialog-head"><h2 id="sourceTitle">出處與補充</h2><button class="close" id="closeModal" type="button" aria-label="關閉">×</button></div><div class="dialog-body" id="sourceBody"></div></div>
+  </div>
+
+  <script>
+    const sources = {
+      s1:{type:"附件逐字稿",title:"市場新高、台積電估值錨與股債配置",meta:"EP703 逐字稿 L508–618",excerpt:"主持人以台積電未來 1–3 年 EPS 作為台股衡量基準；同時提醒供應鏈狂潮終會修正，並討論股債配置只能提供長期緩衝，不保證短期反向。",note:"逐字稿中的指數數值屬口語／自動辨識內容，本報告不以它作即時行情背書。"},
+      s2:{type:"附件逐字稿",title:"缺貨受害者轉為供應恢復受惠者",meta:"EP703 逐字稿 L621–718",excerpt:"記憶體與零組件持續漲價時，靠出貨量的公司受害；價格拉平甚至下跌、供貨恢復後，這些公司可能成為主要受惠者。",note:"主持人明確表示不在節目點名具體供應鏈標的，因此本報告也不替他補造薦股名單。"},
+      s3:{type:"附件逐字稿",title:"大盤創高下的弱股淘汰與現金部位",meta:"EP703 逐字稿 L722–1000",excerpt:"大盤創高但個股連波段新高都無法突破時，主持人偏向減碼；賣出後不一定追動能，可能保留現金並降低槓桿，以免修正時失去流動性。",note:"這是個人風控框架，不是保證有效的機械交易規則。"},
+      s4:{type:"附件逐字稿",title:"趨勢、集合意志與基本面",meta:"EP703 逐字稿 L1113–1330",excerpt:"台積電、聯發科、穩懋、創意、昇達科被列為大型／中型標的例子，用來說明單一主力很難決定方向；長期仍要回到 EPS 成長趨勢。",note:"逐字稿的「文貌」依公司名與上下文校正為「穩懋」。"},
+      s5:{type:"附件逐字稿",title:"NBIS、NVIDIA、信驊與 SpaceXAI 的持有理由",meta:"EP703 逐字稿 L2032–2160",excerpt:"聽眾談 Yandex 重組後成為 NBIS 的高報酬；主持人以 2018 年買 NVIDIA 顯卡故事、後來轉為 AI 股為例，說明每天續抱都是新決定，並延伸 SpaceXAI／NeoCloud 想像。",note:"CoreWeave、Nebius 的風險是主持人主觀看法；SpaceXAI 成為最大 NeoCloud 是假設，不是公司財測。"},
+      s6:{type:"公司官方資料",title:"TSMC 2026 Q2 Earnings Call",meta:"2026-07-16｜TSMC Investor Relations",excerpt:"TSMC 表示 AI 需求持續極強，將 2026 全年美元營收成長預估調整為略高於 40%，並因長期需求提高資本支出與產能。",note:"支持 AI 需求仍強，但不代表估值不會修正或供應鏈沒有週期。",url:"https://investor.tsmc.com/schinese/encrypt/files/encrypt_file/reports/2026-07/547d1696765e05ce3adb81c108ce1c8c1682b80c/TSMC%202Q26%20Transcript.pdf"},
+      s7:{type:"產業研究",title:"AI Server Demand Continues to Support Memory Prices in 3Q26",meta:"2026-07-03｜TrendForce",excerpt:"傳統 DRAM 合約價預估季增 13–18%、NAND 季增 10–15%；高價已逼近消費市場承受上限，筆電與手機出貨受到壓力。",note:"此資料支持節目的成本傳導邏輯；但截至 Q3 供應仍緊，尚非全面價格反轉。",url:"https://www.trendforce.com/presscenter/news/20260703-13134.html"},
+      s8:{type:"公司官方資料",title:"NVIDIA Q2 FY2027 Results",meta:"2026-08-26｜NVIDIA Investor Relations",excerpt:"季度營收 962 億美元、年增 106%；資料中心營收 890 億美元、年增 117%。Vera Rubin 已進入量產。",note:"數據支持 AI 基礎設施需求，但高成長基期、地緣限制與資本支出循環仍是風險。",url:"https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/"},
+      s9:{type:"公司新聞稿",title:"SpaceXAI Adopts NVIDIA Vera CPU",meta:"2026-08-24｜NVIDIA Newsroom",excerpt:"SpaceXAI 將部署 Vera CPU 與 Vera Rubin，擴大 Grok 的 agentic AI 基礎設施，並規劃把加速運算延伸到太空。",note:"確認 AI 基礎設施方向；沒有證明 SpaceXAI 將以公開 NeoCloud 服務成為最大業者。",url:"https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale"},
+      s10:{type:"公司官方財報",title:"Nebius Q2 2026 Financial Results",meta:"2026-08-12｜Nebius Group",excerpt:"Q2 營收 5.823 億美元、調整後 EBITDA 2.362 億；半年設備與無形資產採購 81.303 億，期末現金 80.421 億，非流動負債 84.99 億。",note:"成長與正向 EBITDA 並存，但資本支出、融資與執行風險不可省略。",url:"https://nebius.com/financials"},
+      s11:{type:"公司官方財報",title:"CoreWeave Q2 2026 Results",meta:"2026-08-11｜CoreWeave Investor Relations",excerpt:"Q2 營收 25.75 億美元、淨利息費用 6.40 億、淨損 6.26 億；backlog 約 1,040 億美元。",note:"backlog 是需求證據，但仍受服務交付與容量可用條件約束。",url:"https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Second-Quarter-2026-Results/default.aspx"},
+      s12:{type:"研究資料",title:"Stock–bond correlation is state dependent",meta:"Federal Reserve research",excerpt:"股票與債券的相關性會隨通膨、景氣與風險事件改變；債券可提供分散，但不保證每一段都是即時、完全的股票對沖。",note:"因此節目對股債配置的保留是合理的，但『美債穩定配息』仍需考慮利率與匯率波動。",url:"https://www.federalreserve.gov/newsevents/speech/files/clarida20191112a.pdf"},
+      s13:{type:"公司官方入口",title:"MediaTek Investor Relations",meta:"聯發科投資人關係",excerpt:"提供 2026 季度法說、月營收與財務資料。",note:"本集只把聯發科列為市場趨勢例子，沒有提出公司基本面結論。",url:"https://www.mediatek.com/investor-relations/financial-information"},
+      s14:{type:"名稱與代號核對",title:"TWSE／TPEx listed company reference",meta:"臺灣證券交易所公司治理評鑑資料",excerpt:"官方名錄列示 3105 WIN（穩懋）、3443 GUC（創意）等公司代號，用於修正逐字稿辨識。",note:"此來源只用於名稱核對，不代表投資評等。",url:"https://cgc.twse.com.tw/static/20260430/8a828e179dd8817f019ddd4bfb550001_2025_Corporate_Governance_Evaluation_Results_in_Taiwan.pdf"}
+    };
+    const modal=document.getElementById("sourceModal"),body=document.getElementById("sourceBody"),title=document.getElementById("sourceTitle");
+    function openSource(id){const s=sources[id];if(!s)return;title.textContent=s.title;body.innerHTML=`<span class="source-type">${s.type}</span><p><b>${s.meta}</b></p><div class="excerpt">${s.excerpt}</div><p><b>補充／限制：</b>${s.note}</p>${s.url?`<a class="source-link" href="${s.url}" target="_blank" rel="noopener">開啟原始來源 ↗</a>`:""}`;modal.classList.add("open");document.body.style.overflow="hidden";document.getElementById("closeModal").focus()}
+    function closeSource(){modal.classList.remove("open");document.body.style.overflow=""}
+    document.querySelectorAll(".cite").forEach(b=>b.addEventListener("click",()=>openSource(b.dataset.source)));
+    document.getElementById("closeModal").addEventListener("click",closeSource);modal.addEventListener("click",e=>{if(e.target===modal)closeSource()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSource()});
+    document.getElementById("downloadPage").addEventListener("click",()=>{const blob=new Blob(["<!DOCTYPE html>\n"+document.documentElement.outerHTML],{type:"text/html;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="EP703.htm";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+  </script>
+</body>
+</html>
