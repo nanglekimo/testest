@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EP704 字幕重點、Marvell Investor Day、AI 互連與個股查證。">
+  <title>EP704｜AI 互連大擴張與敘事風險</title>
+  <style>
+    :root{--ink:#11110f;--paper:#f4f2eb;--panel:#fff;--muted:#65635d;--line:#d8d4c8;--cyan:#00a8a8;--coral:#ef5a4f;--acid:#d8ee44;--yellow:#ffc83d;--violet:#7653d6;--max:1180px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif;letter-spacing:0;line-height:1.65}button,a{font:inherit}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(244,242,235,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.topbar .wrap{height:64px;display:flex;align-items:center;gap:18px}.brand{font-weight:950;letter-spacing:1.8px}.chapters{display:flex;gap:4px;margin-left:auto}.chapters a{padding:7px 9px;text-decoration:none;font-size:12px;font-weight:800;color:var(--muted)}.download{border:0;background:var(--ink);color:white;padding:10px 14px;border-radius:5px;font-weight:900;cursor:pointer}
+    .hero{padding:84px 0 48px;border-bottom:1px solid var(--line);overflow:hidden}.kicker,.section-no{text-transform:uppercase;color:var(--coral);font-size:13px;font-weight:950;letter-spacing:2px}.hero h1{font-size:clamp(46px,7vw,92px);line-height:.96;max-width:1020px;margin:18px 0 24px;font-weight:950}.hero-copy{font-size:20px;max-width:850px;color:#4e4c47}.signal{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;margin-top:54px}.number-shift{background:var(--ink);color:white;padding:34px;min-height:260px;border-radius:7px;position:relative;overflow:hidden}.number-shift:after{content:"RUN RATE";position:absolute;right:-20px;bottom:-34px;font-size:72px;font-weight:950;color:rgba(255,255,255,.06)}.number-line{display:flex;align-items:center;gap:20px}.num{font-size:clamp(56px,8vw,108px);font-weight:950;line-height:1}.num.old{color:#888;text-decoration:line-through;text-decoration-color:var(--coral);text-decoration-thickness:8px}.arrow{font-size:40px;color:var(--yellow)}.number-shift p{max-width:610px;color:#d9d7ce}.thesis-box{border:3px solid var(--ink);padding:30px;border-radius:7px;background:var(--acid);display:flex;flex-direction:column;justify-content:space-between}.thesis-box strong{font-size:28px;line-height:1.2}.thesis-box small{font-weight:800}.ticker{display:flex;gap:8px;overflow:auto;padding:22px 0 0;scrollbar-width:thin}.ticker span{flex:0 0 auto;background:white;border:1px solid var(--line);padding:8px 12px;border-radius:4px;font-size:12px;font-weight:900}
+    section{padding:72px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:210px 1fr;gap:24px;margin-bottom:32px}.section-head h2{font-size:clamp(34px,5vw,62px);line-height:1.05;margin:0}.section-head p{color:var(--muted);max-width:750px;margin:10px 0 0}.narratives{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.narrative{background:white;border:1px solid var(--line);border-top:7px solid var(--cyan);padding:24px;border-radius:6px;min-height:230px}.narrative:nth-child(2n){border-top-color:var(--coral)}.narrative:nth-child(3n){border-top-color:var(--yellow)}.narrative b{font-size:12px;color:var(--muted)}.narrative h3{font-size:22px;line-height:1.25;margin:14px 0 10px}.narrative p{color:#55524c;margin:0}
+    .cite{border:0;border-bottom:2px solid currentColor;background:transparent;color:var(--violet);font-size:11px;font-weight:950;padding:0 2px;margin-left:5px;cursor:pointer;vertical-align:super}.cite:hover{color:var(--coral)}
+    .system-map{background:var(--ink);color:white;padding:34px;border-radius:7px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch}.node{border:1px solid #4a4a45;padding:18px;min-height:160px;position:relative}.node:not(:last-child):after{content:"→";position:absolute;right:-17px;top:58px;z-index:2;color:var(--yellow);font-size:25px}.node small{color:var(--yellow);font-weight:900}.node strong{display:block;font-size:20px;line-height:1.2;margin:12px 0}.node p{font-size:13px;color:#c9c7be;margin:0}.tech-strip{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:14px}.tech-strip div{padding:18px;background:white;color:var(--ink);border-right:1px solid var(--line)}.tech-strip div:last-child{border-right:0}.tech-strip strong{font-size:22px}.tech-strip span{display:block;color:var(--muted);font-size:13px}
+    .target-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.target-panel{background:white;border:1px solid var(--line);border-radius:7px;padding:28px}.target-panel.dark{background:#20201d;color:white}.target-panel h3{font-size:26px;margin:0 0 8px}.ladder{margin-top:30px}.rung{display:grid;grid-template-columns:80px 1fr 100px;align-items:center;gap:12px;margin:16px 0}.bar{height:16px;background:#e5e2d9}.bar i{display:block;height:100%;background:var(--cyan)}.rung:nth-child(2) .bar i{background:var(--yellow)}.rung:nth-child(3) .bar i{background:var(--coral)}.rung strong{text-align:right}.mix{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:25px}.mix div{padding:18px;background:#30302c}.mix b{font-size:26px;color:var(--acid);display:block}.warning{background:var(--yellow);padding:22px;border-left:8px solid var(--coral);font-weight:800;margin-top:14px}
+    .stocks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stock{background:white;border:1px solid var(--line);padding:22px;border-radius:6px}.stock.hero-stock{grid-column:span 2;background:var(--ink);color:white}.stock-top{display:flex;justify-content:space-between;gap:8px}.ticker-code{font-weight:950;color:var(--cyan)}.status{font-size:11px;font-weight:900;padding:3px 7px;background:#ece9df;border-radius:3px;color:var(--ink)}.stock h3{font-size:24px;margin:10px 0 8px}.stock p{color:var(--muted)}.hero-stock p{color:#cfcdc4}.stock-note{border-top:1px solid var(--line);padding-top:12px;font-size:13px}.hero-stock .stock-note{border-color:#444}.private{background:#efe8ff;color:#593bac}.risk{background:#ffe4df;color:#9f2f26}.reference{background:#e1f4f1;color:#08746d}
+    .matrix-wrap{overflow:auto;background:white;border:1px solid var(--line);border-radius:7px}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:18px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--ink);color:white;font-size:12px;text-transform:uppercase}.badge{display:inline-block;padding:4px 8px;border-radius:3px;font-size:11px;font-weight:900}.confirmed{background:#dff2d0;color:#285819}.reported{background:#fff0b6;color:#715500}.hypothesis{background:#ffe0dc;color:#8c3027}
+    .playbook{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{padding:22px;border:2px solid var(--ink);background:white;border-radius:6px}.step-number{font-size:44px;font-weight:950;color:var(--coral)}.step h3{margin:0 0 8px}.step p{color:var(--muted)}
+    footer{background:var(--ink);color:#bfbdb5;padding:34px 0}.footer-grid{display:flex;justify-content:space-between;gap:30px;font-size:12px}
+    .modal{position:fixed;inset:0;background:rgba(16,16,14,.78);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.open{display:flex}.modal-panel{background:white;width:min(690px,100%);max-height:88vh;overflow:auto;border-radius:7px;box-shadow:0 24px 70px rgba(0,0,0,.4)}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line)}.modal-head h2{font-size:22px;margin:0;line-height:1.25}.close{border:0;background:#eeeae0;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer}.modal-body{padding:24px}.source-type{display:inline-block;background:#ebe4ff;color:#5235a8;padding:4px 8px;font-size:11px;font-weight:900;border-radius:3px}.source-meta{font-size:13px;font-weight:800;margin:18px 0 10px}.quote{background:#f0eee8;border-left:5px solid var(--yellow);padding:16px}.note{margin-top:16px;color:#5e5b54}.source-link{display:inline-block;margin-top:18px;background:var(--ink);color:white;padding:10px 14px;border-radius:4px;text-decoration:none;font-weight:900}
+    @media(max-width:850px){.chapters{display:none}.signal,.target-grid{grid-template-columns:1fr}.narratives,.stocks{grid-template-columns:1fr 1fr}.stock.hero-stock{grid-column:span 2}.flow{grid-template-columns:1fr 1fr}.node:not(:last-child):after{display:none}.playbook{grid-template-columns:1fr 1fr}.section-head{grid-template-columns:1fr}.hero{padding-top:58px}}
+    @media(max-width:560px){.wrap{width:min(100% - 24px,var(--max))}.topbar .wrap{height:58px}.brand{font-size:13px}.download{font-size:12px;padding:9px 11px}.hero{padding:48px 0 34px}.hero h1{font-size:42px}.hero-copy{font-size:16px}.signal{margin-top:34px}.number-shift,.thesis-box{padding:22px;min-height:auto}.number-line{gap:10px}.num{font-size:60px}.narratives,.stocks,.flow,.playbook,.tech-strip{grid-template-columns:1fr}.stock.hero-stock{grid-column:span 1}.section-head h2{font-size:36px}section{padding:54px 0}.rung{grid-template-columns:60px 1fr 76px}.mix{grid-template-columns:1fr 1fr}.footer-grid{display:block}.footer-grid div+div{margin-top:10px}.modal{padding:12px}.modal-head,.modal-body{padding:18px}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="wrap"><div class="brand">EP704 / SIGNAL</div><nav class="chapters" aria-label="頁面章節"><a href="#summary">摘要</a><a href="#system">互連</a><a href="#targets">目標</a><a href="#stocks">個股</a><a href="#verify">查證</a><a href="#playbook">框架</a></nav><button class="download" id="downloadPage" type="button">下載 HTML</button></div></header>
+
+  <main>
+    <section class="hero"><div class="wrap">
+      <p class="kicker">EP704 · Transcript to Signal · 2026-10-11</p>
+      <h1>AI 互連大擴張<br>與敘事風險</h1>
+      <p class="hero-copy">市場會把一個估算值當成事實，也會把五年後的技術路線提前交易。這一集真正要回答的是：哪些是雜訊、哪些改變長期方向，以及你願意為「可能正確」承受多大回撤。</p>
+      <div class="signal">
+        <article class="number-shift"><small>OPENAI REVENUE RUN RATE / MEDIA RESET</small><div class="number-line"><span class="num old">70B</span><span class="arrow">→</span><span class="num">50B</span></div><p>兩個數字來自不同的年化與合作夥伴收入計算口徑。50B 仍是媒體取得的私人公司資料，不是公開市場審計財報。<button class="cite" data-source="s2">02</button><button class="cite" data-source="s3">03</button></p></article>
+        <article class="thesis-box"><small>THE CORE THESIS</small><strong>算力增加之後，瓶頸從「有沒有晶片」移向「晶片、記憶體、機櫃與資料中心如何高速連接」。</strong><p>Marvell 把自己定位為 connectivity-first 公司，並以此支撐極具企圖心的 FY31 目標。<button class="cite" data-source="s4">04</button><button class="cite" data-source="s5">05</button></p></article>
+      </div>
+      <div class="ticker" aria-label="本集提及公司與標的"><span>MRVL Marvell</span><span>AVGO Broadcom</span><span>AAOI</span><span>5274 信驊</span><span>4919 新唐</span><span>NVDA</span><span>OpenAI</span><span>Anthropic</span><span>SpaceX（辨識存疑）</span></div>
+    </div></section>
+
+    <section id="summary"><div class="wrap">
+      <div class="section-head"><div class="section-no">01 / Executive Map</div><div><h2>六條敘事，不混成一個故事</h2><p>節目意見、公司官方目標、媒體報導與本報告推論分層呈現。被提及不等於被推薦，技術方向正確也不保證買入價格正確。</p></div></div>
+      <div class="narratives">
+        <article class="narrative"><b>01 / PROCESS</b><h3>先分辨雜訊是否改變終局</h3><p>月度數字、投片量和媒體估算會反覆修正；真正應觸發換倉的，是價格、需求或技術路線的結構性破壞。<button class="cite" data-source="s1">01</button></p></article>
+        <article class="narrative"><b>02 / ACCOUNTING</b><h3>ARR 不是已實現全年營收</h3><p>把單月或近期表現乘十二，是速度指標，不是審計收入。OpenAI 的 70B 與 50B 差異主要來自比較口徑。<button class="cite" data-source="s2">02</button><button class="cite" data-source="s3">03</button></p></article>
+        <article class="narrative"><b>03 / ARCHITECTURE</b><h3>資料中心正在變成一台電腦</h3><p>從 package、rack 到多座資料中心，AI 系統的效能愈來愈取決於互連頻寬、延遲、功耗與記憶體可達性。<button class="cite" data-source="s5">05</button></p></article>
+        <article class="narrative"><b>04 / TARGET</b><h3>Marvell 給的是野心，不是保證</h3><p>FY31 70–90B 需要從 FY26 8.2B 跨越近十倍，並同時兌現互連、客製晶片、交換器與營運槓桿。<button class="cite" data-source="s5">05</button></p></article>
+        <article class="narrative"><b>05 / TECHNOLOGY</b><h3>不要把路線圖當訂單</h3><p>1.6T 尚在放量，市場已交易 3.2T、TFLN 與 plasmonics。技術選錯會歸零；選對也可能先跌五成。<button class="cite" data-source="s7">07</button></p></article>
+        <article class="narrative"><b>06 / PORTFOLIO</b><h3>分散的代價是放棄暴擊</h3><p>All Weather 的目標是平衡不同成長與通膨環境，不是讓每個資產都上漲，也不是保證擊敗大盤。<button class="cite" data-source="s13">13</button><button class="cite" data-source="s14">14</button></p></article>
+      </div>
+    </div></section>
+
+    <section id="system"><div class="wrap">
+      <div class="section-head"><div class="section-no">02 / System Map</div><div><h2>互連為什麼成為主菜</h2><p>單顆晶片再快，資料若卡在晶片、記憶體、機櫃或資料中心之間，整體運算仍會閒置。Marvell 的論點是：AI scale-up 將迫使光學更靠近運算。</p></div></div>
+      <div class="system-map">
+        <div class="flow">
+          <div class="node"><small>SCALE-IN</small><strong>晶片與封裝</strong><p>SerDes、die-to-die、HBM 與先進封裝。</p></div>
+          <div class="node"><small>SCALE-UP</small><strong>伺服器與機櫃</strong><p>銅仍是目前主力，但距離與功耗開始受限。</p></div>
+          <div class="node"><small>MULTI-RACK</small><strong>NPO / CPO</strong><p>光學靠近封裝，以頻寬密度換取更大運算域。</p></div>
+          <div class="node"><small>SCALE-OUT</small><strong>叢集交換</strong><p>高 radix Ethernet 與高效能交換晶片。</p></div>
+          <div class="node"><small>SCALE-ACROSS</small><strong>跨資料中心</strong><p>光 DSP、coherent 與長距離連接。</p></div>
+        </div>
+        <div class="tech-strip"><div><strong>800G</strong><span>目前部署主力之一</span></div><div><strong>1.6T</strong><span>正在加速放量</span></div><div><strong>3.2T</strong><span>2nm PAM / coherent-lite 路線</span></div></div>
+      </div>
+    </div></section>
+
+    <section id="targets"><div class="wrap">
+      <div class="section-head"><div class="section-no">03 / Target Math</div><div><h2>從 8.2B 到 70–90B</h2><p>以下全部是 Marvell 管理層的前瞻目標，並非已簽訂收入。數字愈遠，越應把它視為需要逐季驗證的條件樹。</p></div></div>
+      <div class="target-grid">
+        <article class="target-panel"><h3>營收目標階梯 <button class="cite" data-source="s5">05</button></h3><div class="ladder"><div class="rung"><span>FY26</span><div class="bar"><i style="width:10.25%"></i></div><strong>$8.2B</strong></div><div class="rung"><span>FY28E</span><div class="bar"><i style="width:25%"></i></div><strong>$20B</strong></div><div class="rung"><span>FY31E</span><div class="bar"><i style="width:100%"></i></div><strong>$70–90B</strong></div></div><div class="warning">這條路徑隱含 FY26–FY31 55–60% 年複合成長。只要一個大型客戶延後、技術轉向或產能受限，終點就可能大幅重估。</div></article>
+        <article class="target-panel dark"><h3>FY31 中位數結構</h3><p>以 80B 中位數拆解：</p><div class="mix"><div><b>$37.5B</b>Interconnect</div><div><b>$30B</b>Custom</div><div><b>$10B</b>Switch & storage</div><div><b>$2.5B</b>Comms & other</div></div><p>長期非 GAAP 模型另含 56–59% 毛利率、44–46% 營益率與超過 36% 自由現金流率；都屬前瞻假設。</p></article>
+      </div>
+    </div></section>
+
+    <section id="stocks"><div class="wrap">
+      <div class="section-head"><div class="section-no">04 / Stock Map</div><div><h2>附件提及公司：真正的語境</h2><p>核心研究、競爭參照、歷史案例與辨識存疑項目分開。這張圖不是購買清單，而是敘事責任表。</p></div></div>
+      <div class="stocks">
+        <article class="stock hero-stock"><div class="stock-top"><span class="ticker-code">MRVL</span><span class="status reference">核心研究</span></div><h3>Marvell Technology</h3><p>本集主角。節目以 Investor Day 說明 AI 系統從運算走向連接，官方資料確認 FY31 70–90B 目標、互連約 37.5B 中位數，以及 3.2T、NPO/CPO、AI infrastructure management 等技術路線。<button class="cite" data-source="s4">04</button><button class="cite" data-source="s5">05</button></p><div class="stock-note"><b>觀察：</b>FY28 20B 里程碑、互連份額、XPU attach 設計案、客戶集中、非 GAAP 與 GAAP 差異。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">AVGO</span><span class="status reference">競爭參照</span></div><h3>Broadcom</h3><p>前段用「投片量」說明短期數據雜訊，後段則視為交換器與 AI 網路領導者。Broadcom 官方 Q2 FY26 AI 半導體營收 10.8B、年增 143%。<button class="cite" data-source="s1">01</button><button class="cite" data-source="s12">12</button></p><div class="stock-note">本集沒有提供 AVGO 估值或買賣區間。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">AAOI</span><span class="status risk">回撤案例</span></div><h3>Applied Optoelectronics</h3><p>主持人以 AOI 說明：技術方向最終看對，持有途中仍可能多次回撤 50–60%。公司 Q2 2026 營收 191.9M，但 GAAP 淨損 22.8M。<button class="cite" data-source="s7">07</button><button class="cite" data-source="s8">08</button></p><div class="stock-note">方向正確、財報改善與買入價格是三個不同問題。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">5274</span><span class="status risk">受影響標的</span></div><h3>信驊 ASPEED</h3><p>Marvell 的新型 AI 管理晶片讓市場擔心 BMC 競爭。官方簡報描述的是性能需求高約 1000 倍的新類別，不等於直接取代所有傳統 BMC。<button class="cite" data-source="s9">09</button><button class="cite" data-source="s10">10</button></p><div class="stock-note">ASPEED 2024 年報估算其全球伺服器遠端管理晶片份額約 70%；該數字不是 2026 即時市占。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">4919</span><span class="status reference">市場參照</span></div><h3>新唐 Nuvoton</h3><p>節目回顧曾以新唐切入 BMC 為投資題材，後來發現相對公司整體營收可能太小。新唐官方產品頁確認提供 iBMC，但本集沒有提出財務貢獻估算。<button class="cite" data-source="s9">09</button><button class="cite" data-source="s11">11</button></p><div class="stock-note">「有產品」不等於「足以改變公司獲利」。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">NVDA</span><span class="status reference">歷史類比／合作方</span></div><h3>NVIDIA</h3><p>節目把 2020 年前 AI 仍像夢的 NVIDIA，類比今天看似很小的新市場。外部查證顯示 NVIDIA 已投資 Marvell 20 億美元並合作 NVLink Fusion。<button class="cite" data-source="s6">06</button></p><div class="stock-note">歷史類比不能證明所有小市場都會成長為 NVIDIA 等級。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">PRIVATE</span><span class="status private">非上市</span></div><h3>OpenAI / Anthropic</h3><p>兩家公司只用於解釋收入認列與 ARR 可比性。兩者皆非一般公開市場股票；50B／70B 是媒體取得的年化資訊，不是公開審計財報。<button class="cite" data-source="s3">03</button></p><div class="stock-note">不要把私人公司媒體數字當成公開公司同等強度的揭露。</div></article>
+        <article class="stock"><div class="stock-top"><span class="ticker-code">UNRESOLVED</span><span class="status risk">字幕辨識存疑</span></div><h3>SpaceX</h3><p>字幕在 14:53 辨識為 SpaceX，但後續同時談 IPO 與股價，和 SpaceX 私有公司狀態不一致。本報告保留原字樣，不據此猜測其他公開股票。<button class="cite" data-source="s1">01</button></p><div class="stock-note">這是轉錄限制，不列入個股論證。</div></article>
+      </div>
+    </div></section>
+
+    <section id="verify"><div class="wrap">
+      <div class="section-head"><div class="section-no">05 / Fact Check</div><div><h2>哪些成立，哪些仍要等</h2><p>把節目中的口語命題拆成能被追蹤的驗證項目。</p></div></div>
+      <div class="matrix-wrap"><table><thead><tr><th>命題</th><th>判定</th><th>查證與邏輯斷點</th></tr></thead><tbody>
+        <tr><td>OpenAI ARR 從 70B 下修為 50B，代表 AI 需求崩壞</td><td><span class="badge hypothesis">不成立</span></td><td>報導顯示主要是收入比較口徑差異；50B 本身仍是高速規模，但成本、現金流與訂單品質仍未知。<button class="cite" data-source="s3">03</button></td></tr>
+        <tr><td>Marvell 已經能做到 FY31 70–90B</td><td><span class="badge reported">公司目標</span></td><td>官方簡報確實給出目標，但基期只有 FY26 8.2B；它是前瞻性模型，不是 backlog 或合約收入。<button class="cite" data-source="s5">05</button></td></tr>
+        <tr><td>AI 擴張使互連與光學更加重要</td><td><span class="badge confirmed">多項支持</span></td><td>Marvell、Broadcom、AOI 的產品與營收資料均支持需求方向；但各家公司可取得的份額與利潤率不同。<button class="cite" data-source="s5">05</button><button class="cite" data-source="s8">08</button><button class="cite" data-source="s12">12</button></td></tr>
+        <tr><td>NPO 最終一定被 CPO 取代</td><td><span class="badge hypothesis">未定</span></td><td>Marvell 官方資料分別列出 NPO 的可維修性與 CPO 的功耗／整合優勢，顯示架構會依客戶優先序並存。</td></tr>
+        <tr><td>Marvell AI 管理晶片將直接消滅傳統 BMC</td><td><span class="badge hypothesis">過度推論</span></td><td>新類別處理更多感測器與資料，但節目也認為其目標是資料中心級整合，不是單純搶走現有 BMC 全部市場。<button class="cite" data-source="s9">09</button></td></tr>
+        <tr><td>分散配置能保證任何行情都賺錢</td><td><span class="badge hypothesis">不成立</span></td><td>All Weather 是平衡成長與通膨風險來源；分散可降低單一情境依賴，但不能消除虧損或保證超額報酬。<button class="cite" data-source="s14">14</button></td></tr>
+      </tbody></table></div>
+    </div></section>
+
+    <section id="playbook"><div class="wrap">
+      <div class="section-head"><div class="section-no">06 / Playbook</div><div><h2>把故事變成四個檢查動作</h2><p>不是用來預測明天漲跌，而是防止自己在遠期目標、短期雜訊與持倉壓力之間失去尺度。</p></div></div>
+      <div class="playbook">
+        <article class="step"><div class="step-number">1</div><h3>標記數字類型</h3><p>區分實際營收、run rate、TAM、管理層目標、分析師共識與市場傳言。</p></article>
+        <article class="step"><div class="step-number">2</div><h3>寫出失效條件</h3><p>價格上不去、設計案延後、技術路線轉向、毛利惡化，哪些才真正破壞原論點？</p></article>
+        <article class="step"><div class="step-number">3</div><h3>拆成里程碑</h3><p>不要直接相信 FY31。先看 FY28 20B、1.6T 放量、互連份額與 XPU attach。</p></article>
+        <article class="step"><div class="step-number">4</div><h3>用部位換耐心</h3><p>能承受的回撤由部位大小決定。看對方向卻因槓桿被迫出場，仍然是錯誤。</p></article>
+      </div>
+    </div></section>
+  </main>
+
+  <footer><div class="wrap footer-grid"><div>EP704 字幕整理與外部查證｜資料檢核日：2026-10-11<br>字幕為自動辨識文字，已校正 Marvell、Broadcom、Nuvoton 等明顯公司名。</div><div>研究用途，不構成投資建議。<br>公司遠期目標不等於承諾收入。</div></div></footer>
+
+  <div class="modal" id="sourceModal" role="dialog" aria-modal="true" aria-labelledby="sourceTitle"><div class="modal-panel"><div class="modal-head"><h2 id="sourceTitle"></h2><button class="close" id="closeModal" type="button" aria-label="關閉">×</button></div><div class="modal-body" id="sourceBody"></div></div></div>
+  <script>
+    const sources={
+      s1:{type:"附件字幕",title:"投資節奏、Broadcom 雜訊與 SpaceX 辨識疑點",meta:"EP704 SRT｜13:11–16:37",excerpt:"主持人反思過度追蹤月度與投片數字，認為長期方向未變時不必被短期上修／下修反覆干擾；字幕另出現 SpaceX、IPO 與股價的矛盾組合。",note:"SpaceX 段落無法從字幕可靠識別實際標的，因此保留疑點、不自行補名。"},
+      s2:{type:"附件字幕",title:"OpenAI 70B 與 50B 年化營收爭議",meta:"EP704 SRT｜16:38–21:22",excerpt:"節目認為市場把不同收入口徑與 run rate 估算混為一談，造成 AI 供應鏈閃崩；ARR 可觀察速度，但不能當作已實現全年收入。",note:"主持人的判斷屬市場評論；私人公司數據仍以媒體與投資人資料為主。"},
+      s3:{type:"媒體查證",title:"Axios：OpenAI annualized revenue 約 50B",meta:"2026-10-08｜Axios",excerpt:"Axios 報導 70B 是為了與 Anthropic 口徑可比而 gross up 的估算；OpenAI 自身口徑的年化收入約 50B。",note:"這不是 OpenAI 公開審計財報；年化數字會隨採樣月份快速變動。",url:"https://www.axios.com/2026/10/08/openai-50-billion-arr-anthropic-revenue-accounting"},
+      s4:{type:"附件字幕",title:"Marvell Investor Day 與 connectivity 主敘事",meta:"EP704 SRT｜21:22–31:19",excerpt:"節目整理 Marvell 對 FY28、FY31 的上修，並把互連、光學、XPU attach、交換器與 AI infrastructure management 串成 total solution。",note:"字幕將 Marvell 誤辨為 Mariel／Marvel，已依 Investor Day 與數字校正。"},
+      s5:{type:"公司官方資料",title:"Marvell Investor Day 2026",meta:"2026-10-06｜Marvell Investor Relations",excerpt:"官方簡報列出 FY26 8.2B、FY28 20B、FY31 70–90B；FY31 中位數包含 interconnect 37.5B、custom 30B、switch/storage 10B。",note:"屬長期前瞻目標與非 GAAP 模型，實際結果可能重大偏離。",url:"https://investor.marvell.com/news-events/ir-calendar/detail/20261006-marvell-investor-day-2026"},
+      s6:{type:"公司官方資料",title:"NVIDIA 與 Marvell NVLink Fusion 合作",meta:"2026-03-31｜Marvell Investor Relations",excerpt:"NVIDIA 投資 Marvell 20 億美元；Marvell 將提供客製 XPU 與相容 NVLink Fusion 的 scale-up networking，雙方並合作 silicon photonics。",note:"策略投資驗證合作關係，不代表 Marvell 的 FY31 目標必然實現。",url:"https://investor.marvell.com/news-events/press-releases/detail/1019/nvidia-ai-ecosystem-expands-as-marvell-joins-forces-through-nvlink-fusion"},
+      s7:{type:"附件字幕",title:"3.2T 題材與 AOI 回撤案例",meta:"EP704 SRT｜25:55–27:45",excerpt:"節目提醒 1.6T 尚未完全普及，市場已交易 3.2T、TFLN 與 plasmonics；即使 AOI 最終方向看對，中途也曾多次大幅回撤。",note:"字幕提到的個別材料受惠股名稱不清楚，本報告不自行猜測。"},
+      s8:{type:"公司官方資料",title:"Applied Optoelectronics Q2 2026",meta:"2026-08-06｜AOI Investor Relations",excerpt:"Q2 營收 191.9M；800G 產品量季增超過一倍，並擴充 800G／1.6T 產能。GAAP 淨損 22.8M，非 GAAP 淨利 5.5M。",note:"營收成長與股價波動不是同一指標；公司亦揭露客戶集中、產能與需求風險。",url:"https://investors.ao-inc.com/news-releases/news-release-details/applied-optoelectronics-reports-second-quarter-2026-results"},
+      s9:{type:"附件字幕",title:"BMC、信驊、新唐與 AI 管理晶片",meta:"EP704 SRT｜27:45–30:38",excerpt:"節目認為 Marvell 的目標較像資料中心級整合管理，不是單純搶傳統 BMC；並回顧新唐 BMC 題材對公司營收可能太小的教訓。",note:"市場第一時間的競爭敘事，仍需用產品規格、客戶採用與實際營收驗證。"},
+      s10:{type:"公司官方資料",title:"ASPEED 2024 Annual Report",meta:"信驊科技年報",excerpt:"公司估計 2024 年 BMC 出貨約 1,300 萬顆，全球伺服器遠端管理晶片市占約 70%。",note:"這是公司依出貨與產業資料估算的 2024 數字，不應當成 2026 即時市占。",url:"https://www.aspeedtech.com/file/report/2024AnnualReport_en.pdf"},
+      s11:{type:"公司官方資料",title:"Nuvoton Server Solutions",meta:"新唐科技產品頁",excerpt:"新唐在伺服器解決方案中列出 iBMC、TPM、I/O 與硬體監控產品。",note:"產品存在不代表其營收規模足以明顯改變新唐整體獲利。",url:"https://www.nuvoton.com/applications/computing/server/"},
+      s12:{type:"公司官方資料",title:"Broadcom Q2 FY2026 Results",meta:"2026-06-03｜Broadcom Investor Relations",excerpt:"Q2 AI 半導體營收 10.8B，年增 143%，由客製 AI 加速器與 AI networking 需求推動。",note:"支持產業需求，但沒有驗證節目口語提到的特定投片量。",url:"https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial"},
+      s13:{type:"附件字幕",title:"All Weather 與資產配置問答",meta:"EP704 SRT｜40:10–41:37",excerpt:"聽眾提出以短債、長債、黃金、大宗商品與股市 ETF 組成 10% 配置；主持人認為可降低極端行情傷害，但也不應期待暴擊。",note:"節目沒有給出具體 ETF、風險平價權重或回測。"},
+      s14:{type:"原始框架",title:"Bridgewater：The All Weather Story",meta:"Bridgewater Associates",excerpt:"All Weather 以成長與通膨環境平衡資產風險，核心是不依賴準確預測下一個經濟狀態。",note:"散戶以等金額配置多種 ETF，不必然等同 Bridgewater 的風險平衡實作。",url:"https://www.bridgewater.com/research-and-insights/the-all-weather-story"}
+    };
+    const modal=document.getElementById("sourceModal"),body=document.getElementById("sourceBody"),title=document.getElementById("sourceTitle");
+    function openSource(id){const s=sources[id];if(!s)return;title.textContent=s.title;body.innerHTML=`<span class="source-type">${s.type}</span><div class="source-meta">${s.meta}</div><div class="quote">${s.excerpt}</div><p class="note"><b>補充／限制：</b>${s.note}</p>${s.url?`<a class="source-link" href="${s.url}" target="_blank" rel="noopener">開啟原始來源 ↗</a>`:""}`;modal.classList.add("open");document.body.style.overflow="hidden";document.getElementById("closeModal").focus()}
+    function closeSource(){modal.classList.remove("open");document.body.style.overflow=""}
+    document.querySelectorAll("[data-source]").forEach(el=>el.addEventListener("click",()=>openSource(el.dataset.source)));
+    document.getElementById("closeModal").addEventListener("click",closeSource);modal.addEventListener("click",e=>{if(e.target===modal)closeSource()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSource()});
+    document.getElementById("downloadPage").addEventListener("click",()=>{const blob=new Blob(["<!DOCTYPE html>\n"+document.documentElement.outerHTML],{type:"text/html;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="EP704.htm";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+  </script>
+</body>
+</html>
